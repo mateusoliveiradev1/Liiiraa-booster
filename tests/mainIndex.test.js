@@ -1,6 +1,7 @@
 /** @jest-environment node */
 
 const handlers = {};
+
 jest.mock('child_process', () => {
   const execFile = jest.fn(() => ({
     stdout: { on: jest.fn() },
@@ -11,20 +12,15 @@ jest.mock('child_process', () => {
   }));
   return { execFile };
 });
+
 jest.mock('electron', () => {
   const removeMenu = jest.fn();
   let lastOptions;
-  function BrowserWindow(options) {
-    lastOptions = options;
-  }
-  BrowserWindow.prototype.loadURL = jest.fn();
-  BrowserWindow.prototype.loadFile = jest.fn();
-  BrowserWindow.prototype.removeMenu = removeMenu;
   const BrowserWindow = jest.fn(function (opts) {
+    lastOptions = opts;
     this.loadURL = jest.fn();
     this.loadFile = jest.fn();
     this.removeMenu = removeMenu;
-    this.opts = opts;
   });
 
   return {
@@ -39,12 +35,9 @@ jest.mock('electron', () => {
 });
 
 require('@testing-library/jest-dom');
-
 require('../src/main/index.js');
 
 const { __removeMenu, __browserWindowOptions } = require('electron');
-
-const { __removeMenu } = require('electron');
 const { execFile } = require('child_process');
 const { BrowserWindow } = require('electron');
 
@@ -53,7 +46,6 @@ test('removeMenu called on BrowserWindow', async () => {
   await Promise.resolve();
   expect(__removeMenu).toHaveBeenCalled();
 });
-
 
 test('BrowserWindow created with secure preferences', async () => {
   await Promise.resolve();
@@ -64,6 +56,7 @@ test('BrowserWindow created with secure preferences', async () => {
     enableRemoteModule: false,
     sandbox: true
   });
+});
 
 test('run-script passes -NoProfile in args', async () => {
   const handler = handlers['run-script'];
@@ -71,6 +64,7 @@ test('run-script passes -NoProfile in args', async () => {
   const args = execFile.mock.calls[0][1];
   expect(args).toContain('-NoProfile');
 });
+
 test('BrowserWindow called with sandbox true', async () => {
   await Promise.resolve();
   expect(BrowserWindow).toHaveBeenCalledWith(
@@ -78,5 +72,4 @@ test('BrowserWindow called with sandbox true', async () => {
       webPreferences: expect.objectContaining({ sandbox: true })
     })
   );
-
 });

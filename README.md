@@ -116,6 +116,8 @@ Electron via canal `run-script`:
 
 - **optimize.ps1** — otimizações de performance no Windows (desativa serviços como Windows Search).
 - **advanced.ps1** — tweaks avançados como desativar UAC, Defender, Windows Update, Memory Compression, políticas de mitigação, Core Isolation, Telemetry e SmartScreen. Use as flags `-DisableUAC`, `-DisableDefender`, `-DisableUpdate`, `-DisableMemoryCompression`, `-DisableMitigations`, `-DisableHVCI`, `-DisableTelemetry` e `-DisableSmartScreen`; combine com `-Restore` para reverter.
+- **optimize.ps1** — otimizações de performance no Windows (desativa serviços como Windows Search) usando PowerShell.
+- **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação, Core Isolation, Telemetry e SmartScreen. Agora aceita `-DisableUAC`, `-DisableDefender`, `-DisableUpdate`, `-DisableMemoryCompression`, `-DisableMitigations`, `-DisableHVCI`, `-DisableTelemetry` e `-DisableSmartScreen` (use `-Restore` com os mesmos parâmetros para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
   - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante, incluindo a desativação do Power Throttling (use `-Restore` para desfazer).
   - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho; `-Restore` reverte.
