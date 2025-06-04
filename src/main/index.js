@@ -17,6 +17,7 @@ function createWindow () {
       enableRemoteModule: false
     }
   });
+  win.removeMenu();
 
   if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:5173');
