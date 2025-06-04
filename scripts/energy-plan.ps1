@@ -3,6 +3,7 @@
 
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 Start-LiiiraaLog 'energy-plan.log'
 
@@ -26,6 +27,7 @@ try {
     Write-Output "Power plan '$planName' activated."
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog
