@@ -14,13 +14,8 @@ jest.mock('child_process', () => {
 jest.mock('electron', () => {
   const removeMenu = jest.fn();
   let lastOptions;
-  function BrowserWindow(options) {
-    lastOptions = options;
-  }
-  BrowserWindow.prototype.loadURL = jest.fn();
-  BrowserWindow.prototype.loadFile = jest.fn();
-  BrowserWindow.prototype.removeMenu = removeMenu;
   const BrowserWindow = jest.fn(function (opts) {
+    lastOptions = opts;
     this.loadURL = jest.fn();
     this.loadFile = jest.fn();
     this.removeMenu = removeMenu;
@@ -44,7 +39,6 @@ require('../src/main/index.js');
 
 const { __removeMenu, __browserWindowOptions } = require('electron');
 
-const { __removeMenu } = require('electron');
 const { execFile } = require('child_process');
 const { BrowserWindow } = require('electron');
 
@@ -64,6 +58,7 @@ test('BrowserWindow created with secure preferences', async () => {
     enableRemoteModule: false,
     sandbox: true
   });
+});
 
 test('run-script passes -NoProfile in args', async () => {
   const handler = handlers['run-script'];
