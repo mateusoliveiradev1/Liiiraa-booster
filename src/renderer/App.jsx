@@ -213,19 +213,19 @@ export default function App() {
             <p className="mb-2">{t('messages.debloat_desc')}</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                className="btn-warning"
                 onClick={handleDebloatFull}
               >
                 {t('buttons.debloat_full')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                className="btn-warning"
                 onClick={handleDebloatLite}
               >
                 {t('buttons.debloat_lite')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                className="btn-neutral"
                 onClick={handleDebloatRestore}
               >
                 {t('buttons.debloat_restore')}
@@ -238,7 +238,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.game_booster_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleGameBoost}
             >
               {t('buttons.start_game_booster')}
@@ -298,7 +298,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.pubg_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handlePubg}
             >
               {t('buttons.optimize_pubg')}
@@ -310,7 +310,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.cs2_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleCs2}
             >
               {t('buttons.optimize_cs2')}
@@ -322,7 +322,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.fortnite_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleFortnite}
             >
               {t('buttons.optimize_fortnite')}
@@ -334,7 +334,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.warzone_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleWarzone}
             >
               {t('buttons.optimize_warzone')}
@@ -346,7 +346,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.valorant_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleValorant}
             >
               {t('buttons.optimize_valorant')}
@@ -379,13 +379,13 @@ export default function App() {
             <p className="mb-2">{t('messages.advanced_desc')}</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark"
+                className="btn-danger"
                 onClick={handleAdvanced}
               >
                 {t('buttons.run_advanced')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                className="btn-neutral"
                 onClick={handleRestore}
               >
                 {t('buttons.restore_tweaks')}
