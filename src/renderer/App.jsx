@@ -8,7 +8,9 @@ import {
   FaMicrochip,
   FaMemory,
   FaHdd,
-  FaNetworkWired
+  FaNetworkWired,
+  FaSun,
+  FaMoon
 } from 'react-icons/fa';
 import { BsGpuCard } from 'react-icons/bs';
 import MetricsCard from './components/MetricsCard.jsx';
@@ -537,6 +539,13 @@ export default function App() {
       <div className="flex-1 p-4 overflow-auto">
         <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-primary to-secondary shadow-md rounded flex justify-between items-center text-white">
           <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
+          <button
+            onClick={toggleDark}
+            aria-label={dark ? t('buttons.light_mode') : t('buttons.dark_mode')}
+            data-testid="theme-toggle"
+          >
+            {dark ? <FaSun /> : <FaMoon />}
+          </button>
         </div>
         {renderSection()}
         {loading && <Spinner />}
