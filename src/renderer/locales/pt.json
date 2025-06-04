@@ -16,7 +16,8 @@
     "valorant": "Valorant",
     "advanced": "Ajustes Avançados",
     "history": "Histórico",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "energy": "Energia"
   },
   "buttons": {
     "run_optimize": "Executar Otimização Automática",
@@ -39,7 +40,9 @@
     "restore_tweaks": "Restaurar Ajustes",
     "light_mode": "Modo Claro",
     "dark_mode": "Modo Escuro",
-    "create_restore_point": "Criar Ponto de Restauração"
+    "create_restore_point": "Criar Ponto de Restauração",
+    "apply_energy_plan": "Aplicar Plano de Energia",
+    "tweak_peripheral_power": "Ajustar Energia de Periféricos"
   },
   "messages": {
     "optimize_desc": "Detecta automaticamente CPU e GPU e executa as otimizações correspondentes.",
@@ -63,7 +66,12 @@
     "no_logs": "Nenhum log encontrado.",
     "command_success": "{{cmd}} concluído com sucesso",
     "command_failed": "{{cmd}} falhou",
+
+    "clean_result": "Liberado {{space}} de espaço em disco.",
+    "energy_desc": "Configurar as opções de energia para máximo desempenho."
+
     "clean_result": "Liberado {{space}} de espaço em disco."
+
   },
   "labels": {
     "user": "Usuário",
