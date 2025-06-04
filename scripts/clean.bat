@@ -1,8 +1,6 @@
 @echo off
 rem Clean temporary files and logs
 rem Invoked via `window.api.runScript('clean')` in Electron
-
- codex/atualizar-scripts-para-verificar-privilégios-de-administrado
 :: Ensure script is running as Administrator
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -17,7 +15,6 @@ set "LOGDIR=%~dp0..\logs"
 if not exist "%LOGDIR%" mkdir "%LOGDIR%"
 set "LOGFILE=%LOGDIR%\clean.log"
 echo [%date% %time%] Cleaning system...>>"%LOGFILE%"
- main
 echo Cleaning system...
 
 rem Delete temp files and prefetch data
