@@ -86,7 +86,7 @@ Write-Output "Optimizing system..."
 
 try {
     # --- Power plan ---
-    $planName = 'Liiiraa Booster - Max Performance and Low Latency'
+    $planName = 'Liiiraa Booster - Max Performance and Low Latêncy'
     $planGuid = (powercfg -l | Where-Object { $_ -match [regex]::Escape($planName) }) -replace '\s*([\w-]+)\s+.*', '$1'
     if (-not $planGuid) {
         $dup = powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
