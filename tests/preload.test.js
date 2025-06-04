@@ -136,4 +136,10 @@ test('runScript rejects unknown command', async () => {
   expect(ipcRenderer.invoke).not.toHaveBeenCalled();
 });
 
+test('runScript does not invoke ipcRenderer on invalid command', async () => {
+  ipcRenderer.invoke.mockClear();
+  await expect(api.runScript('invalid')).rejects.toThrow();
+  expect(ipcRenderer.invoke).not.toHaveBeenCalled();
+});
+
 
