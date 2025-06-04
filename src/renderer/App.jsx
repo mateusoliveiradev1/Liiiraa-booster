@@ -141,11 +141,6 @@ export default function App() {
   const handlePeripheralEnergy = () => runCommand('peripheral-energy');
 
 
-  const renderPlaceholder = (text) => (
-    <div>
-      <p className="mb-2">{text}</p>
-    </div>
-  );
 
   const renderSection = () => {
     switch (activeSection) {
