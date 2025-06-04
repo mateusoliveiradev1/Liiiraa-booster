@@ -123,11 +123,11 @@ Electron via canal `run-script`:
   [psutil](https://pypi.org/project/psutil/).
  - **cpu-amd.ps1** — otimiza processadores AMD e desativa o Power Throttling (botão *Optimize AMD CPU* na aba **CPU**).
  - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
- - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**, use `-Restore` para desfazer).
+ - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` para definir o limite máximo de energia e `-LockMaxClock` para travar as frequências máximas, aumentando o desempenho; `-Restore` desfaz as alterações.
  - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**, use `-Restore` para desfazer).
 
 - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
-- **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**).
+ - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho e `-Restore` para reverter.
 - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**).
 - **gpu-intel.ps1** — otimizações para GPUs Intel (botão *Optimize Intel GPU* em **GPU**).
 
