@@ -12,6 +12,14 @@ test('toggle button collapses the sidebar', () => {
   expect(sidebar.className).toContain('w-12');
 });
 
+test('renders group headings', () => {
+  render(<Sidebar activeSection="Dashboard" onSelect={() => {}} />);
+  expect(screen.getByText('sidebar.group_system')).toBeInTheDocument();
+  expect(screen.getByText('sidebar.group_hardware')).toBeInTheDocument();
+  expect(screen.getByText('sidebar.group_games')).toBeInTheDocument();
+  expect(screen.getByText('sidebar.group_other')).toBeInTheDocument();
+});
+
 test('calls onSelect when a section is clicked', () => {
   const onSelect = jest.fn();
   render(<Sidebar activeSection="Dashboard" onSelect={onSelect} />);

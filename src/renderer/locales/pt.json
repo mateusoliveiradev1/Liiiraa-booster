@@ -18,6 +18,11 @@
     "logs": "Logs",
     "settings": "Configurações",
     "energy": "Energia"
+    ,
+    "group_system": "Sistema",
+    "group_hardware": "Hardware",
+    "group_games": "Jogos",
+    "group_other": "Outros"
   },
   "buttons": {
     "run_optimize": "Executar Otimização Automática",

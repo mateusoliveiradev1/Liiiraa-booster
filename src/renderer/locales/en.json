@@ -18,6 +18,11 @@
     "logs": "Logs",
     "settings": "Settings",
     "energy": "Energy"
+    ,
+    "group_system": "System",
+    "group_hardware": "Hardware",
+    "group_games": "Games",
+    "group_other": "Other"
   },
   "buttons": {
     "run_optimize": "Run Auto Optimize",
