@@ -106,8 +106,6 @@ export default function App() {
 
 
 
-  const handleOptimize = () => runCommand('auto-optimize');
-
   const handleClean = async () => {
     try {
       const output = await window.api.runScript('clean');
@@ -134,7 +132,6 @@ export default function App() {
   const handleDebloatRestore = () => runCommand('debloat-restore');
 
 
-  const handleDebloat = () => runCommand('debloat');
 
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
