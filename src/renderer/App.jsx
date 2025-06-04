@@ -505,7 +505,7 @@ export default function App() {
     <div className="flex h-screen">
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
-        <div className="flex justify-between items-center mb-4">
+        <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-primary to-accent flex justify-between items-center text-white">
           <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
         </div>
         {renderSection()}
