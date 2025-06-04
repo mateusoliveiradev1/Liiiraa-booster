@@ -34,24 +34,68 @@ app.on('window-all-closed', () => {
 // Basic secure IPC example
 ipcMain.handle('run-script', async (_event, command) => {
   // whitelist allowed commands for security
+  const scriptsDir = path.resolve(__dirname, '../../scripts');
   const allowed = {
-    'hello': 'echo Hello World',
-    'optimize': 'powershell -ExecutionPolicy Bypass -File scripts/optimize.ps1',
-    'clean': 'cmd /c scripts/clean.bat',
-    'restore': 'powershell -ExecutionPolicy Bypass -File scripts/optimize.ps1 -Restore',
-    'metrics': 'python scripts/metrics.py'
+    hello: {
+      file: 'cmd',
+      args: ['/c', 'echo', 'Hello', 'World']
+    },
+    optimize: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'optimize.ps1')
+      ]
+    },
+    clean: {
+      file: 'cmd',
+      args: ['/c', path.join(scriptsDir, 'clean.bat')]
+    },
+    restore: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'optimize.ps1'),
+        '-Restore'
+      ]
+    },
+    metrics: {
+      file: 'python',
+      args: [path.join(scriptsDir, 'metrics.py')]
+    }
   };
   if (!allowed[command]) {
     throw new Error('Command not allowed');
   }
-  const exec = require('child_process').exec;
+  const { execFile } = require('child_process');
   return new Promise((resolve, reject) => {
-    exec(allowed[command], (error, stdout, stderr) => {
-      if (error) {
-        reject(stderr || error.message);
+    const { file, args } = allowed[command];
+    const child = execFile(file, args, { windowsHide: true });
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout.on('data', (data) => {
+      stdout += data;
+    });
+
+    child.stderr.on('data', (data) => {
+      stderr += data;
+    });
+
+    child.on('close', (code) => {
+      if (code !== 0) {
+        reject(stderr || `Process exited with code ${code}`);
       } else {
         resolve(stdout);
       }
+    });
+
+    child.on('error', (error) => {
+      reject(error.message);
     });
   });
 });
