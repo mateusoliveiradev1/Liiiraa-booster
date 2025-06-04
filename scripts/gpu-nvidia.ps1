@@ -11,6 +11,7 @@ param(
 
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 Start-LiiiraaLog 'gpu-nvidia.log'
 
@@ -62,6 +63,7 @@ try {
     Write-Output 'GPU optimization complete.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog

@@ -21,4 +21,10 @@ function Start-LiiiraaLog {
     Start-Transcript -Path $logFile -Append | Out-Null
 }
 
-Export-ModuleMember -Function Require-Admin, Start-LiiiraaLog
+function Stop-LiiiraaLog {
+    try {
+        Stop-Transcript | Out-Null
+    } catch {}
+}
+
+Export-ModuleMember -Function Require-Admin, Start-LiiiraaLog, Stop-LiiiraaLog

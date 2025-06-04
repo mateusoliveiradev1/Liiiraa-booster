@@ -2,6 +2,7 @@
 # Invoked via `window.api.runScript('gamebooster-restore')` in Electron
 
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 
 Start-LiiiraaLog 'gamebooster.log'
@@ -21,6 +22,7 @@ try {
     Write-Output 'Game Booster settings restored.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog
