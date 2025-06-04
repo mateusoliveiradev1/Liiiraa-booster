@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Logs from '../src/renderer/components/Logs.jsx';
 
@@ -10,7 +10,9 @@ test('renders logs returned by api', async () => {
     )
   };
 
-  render(<Logs />);
+  await act(async () => {
+    render(<Logs />);
+  });
 
   expect(await screen.findByText('test.log')).toBeInTheDocument();
   expect(screen.getByText('[2024-01-01] Booted')).toBeInTheDocument();
@@ -22,8 +24,12 @@ test('clear logs button triggers api', async () => {
     clearLogs: jest.fn(() => Promise.resolve())
   };
 
-  render(<Logs />);
+  await act(async () => {
+    render(<Logs />);
+  });
   const button = await screen.findByText('buttons.clear_logs');
-  fireEvent.click(button);
+  await act(async () => {
+    fireEvent.click(button);
+  });
   expect(window.api.clearLogs).toHaveBeenCalled();
 });
