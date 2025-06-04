@@ -83,7 +83,7 @@ export default function App() {
     fetchMetrics();
     const id = setInterval(fetchMetrics, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [t]);
 
   const toggleDark = () => {
     document.documentElement.classList.toggle('dark', !dark);
