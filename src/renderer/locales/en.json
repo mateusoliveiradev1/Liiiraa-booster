@@ -59,5 +59,9 @@
     "no_logs": "No logs found.",
     "command_success": "{{cmd}} completed successfully",
     "command_failed": "{{cmd}} failed"
+  },
+  "labels": {
+    "user": "User",
+    "time": "Time"
   }
 }

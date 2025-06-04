@@ -26,6 +26,21 @@ export default function App() {
   });
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const [username, setUsername] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    if (window.api?.getUser) {
+      window.api
+        .getUser()
+        .then((name) => setUsername(name))
+        .catch(() => {});
+    }
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -113,6 +128,16 @@ export default function App() {
       case 'Dashboard':
         return (
           <div>
+
+            <div className="mb-4">
+              <p>
+                {t('labels.user')}: {username}
+              </p>
+              <p>
+                {t('labels.time')}: {currentTime.toLocaleTimeString()}
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <MetricsCard label="CPU" value={metrics.cpu} />
               <MetricsCard label="GPU" value={metrics.gpu} />
@@ -120,12 +145,15 @@ export default function App() {
               <MetricsCard label="Disk" value={metrics.disk} />
               <MetricsCard label="Network" value={metrics.network} />
             </div>
+
+
             <button
               className="mt-4 px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
               onClick={handleRestorePoint}
             >
               {t('buttons.create_restore_point')}
             </button>
+
           </div>
         );
       case 'Optimize':
