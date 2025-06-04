@@ -156,6 +156,15 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'gpu-nvidia.ps1')
       ]
     },
+    'gpu-intel': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'gpu-intel.ps1')
+      ]
+    },
     'gpu-amd': {
       file: 'powershell',
       args: [

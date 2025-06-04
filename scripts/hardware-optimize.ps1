@@ -39,6 +39,9 @@ try {
     } elseif ($gpuName -match 'AMD' -or $gpuName -match 'Radeon') {
         Write-Output 'Running AMD GPU optimizations...'
         & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-amd.ps1')
+    } elseif ($gpuName -match 'Intel') {
+        Write-Output 'Running Intel GPU optimizations...'
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-intel.ps1')
     } else {
         Write-Warning "Unknown GPU vendor: $gpuName"
     }
