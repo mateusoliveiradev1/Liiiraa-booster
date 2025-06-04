@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import History from '../src/renderer/components/History.jsx';
+import Logs from '../src/renderer/components/Logs.jsx';
 
 test('renders logs returned by api', async () => {
   window.api = {
@@ -10,7 +10,7 @@ test('renders logs returned by api', async () => {
     )
   };
 
-  render(<History />);
+  render(<Logs />);
 
   expect(await screen.findByText('test.log')).toBeInTheDocument();
   expect(screen.getByText('[2024-01-01] Booted')).toBeInTheDocument();

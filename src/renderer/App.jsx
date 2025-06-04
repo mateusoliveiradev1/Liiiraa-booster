@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './i18n';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
-import History from './components/History.jsx';
+import Logs from './components/Logs.jsx';
 
 const mockMetrics = {
   cpu: '35%',
@@ -399,8 +399,8 @@ export default function App() {
             </div>
           </div>
         );
-      case 'History':
-        return <History />;
+      case 'Logs':
+        return <Logs />;
       case 'Settings':
         return (
           <div>

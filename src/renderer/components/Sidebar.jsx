@@ -21,7 +21,7 @@ export default function Sidebar({ activeSection, onSelect }) {
     { key: 'Valorant', icon: '🎯', tKey: 'sidebar.valorant' },
     { key: 'Energy', icon: '🔌', tKey: 'sidebar.energy' },
     { key: 'Advanced Tweaks', icon: '⚙️', tKey: 'sidebar.advanced' },
-    { key: 'History', icon: '📜', tKey: 'sidebar.history' },
+    { key: 'Logs', icon: '📜', tKey: 'sidebar.logs' },
     { key: 'Settings', icon: '🔧', tKey: 'sidebar.settings' }
   ];
 
