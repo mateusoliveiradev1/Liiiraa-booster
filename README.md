@@ -36,6 +36,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Reversão segura e logs automáticos
 - Botão **Create Restore Point** para criar pontos de restauração
 - Painel com histórico de boot e plugins
+- Scripts de jogos evitam linhas duplicadas verificando as configurações antes de escrever
 
 ---
 

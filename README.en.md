@@ -55,4 +55,5 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy**).
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
+- Game scripts avoid duplicate entries by checking configuration files before writing.
 

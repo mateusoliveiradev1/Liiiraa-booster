@@ -12,8 +12,12 @@ try {
     # Add launch options to autoexec.cfg
     $cfg = Join-Path $env:USERPROFILE 'Documents\My Games\Counter-Strike Global Offensive\cfg\autoexec.cfg'
     if (Test-Path $cfg) {
-        Add-Content -Path $cfg -Value 'fps_max 400'
-        Add-Content -Path $cfg -Value 'cl_disablehtmlmotd 1'
+        if (-not (Select-String -Path $cfg -SimpleMatch -Pattern 'fps_max 400' -Quiet)) {
+            Add-Content -Path $cfg -Value 'fps_max 400'
+        }
+        if (-not (Select-String -Path $cfg -SimpleMatch -Pattern 'cl_disablehtmlmotd 1' -Quiet)) {
+            Add-Content -Path $cfg -Value 'cl_disablehtmlmotd 1'
+        }
     }
 
     Write-Output 'Game optimization complete.'
