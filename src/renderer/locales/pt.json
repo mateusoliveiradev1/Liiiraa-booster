@@ -67,7 +67,14 @@
     "command_success": "{{cmd}} concluído com sucesso",
     "command_failed": "{{cmd}} falhou",
     "clean_result": "Liberado {{space}} de espaço em disco.",
+
+    "energy_desc": "Configurar as opções de energia para máximo desempenho.",
+
+    "clean_result": "Liberado {{space}} de espaço em disco."
+
+
     "energy_desc": "Configurar as opções de energia para máximo desempenho."
+
   },
   "labels": {
     "user": "Usuário",
