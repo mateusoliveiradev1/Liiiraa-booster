@@ -101,6 +101,10 @@ pip install -r requirements.txt
 O pacote `pynvml` é opcional e habilita a coleta de métricas de GPU caso haja
 uma placa NVIDIA disponível.
 
+Defina `METRICS_LOG=1` para gravar logs em `logs/metrics.log`. Caso a variável
+não esteja presente, o `metrics.py` descarta as mensagens utilizando
+`logging.NullHandler()`.
+
 Esses scripts são chamados pelo Electron através do canal IPC `run-script`.
 
 ## 📝 Scripts e IPC
