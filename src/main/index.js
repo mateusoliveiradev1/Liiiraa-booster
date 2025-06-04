@@ -55,6 +55,15 @@ ipcMain.handle('run-script', async (_event, command) => {
       file: 'cmd',
       args: ['/c', path.join(scriptsDir, 'clean.bat')]
     },
+    debloat: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1')
+      ]
+    },
     restore: {
       file: 'powershell',
       args: [
@@ -63,6 +72,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         '-File',
         path.join(scriptsDir, 'optimize.ps1'),
         '-Restore'
+      ]
+    },
+    gamebooster: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'gamebooster.ps1')
       ]
     },
     metrics: {

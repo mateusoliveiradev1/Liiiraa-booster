@@ -82,6 +82,8 @@ export default function App() {
 
   const handleOptimize = () => runCommand('optimize');
   const handleClean = () => runCommand('clean');
+  const handleDebloat = () => runCommand('debloat');
+  const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
 
   const renderPlaceholder = (text) => (
@@ -127,9 +129,29 @@ export default function App() {
           </div>
         );
       case 'Debloat':
-        return renderPlaceholder('Windows debloat features coming soon.');
+        return (
+          <div>
+            <p className="mb-2">Remove pre-installed Windows apps.</p>
+            <button
+              className="px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700"
+              onClick={handleDebloat}
+            >
+              Run Debloat
+            </button>
+          </div>
+        );
       case 'Game Booster':
-        return renderPlaceholder('Game Booster mode is under construction.');
+        return (
+          <div>
+            <p className="mb-2">Temporarily disable services and free memory for gaming.</p>
+            <button
+              className="px-4 py-2 rounded bg-purple-600 text-white hover:bg-purple-700"
+              onClick={handleGameBoost}
+            >
+              Start Game Booster
+            </button>
+          </div>
+        );
       case 'Advanced Tweaks':
         return (
           <div>
