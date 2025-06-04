@@ -120,6 +120,8 @@ export default function App() {
   };
 
 
+
+
   const handleDebloatFull = () => runCommand('debloat-full');
   const handleDebloatLite = () => runCommand('debloat-lite');
   const handleDebloatRestore = () => runCommand('debloat-restore');

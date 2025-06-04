@@ -64,6 +64,7 @@
     "command_success": "{{cmd}} completed successfully",
     "command_failed": "{{cmd}} failed",
     "clean_result": "Freed {{space}} of disk space."
+
   },
   "labels": {
     "user": "User",
