@@ -74,11 +74,14 @@
     "command_success": "{{cmd}} concluído com sucesso",
     "command_failed": "{{cmd}} falhou",
     "clean_result": "Liberado {{space}} de espaço em disco.",
-    "energy_desc": "Configurar as opções de energia para máximo desempenho."
+    "energy_desc": "Configurar as opções de energia para máximo desempenho.",
+    "dashboard_desc": "Visualize as métricas atuais do sistema.",
+    "no_gpu": "Métricas da GPU indisponíveis."
 
   },
   "labels": {
     "user": "Usuário",
-    "time": "Hora"
+    "time": "Hora",
+    "date": "Data"
   }
 }

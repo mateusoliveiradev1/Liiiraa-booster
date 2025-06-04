@@ -210,9 +210,16 @@ useEffect(() => {
         return (
           <div>
 
+            <p className="mb-4 text-gray-700 dark:text-gray-300">
+              {t('messages.dashboard_desc')}
+            </p>
+
             <div className="mb-4 space-y-1 text-lg font-medium">
               <p>
                 {t('labels.user')}: {username}
+              </p>
+              <p>
+                {t('labels.date')}: {currentTime.toLocaleDateString()}
               </p>
               <p>
                 {t('labels.time')}: {currentTime.toLocaleTimeString()}
@@ -228,7 +235,7 @@ useEffect(() => {
               />
               <MetricsCard
                 label="GPU"
-                value={metrics.gpu}
+                value={metrics.gpu === 'N/A' ? t('messages.no_gpu') : metrics.gpu}
                 icon={<BsGpuCard />}
                 percentage={metrics.gpuPercent}
               />
