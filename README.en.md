@@ -39,7 +39,7 @@ pip install -r requirements.txt
 The `pynvml` package is optional and enables GPU metrics collection if an NVIDIA card is present.
 
 These scripts are called by Electron through the `run-script` IPC channel.
-Both `cpu-amd.ps1` and `cpu-intel.ps1` accept a `-Restore` flag to revert their registry and power plan tweaks, and disable the Windows Power Throttling feature during optimization.
+`cpu-amd.ps1`, `cpu-intel.ps1` and the GPU scripts all accept a `-Restore` flag to revert the registry or driver tweaks applied during optimization.
 
 
 
@@ -49,8 +49,8 @@ The `scripts/` folder contains several automation files. They must be run with *
 
  - **cpu-amd.ps1** — optimizes AMD processors and disables Windows Power Throttling (via *Optimize AMD CPU* in the **CPU** tab).
  - **cpu-intel.ps1** — optimizes Intel processors and disables Windows Power Throttling (via *Optimize Intel CPU* in the **CPU** tab).
-- **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab).
-- **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab).
+ - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab, use `-Restore` to revert).
+ - **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab, use `-Restore` to revert).
 - **energy-plan.ps1** — applies the custom power plan (via *Apply Energy Plan* in **Energy**).
 - **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy**).
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
