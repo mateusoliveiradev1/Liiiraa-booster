@@ -59,8 +59,11 @@ project-root/
 
 ## 📦 Builds e Distribuição
 
-1. Gere os arquivos otimizados com `npm run build`.
-2. Crie instaladores multiplataforma usando **electron-builder** com `npm run dist`.
+1. Gere os arquivos otimizados do frontend com `npm run build`.
+2. Execute `npm run dist` para criar os instaladores usando **electron-builder**:
+   - Windows: `.exe`
+   - macOS: `.dmg`
+   - Linux: `.AppImage`
 
 ## 📝 Scripts e IPC
 
