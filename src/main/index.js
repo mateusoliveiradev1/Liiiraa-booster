@@ -57,6 +57,16 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'hardware-optimize.ps1')
       ]
     },
+    'auto-optimize-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'hardware-optimize.ps1'),
+        '-Restore'
+      ]
+    },
     clean: {
       file: 'cmd',
       args: ['/c', path.join(scriptsDir, 'clean.bat')]
@@ -138,6 +148,16 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'cpu-amd.ps1')
       ]
     },
+    'cpu-amd-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'cpu-amd.ps1'),
+        '-Restore'
+      ]
+    },
     'cpu-intel': {
       file: 'powershell',
       args: [
@@ -145,6 +165,16 @@ const ALLOWED_COMMANDS = {
         'Bypass',
         '-File',
         path.join(scriptsDir, 'cpu-intel.ps1')
+      ]
+    },
+    'cpu-intel-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'cpu-intel.ps1'),
+        '-Restore'
       ]
     },
     'gpu-nvidia': {

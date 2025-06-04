@@ -39,3 +39,4 @@ pip install -r requirements.txt
 The `pynvml` package is optional and enables GPU metrics collection if an NVIDIA card is present.
 
 These scripts are called by Electron through the `run-script` IPC channel.
+Both `cpu-amd.ps1` and `cpu-intel.ps1` accept a `-Restore` flag to revert their registry and power plan tweaks.
