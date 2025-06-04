@@ -71,3 +71,12 @@ test('clicks on Settings tab', () => {
   fireEvent.click(settings);
   expect(onSelect).toHaveBeenCalledWith('Settings');
 });
+
+test('clicks on CPU tab', () => {
+  const onSelect = jest.fn();
+  render(<Sidebar activeSection="CPU" onSelect={onSelect} />);
+  const cpu = screen.getByRole('button', { name: /sidebar.cpu/ });
+  expect(cpu).toHaveClass('bg-primary');
+  fireEvent.click(cpu);
+  expect(onSelect).toHaveBeenCalledWith('CPU');
+});

@@ -40,8 +40,7 @@ export default function Sidebar({ activeSection, onSelect }) {
     {
       title: 'sidebar.group_hardware',
       items: [
-        { key: 'CPU AMD', icon: <FaMicrochip />, tKey: 'sidebar.cpu_amd' },
-        { key: 'CPU Intel', icon: <FaMicrochip />, tKey: 'sidebar.cpu_intel' },
+        { key: 'CPU', icon: <FaMicrochip />, tKey: 'sidebar.cpu' },
         { key: 'GPU Nvidia', icon: <BsGpuCard />, tKey: 'sidebar.gpu_nvidia' },
         { key: 'GPU AMD', icon: <BsGpuCard />, tKey: 'sidebar.gpu_amd' }
       ]
