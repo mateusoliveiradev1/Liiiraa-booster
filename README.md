@@ -39,11 +39,13 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 
 ```text
 project-root/
-├── frontend/           # interface feita com Vite e Tailwind
-│   ├── index.html
-│   └── src/
-├── backend/            # processos principais do Electron
-│   └── main.js
+├── src/
+│   ├── renderer/        # interface feita com Vite e Tailwind
+│   │   ├── index.html
+│   │   └── main.jsx
+│   └── main/           # processos principais do Electron
+│       ├── index.js
+│       └── preload.js
 └── scripts/            # scripts de otimização
     ├── optimize.ps1
     ├── clean.bat
@@ -60,7 +62,7 @@ project-root/
 
 ## 📦 Builds e Distribuição
 
-1. Gere os arquivos otimizados do frontend com `npm run build`.
+1. Gere os arquivos otimizados do renderer com `npm run build`.
 2. Execute `npm run dist` para criar os instaladores usando **electron-builder**:
    - Windows: `.exe`
    - macOS: `.dmg`
