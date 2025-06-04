@@ -319,14 +319,19 @@ ipcMain.handle('run-script', async (_event, command) => {
 ipcMain.handle('get-logs', async () => {
   const logsDir = path.resolve(__dirname, '../../logs');
   try {
-    const files = fs
-      .readdirSync(logsDir)
-      .filter((f) => f.endsWith('.log'));
-    return files.map((file) => {
-      const content = fs.readFileSync(path.join(logsDir, file), 'utf8');
+    const files = (await fs.promises.readdir(logsDir)).filter((f) =>
+      f.endsWith('.log')
+    );
+    const results = [];
+    for (const file of files) {
+      const content = await fs.promises.readFile(
+        path.join(logsDir, file),
+        'utf8'
+      );
       const lines = content.trim().split(/\r?\n/);
-      return { file, lines };
-    });
+      results.push({ file, lines });
+    }
+    return results;
   } catch (err) {
     return [];
   }
@@ -335,9 +340,11 @@ ipcMain.handle('get-logs', async () => {
 ipcMain.handle('clear-logs', async () => {
   const logsDir = path.resolve(__dirname, '../../logs');
   try {
-    const files = fs.readdirSync(logsDir).filter((f) => f.endsWith('.log'));
+    const files = (await fs.promises.readdir(logsDir)).filter((f) =>
+      f.endsWith('.log')
+    );
     for (const file of files) {
-      fs.unlinkSync(path.join(logsDir, file));
+      await fs.promises.unlink(path.join(logsDir, file));
     }
     return true;
   } catch (err) {
