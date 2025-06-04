@@ -23,10 +23,8 @@ set DIRS="%TEMP%" "%SystemRoot%\Temp" "C:\Windows\Prefetch" "C:\Windows\Software
 
 set SIZEBEFORE=0
 for %%D in (%DIRS%) do (
-  for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
-    set B=%%A
-    set B=!B:,=!
-    set /a SIZEBEFORE+=B
+  for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "(Get-ChildItem -Path '%%~D' -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum"`) do (
+    if not "%%A"=="" set /a SIZEBEFORE+=%%A
   )
 )
 
@@ -52,15 +50,12 @@ PowerShell -Command "Clear-RecycleBin -Force" >>"%LOGFILE%" 2>&1
 
 set SIZEAFTER=0
 for %%D in (%DIRS%) do (
-  for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
-    set B=%%A
-    set B=!B:,=!
-    set /a SIZEAFTER+=B
+  for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "(Get-ChildItem -Path '%%~D' -Recurse -Force -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum"`) do (
+    if not "%%A"=="" set /a SIZEAFTER+=%%A
   )
 )
 
-set /a FREED=SIZEBEFORE-SIZEAFTER
-set /a FREEDMB=FREED/1048576
+for /f "usebackq delims=" %%A in (`powershell -NoProfile -Command "$b=%SIZEBEFORE%; $a=%SIZEAFTER%; [math]::Round(($b-$a)/1MB)"`) do set FREEDMB=%%A
 echo Freed !FREEDMB! MB>>"%LOGFILE%"
 echo Freed !FREEDMB! MB
 echo Done.>>"%LOGFILE%"
