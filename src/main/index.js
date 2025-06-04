@@ -51,6 +51,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         path.join(scriptsDir, 'optimize.ps1')
       ]
     },
+    'auto-optimize': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'hardware-optimize.ps1')
+      ]
+    },
     clean: {
       file: 'cmd',
       args: ['/c', path.join(scriptsDir, 'clean.bat')]
@@ -72,6 +81,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         '-File',
         path.join(scriptsDir, 'optimize.ps1'),
         '-Restore'
+      ]
+    },
+    'restore-point': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'restore-point.ps1')
       ]
     },
     gamebooster: {
@@ -226,4 +244,8 @@ ipcMain.handle('get-logs', async () => {
   } catch (err) {
     return [];
   }
+});
+
+ipcMain.handle('get-user', async () => {
+  return require('os').userInfo().username;
 });

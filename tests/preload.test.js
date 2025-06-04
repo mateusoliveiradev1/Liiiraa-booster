@@ -35,6 +35,11 @@ test('runScript supports optimize command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'optimize');
 });
 
+test('runScript supports auto-optimize command', async () => {
+  await api.runScript('auto-optimize');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'auto-optimize');
+});
+
 test('runScript supports clean command', async () => {
   await api.runScript('clean');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'clean');
@@ -43,4 +48,16 @@ test('runScript supports clean command', async () => {
 test('runScript supports restore command', async () => {
   await api.runScript('restore');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
+});
+
+
+test('getUser calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.getUser();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-user');
+
+test('runScript supports restore-point command', async () => {
+  await api.runScript('restore-point');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');
+
 });
