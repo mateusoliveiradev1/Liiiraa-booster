@@ -25,7 +25,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Otimização automática de CPU/GPU baseada no fabricante
 - Ajustes de rede TCP para reduzir latência e Throttling de energia desativado
 - Criação de plano de energia personalizado:
-  > `Liiiraa Booster - Max Performance and Low Latency`
+  > `Liiiraa Booster - Max Performance and Low Latêncy`
 - Aba **Energy** para monitorar consumo e aplicar planos de energia
 - Otimizações específicas para:
   - AMD, Intel, NVIDIA
