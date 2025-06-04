@@ -71,9 +71,9 @@ project-root/
 
 ## 🧪 Testes
 
-1. Instale as dependências com `npm install`.
+1. Execute `npm install` para instalar todas as dependências do projeto.
    Em ambientes de CI, prefira `npm ci` para garantir versões exatas.
-2. Execute `npm test` para rodar a suíte de testes.
+2. Depois rode `npm test` para iniciar a suíte de testes.
 
 ## 🐍 Requisitos de Python
 
