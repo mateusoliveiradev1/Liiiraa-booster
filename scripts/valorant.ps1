@@ -12,7 +12,9 @@ try {
     # Unlock frame rate limit
     $config = Join-Path $env:LOCALAPPDATA 'VALORANT\Saved\Config\WindowsClient\GameUserSettings.ini'
     if (Test-Path $config) {
-        (Get-Content $config) -replace '^FrameRateLimit=.*', 'FrameRateLimit=0' | Set-Content $config
+        if (-not (Select-String -Path $config -Pattern '^FrameRateLimit=0$' -Quiet)) {
+            (Get-Content $config) -replace '^FrameRateLimit=.*', 'FrameRateLimit=0' | Set-Content $config
+        }
     }
 
     Write-Output 'Game optimization complete.'

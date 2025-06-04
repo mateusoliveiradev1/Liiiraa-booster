@@ -12,7 +12,9 @@ try {
     # Tune adv_options.ini settings
     $config = Join-Path $env:USERPROFILE 'Documents\Call of Duty Modern Warfare\players\adv_options.ini'
     if (Test-Path $config) {
-        (Get-Content $config) -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.85' | Set-Content $config
+        if (-not (Select-String -Path $config -Pattern '^VideoMemoryScale 0.85$' -Quiet)) {
+            (Get-Content $config) -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.85' | Set-Content $config
+        }
     }
 
     Write-Output 'Game optimization complete.'
