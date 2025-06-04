@@ -310,13 +310,19 @@ export default function App() {
             >
               {t("sidebar.game_booster")}
             </button>
-            <button
-              className="btn-primary"
-              onClick={() => setActiveSection("Energy")}
-            >
-              {t("sidebar.energy")}
-            </button>
-          </div>
+              <button
+                className="btn-primary"
+                onClick={() => setActiveSection("Energy")}
+              >
+                {t("sidebar.energy")}
+              </button>
+              <button
+                className="btn-primary"
+                onClick={handlePeripheralEnergy}
+              >
+                {t("buttons.tweak_peripheral_power")}
+              </button>
+            </div>
         );
       case "Optimize":
         return (

@@ -58,7 +58,7 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **gpu-intel.ps1** — tweaks for Intel GPUs (via *Optimize Intel GPU* in the **GPU** tab).
 
 - **energy-plan.ps1** — applies the custom power plan (via *Apply Energy Plan* in **Energy**).
-- **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy**).
+- **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy** or **System**).
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
 - **gamebooster-restore.ps1** — restores services and Game Bar settings after using Game Booster.
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
