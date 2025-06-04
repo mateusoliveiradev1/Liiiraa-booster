@@ -1,7 +1,6 @@
 # Optimize system settings for gaming performance
 # Invoked via `window.api.runScript('optimize')` in Electron
 
- codex/atualizar-scripts-para-verificar-privilégios-de-administrado
 param(
     [switch]$Restore
 )
@@ -87,4 +86,3 @@ try {
 }
 
 Stop-Transcript | Out-Null
- main
