@@ -13,6 +13,12 @@ test('runScript calls ipcRenderer.invoke', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'hello');
 });
 
+
+test('getLogs calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.getLogs();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-logs');
+
 test('runScript supports debloat command', async () => {
   await api.runScript('debloat');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat');
@@ -21,4 +27,5 @@ test('runScript supports debloat command', async () => {
 test('runScript supports gamebooster command', async () => {
   await api.runScript('gamebooster');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gamebooster');
+
 });
