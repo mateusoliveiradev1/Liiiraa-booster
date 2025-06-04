@@ -78,11 +78,10 @@ project-root/
 ## 🐍 Requisitos de Python
 
 
-Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Depo
-is instale as dependências de métricas:
+Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Em seguida, instale as dependências de métricas com:
 
 ```bash
-pip install psutil pynvml
+pip install -r requirements.txt
 ```
 
 O pacote `pynvml` é opcional e habilita a coleta de métricas de GPU caso haja
