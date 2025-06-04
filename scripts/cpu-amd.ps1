@@ -14,6 +14,7 @@ if ($Restore) {
         Write-Output 'Restoring AMD CPU settings...'
         $balanced = '381b4222-f694-41f0-9685-ff5bb260df2e'
         powercfg -setactive $balanced | Out-Null
+        Remove-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling' -Name 'PowerThrottlingOff' -ErrorAction SilentlyContinue
         $policy = '0cc5b647-c1df-4637-891a-dec35c318583'
         $sub    = '3b04d4fd-1cc7-4f23-ab1c-d1337819c4bb'
         powercfg -setacvalueindex scheme_current $policy $sub 0
@@ -28,6 +29,9 @@ if ($Restore) {
 
 try {
     Write-Output 'Applying AMD CPU optimizations...'
+
+    # Disable power throttling to allow the CPU to boost freely
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling' -Name 'PowerThrottlingOff' -Value 1 -Force
 
     # Activate AMD Ryzen High Performance plan when available
     $ryzenPlan = powercfg -l | Where-Object { $_ -match 'AMD Ryzen High Performance' }
