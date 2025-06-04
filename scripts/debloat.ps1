@@ -20,11 +20,20 @@ try {
         'Microsoft.ZuneMusic',
         'Microsoft.ZuneVideo',
         'Microsoft.BingNews',
-        'Microsoft.MicrosoftSolitaireCollection'
+        'Microsoft.MicrosoftSolitaireCollection',
+        'Microsoft.YourPhone',
+        'Microsoft.GetHelp'
     )
     foreach ($app in $apps) {
         Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
         Write-Output "Removed $app"
+    }
+
+    # Disable optional features that waste resources
+    $features = @('XPS-Viewer')
+    foreach ($feature in $features) {
+        Disable-WindowsOptionalFeature -FeatureName $feature -Online -NoRestart -ErrorAction SilentlyContinue
+        Write-Output "Feature $feature disabled"
     }
     Write-Output 'Debloat complete.'
 } catch {

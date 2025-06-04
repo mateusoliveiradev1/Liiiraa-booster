@@ -60,6 +60,12 @@ try {
         Stop-Service -InputObject $update -Force -ErrorAction SilentlyContinue
     }
 
+    # Turn off telemetry collection
+    Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows\DataCollection' -Name 'AllowTelemetry' -Value 0 -Type DWord -Force
+
+    # Disable SmartScreen filter
+    Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Name 'SmartScreenEnabled' -Value 'Off' -Force
+
     Write-Output 'Advanced tweaks applied.'
 } catch {
     Write-Error $_

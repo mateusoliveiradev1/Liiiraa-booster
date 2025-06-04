@@ -15,6 +15,13 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying Valorant optimizations...'
+
+    # Unlock frame rate limit
+    $config = Join-Path $env:LOCALAPPDATA 'VALORANT\Saved\Config\WindowsClient\GameUserSettings.ini'
+    if (Test-Path $config) {
+        (Get-Content $config) -replace '^FrameRateLimit=.*', 'FrameRateLimit=0' | Set-Content $config
+    }
+
     Write-Output 'Game optimization complete.'
 } catch {
     Write-Error $_
