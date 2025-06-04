@@ -12,3 +12,13 @@ test('runScript calls ipcRenderer.invoke', async () => {
   await api.runScript('hello');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'hello');
 });
+
+test('runScript supports debloat command', async () => {
+  await api.runScript('debloat');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat');
+});
+
+test('runScript supports gamebooster command', async () => {
+  await api.runScript('gamebooster');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gamebooster');
+});
