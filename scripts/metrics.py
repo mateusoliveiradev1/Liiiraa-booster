@@ -4,7 +4,6 @@ import json
 import logging
 import os
 import sys
-import time
 
 try:
     import psutil
@@ -79,7 +78,8 @@ def main() -> None:
     net_down = net2.bytes_recv - net1.bytes_recv
     net_bytes = net_up + net_down
 
-    disk = psutil.disk_usage("/")
+    drive = os.environ.get('SYSTEMDRIVE', 'C:') + '\\'
+    disk = psutil.disk_usage(drive)
     mem = psutil.virtual_memory()
 
     metrics = {
