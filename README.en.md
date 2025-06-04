@@ -41,6 +41,8 @@ The `pynvml` package is optional and enables GPU metrics collection if an NVIDIA
 These scripts are called by Electron through the `run-script` IPC channel.
 Both `cpu-amd.ps1` and `cpu-intel.ps1` accept a `-Restore` flag to revert their registry and power plan tweaks.
 
+
+
 ## Scripts
 
 The `scripts/` folder contains several automation files. They must be run with **Administrator** privileges and can be triggered from the UI:
@@ -53,3 +55,4 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy**).
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
+
