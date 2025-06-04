@@ -106,6 +106,7 @@ Electron via canal `run-script`:
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
+- **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU (use `-Restore` para desfazer).
 - **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
   batch.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
@@ -115,7 +116,7 @@ Electron via canal `run-script`:
 > **Administrador**. Eles modificam configurações do Windows e podem afetar a
 > estabilidade do sistema. O `optimize.ps1` e o `advanced.ps1` realizam um backup do registro antes
 > de aplicar tweaks e podem ser executados com `-Restore` para desfazer as
-> alterações. Sempre tenha um ponto de restauração ou backup antes de prosseguir.
+> alterações (inclusive os scripts de CPU). Sempre tenha um ponto de restauração ou backup antes de prosseguir.
 
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de

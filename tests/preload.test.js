@@ -49,9 +49,24 @@ test('runScript supports auto-optimize command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'auto-optimize');
 });
 
+test('runScript supports auto-optimize-restore command', async () => {
+  await api.runScript('auto-optimize-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'auto-optimize-restore');
+});
+
 test('runScript supports clean command', async () => {
   await api.runScript('clean');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'clean');
+});
+
+test('runScript supports cpu-amd-restore command', async () => {
+  await api.runScript('cpu-amd-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'cpu-amd-restore');
+});
+
+test('runScript supports cpu-intel-restore command', async () => {
+  await api.runScript('cpu-intel-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'cpu-intel-restore');
 });
 
 test('runScript supports restore command', async () => {

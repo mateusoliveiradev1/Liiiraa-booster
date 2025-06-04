@@ -185,6 +185,8 @@ export default function App() {
   const handleAdvanced = () => runCommand('advanced');
   const handleCpuAmd = () => runCommand('cpu-amd');
   const handleCpuIntel = () => runCommand('cpu-intel');
+  const handleCpuAmdRestore = () => runCommand('cpu-amd-restore');
+  const handleCpuIntelRestore = () => runCommand('cpu-intel-restore');
   const handleGpuNvidia = () => runCommand('gpu-nvidia');
   const handleGpuAmd = () => runCommand('gpu-amd');
   const handlePubg = () => runCommand('pubg');
@@ -349,8 +351,14 @@ export default function App() {
             <button className="btn-primary" onClick={handleCpuAmd}>
               {t('buttons.optimize_amd_cpu')}
             </button>
+            <button className="btn-neutral" onClick={handleCpuAmdRestore}>
+              {t('buttons.restore_amd_cpu')}
+            </button>
             <button className="btn-primary" onClick={handleCpuIntel}>
               {t('buttons.optimize_intel_cpu')}
+            </button>
+            <button className="btn-neutral" onClick={handleCpuIntelRestore}>
+              {t('buttons.restore_intel_cpu')}
             </button>
           </div>
         );

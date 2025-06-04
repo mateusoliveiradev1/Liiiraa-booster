@@ -1,6 +1,10 @@
 # Auto hardware detection and optimization
 # Invoked via `window.api.runScript('auto-optimize')` in Electron
 
+param(
+    [switch]$Restore
+)
+
 # Ensure script is running as Administrator
 $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -23,12 +27,15 @@ try {
 
     $scriptDir = $PSScriptRoot
 
+    $cpuArgs = @()
+    if ($Restore) { $cpuArgs += '-Restore' }
+
     if ($cpuVendor -match 'AMD') {
-        Write-Output 'Running AMD CPU optimizations...'
-        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'cpu-amd.ps1')
+        Write-Output ($Restore ? 'Restoring AMD CPU settings...' : 'Running AMD CPU optimizations...')
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'cpu-amd.ps1') @cpuArgs
     } elseif ($cpuVendor -match 'Intel') {
-        Write-Output 'Running Intel CPU optimizations...'
-        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'cpu-intel.ps1')
+        Write-Output ($Restore ? 'Restoring Intel CPU settings...' : 'Running Intel CPU optimizations...')
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'cpu-intel.ps1') @cpuArgs
     } else {
         Write-Warning "Unknown CPU vendor: $cpuVendor"
     }
