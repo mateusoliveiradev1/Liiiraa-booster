@@ -1,10 +1,29 @@
 # Warzone optimization script
 # Invoked via `window.api.runScript('warzone')` in Electron
 
+param(
+    [switch]$Restore
+)
+
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
 Require-Admin
 Start-LiiiraaLog 'warzone.log'
+
+if ($Restore) {
+    try {
+        Write-Output 'Restoring Warzone settings...'
+        $config = Join-Path $env:USERPROFILE 'Documents\Call of Duty Modern Warfare\players\adv_options.ini'
+        if (Test-Path $config) {
+            (Get-Content $config) -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.75' | Set-Content $config
+        }
+        Write-Output 'Restore complete.'
+    } catch {
+        Write-Error $_
+    }
+    Stop-Transcript | Out-Null
+    exit
+}
 
 try {
     Write-Output 'Applying Warzone optimizations...'

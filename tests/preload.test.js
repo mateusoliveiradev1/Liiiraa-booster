@@ -128,7 +128,12 @@ test('getUser calls ipcRenderer.invoke', async () => {
   ipcRenderer.invoke.mockClear();
   await api.getUser();
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-user');
-
-
 });
+
+test('runScript rejects unknown command', async () => {
+  ipcRenderer.invoke.mockClear();
+  await expect(api.runScript('invalid')).rejects.toThrow('Command not allowed');
+  expect(ipcRenderer.invoke).not.toHaveBeenCalled();
+});
+
 
