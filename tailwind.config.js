@@ -28,7 +28,10 @@ module.exports = {
         muted: '#f3f4f6',
         'muted-dark': '#4b5563',
         premium: '#d4af37',
-        'premium-dark': '#b8860b'
+        'premium-dark': '#b8860b',
+        amd: '#e53935',
+        intel: '#0071c5',
+        nvidia: '#76b900'
       },
       keyframes: {
         fadeIn: {

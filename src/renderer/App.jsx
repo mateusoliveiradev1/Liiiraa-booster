@@ -371,19 +371,19 @@ export default function App() {
       case "CPU":
         return (
           <div className="space-x-2">
-            <button className="btn-primary" onClick={handleCpuAmd}>
+            <button className="btn-amd" onClick={handleCpuAmd}>
               <SiAmd className="inline mr-1" />
               {t("buttons.optimize_amd_cpu")}
             </button>
-            <button className="btn-neutral" onClick={handleCpuAmdRestore}>
+            <button className="btn-amd" onClick={handleCpuAmdRestore}>
               <SiAmd className="inline mr-1" />
               {t("buttons.restore_amd_cpu")}
             </button>
-            <button className="btn-primary" onClick={handleCpuIntel}>
+            <button className="btn-intel" onClick={handleCpuIntel}>
               <SiIntel className="inline mr-1" />
               {t("buttons.optimize_intel_cpu")}
             </button>
-            <button className="btn-neutral" onClick={handleCpuIntelRestore}>
+            <button className="btn-intel" onClick={handleCpuIntelRestore}>
               <SiIntel className="inline mr-1" />
               {t("buttons.restore_intel_cpu")}
             </button>
@@ -392,15 +392,15 @@ export default function App() {
       case "GPU":
         return (
           <div className="space-x-2">
-            <button className="btn-success" onClick={handleGpuNvidia}>
+            <button className="btn-nvidia" onClick={handleGpuNvidia}>
               <SiNvidia className="inline mr-1" />
               {t("buttons.optimize_nvidia_gpu")}
             </button>
-            <button className="btn-success" onClick={handleGpuIntel}>
+            <button className="btn-intel" onClick={handleGpuIntel}>
               <SiIntel className="inline mr-1" />
               {t("buttons.optimize_intel_gpu")}
             </button>
-            <button className="btn-success" onClick={handleGpuAmd}>
+            <button className="btn-amd" onClick={handleGpuAmd}>
               <SiAmd className="inline mr-1" />
               {t("buttons.optimize_amd_gpu")}
             </button>
