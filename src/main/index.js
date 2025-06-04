@@ -17,6 +17,7 @@ function createWindow () {
       enableRemoteModule: false
     }
   });
+  win.removeMenu();
 
   // Disable the default menu bar to provide a cleaner UI
   win.removeMenu();
