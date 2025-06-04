@@ -26,16 +26,27 @@ def is_admin() -> bool:
 
 
 def _setup_logger() -> logging.Logger:
-    """Configure a logger writing to ``logs/metrics.log``."""
-    log_dir = os.path.join(os.path.dirname(__file__), "..", "logs")
-    os.makedirs(log_dir, exist_ok=True)
-    log_file = os.path.join(log_dir, "metrics.log")
-    logging.basicConfig(
-        filename=log_file,
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(message)s",
+    """Configure a logger. Set ``METRICS_LOG=1`` to write ``logs/metrics.log``."""
+    logger = logging.getLogger(__name__)
+
+    if os.environ.get("METRICS_LOG") == "1":
+        log_dir = os.path.join(os.path.dirname(__file__), "..", "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(log_dir, "metrics.log")
+        handler: logging.Handler = logging.FileHandler(log_file)
+    else:
+        handler = logging.NullHandler()
+
+    handler.setLevel(logging.INFO)
+    handler.setFormatter(
+        logging.Formatter("%(asctime)s %(levelname)s %(message)s")
     )
-    return logging.getLogger(__name__)
+
+    # Avoid adding multiple handlers if called more than once
+    if not logger.handlers:
+        logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+    return logger
 
 
 def _gpu_metrics() -> dict:
