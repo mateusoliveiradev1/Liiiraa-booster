@@ -35,6 +35,16 @@ if ($Restore) {
             Write-Output "Service $svc restored"
         }
     }
+
+    # Re-enable Memory Compression
+    Enable-MMAgent -mc | Out-Null
+
+    # Restore default hardware mitigations
+    bcdedit /set {current} mitigations default | Out-Null
+
+    # Re-enable Core Isolation (HVCI)
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'Enabled' -Value 1 -Type DWord -Force
+
     Write-Output 'Advanced tweaks restored.'
     Stop-Transcript | Out-Null
     exit
@@ -59,6 +69,15 @@ try {
         Set-Service -InputObject $update -StartupType Disabled -ErrorAction SilentlyContinue
         Stop-Service -InputObject $update -Force -ErrorAction SilentlyContinue
     }
+
+    # Disable Memory Compression
+    Disable-MMAgent -mc | Out-Null
+
+    # Disable hardware mitigation policies
+    bcdedit /set {current} mitigations off | Out-Null
+
+    # Disable Core Isolation (HVCI)
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'Enabled' -Value 0 -Type DWord -Force
 
     # Turn off telemetry collection
     Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows\DataCollection' -Name 'AllowTelemetry' -Value 0 -Type DWord -Force
