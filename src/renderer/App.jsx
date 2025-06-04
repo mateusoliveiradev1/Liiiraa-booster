@@ -13,6 +13,7 @@ export default function App() {
   const [dark, setDark] = useState(false);
   const [metrics, setMetrics] = useState({
     cpu: mockMetrics.cpu,
+    gpu: 'N/A',
     ram: mockMetrics.ram,
     disk: mockMetrics.disk,
     network: mockMetrics.network
@@ -31,7 +32,18 @@ export default function App() {
         const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
         const network = `${(((data.net_up + data.net_down) * 8) / (1024 ** 2)).toFixed(1)} Mbps`;
 
-        setMetrics({ cpu, ram, disk, network });
+        let gpu = 'N/A';
+        if (
+          data.gpu_util !== undefined &&
+          data.gpu_mem_used !== undefined &&
+          data.gpu_mem_total !== undefined
+        ) {
+          const util = `${data.gpu_util}%`;
+          const mem = `${(data.gpu_mem_used / (1024 ** 3)).toFixed(1)} GB / ${(data.gpu_mem_total / (1024 ** 3)).toFixed(1)} GB`;
+          gpu = `${util} - ${mem}`;
+        }
+
+        setMetrics({ cpu, gpu, ram, disk, network });
         setError(null);
       } catch (err) {
         console.error(err);
@@ -77,7 +89,7 @@ export default function App() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <MetricsCard label="CPU" value={metrics.cpu} />
-        <MetricsCard label="GPU" value={mockMetrics.gpu} />
+        <MetricsCard label="GPU" value={metrics.gpu} />
         <MetricsCard label="RAM" value={metrics.ram} />
         <MetricsCard label="Disk" value={metrics.disk} />
         <MetricsCard label="Network" value={metrics.network} />
