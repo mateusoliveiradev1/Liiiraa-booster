@@ -21,7 +21,7 @@ import { SiAmd, SiIntel, SiNvidia, SiPubg, SiValorant } from 'react-icons/si';
 import { TbBrandFortnite } from 'react-icons/tb';
 import { GiPistolGun } from 'react-icons/gi';
 
-export default function Sidebar({ activeSection, onSelect }) {
+function Sidebar({ activeSection, onSelect }) {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => setCollapsed((c) => !c);
@@ -59,7 +59,7 @@ export default function Sidebar({ activeSection, onSelect }) {
   return (
     <div
       data-testid="sidebar"
-      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2 transition-all duration-300 overflow-hidden`}
+      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-gradient-to-b from-surface to-muted dark:from-surface-dark dark:to-muted-dark p-4 space-y-2 transition-all duration-300 overflow-hidden`}
     >
       <button
         onClick={toggleCollapsed}
@@ -79,7 +79,7 @@ export default function Sidebar({ activeSection, onSelect }) {
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className={`flex items-center w-full text-left px-3 py-2 rounded ${
+              className={`flex items-center w-full text-left px-3 py-2 rounded transition ${
                 activeSection === key ? 'bg-primary text-white' : 'hover:bg-muted dark:hover:bg-muted-dark'
               }`}
             >
@@ -93,3 +93,5 @@ export default function Sidebar({ activeSection, onSelect }) {
     </div>
   );
 }
+
+export default React.memo(Sidebar);

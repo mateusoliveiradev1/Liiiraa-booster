@@ -19,8 +19,8 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Detecting hardware...'
-    $cpuVendor = (Get-WmiObject Win32_Processor | Select-Object -First 1 -ExpandProperty Manufacturer)
-    $gpuName   = (Get-WmiObject Win32_VideoController | Select-Object -First 1 -ExpandProperty Name)
+    $cpuVendor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -First 1 -ExpandProperty Manufacturer)
+    $gpuName   = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -First 1 -ExpandProperty Name)
 
     Write-Output "CPU Vendor: $cpuVendor"
     Write-Output "GPU Name: $gpuName"
@@ -46,6 +46,9 @@ try {
     } elseif ($gpuName -match 'AMD' -or $gpuName -match 'Radeon') {
         Write-Output 'Running AMD GPU optimizations...'
         & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-amd.ps1')
+    } elseif ($gpuName -match 'Intel') {
+        Write-Output 'Running Intel GPU optimizations...'
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-intel.ps1')
     } else {
         Write-Warning "Unknown GPU vendor: $gpuName"
     }

@@ -8,7 +8,9 @@ module.exports = {
       },
       colors: {
         primary: '#2563eb',
+        secondary: '#4c51bf',
         'primary-dark': '#1e40af',
+        'secondary-dark': '#3730a3',
         success: '#16a34a',
         'success-dark': '#166534',
         warning: '#f59e0b',
@@ -24,7 +26,18 @@ module.exports = {
         border: '#e5e7eb',
         'border-dark': '#374151',
         muted: '#f3f4f6',
-        'muted-dark': '#4b5563'
+        'muted-dark': '#4b5563',
+        premium: '#d4af37',
+        'premium-dark': '#b8860b'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        }
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.5s ease-in-out'
       }
     }
   },

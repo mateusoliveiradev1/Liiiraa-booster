@@ -2,31 +2,36 @@
 @tailwind components;
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark;
+    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark shadow transition;
   }
 
   .btn-success {
-    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark;
+    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark shadow transition;
   }
 
   .btn-warning {
-    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark;
+    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark shadow transition;
   }
 
   .btn-accent {
-    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark;
+    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark shadow transition;
   }
 
   .btn-danger {
-    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark;
+    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark shadow transition;
   }
 
   .btn-neutral {
-    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark;
+    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark shadow transition;
+  }
+
+  .btn-premium {
+    @apply px-4 py-2 rounded bg-premium text-white hover:bg-premium-dark shadow transition;
   }
 
   .card {
-    @apply border border-border dark:border-border-dark rounded p-4 bg-surface dark:bg-surface-dark;
+    @apply border border-white/20 dark:border-white/20 rounded-lg p-4 bg-white/30 dark:bg-surface-dark/40 backdrop-blur-md shadow-md hover:shadow-xl transition transform animate-fadeIn;
+    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
   }
 }
 @tailwind utilities;

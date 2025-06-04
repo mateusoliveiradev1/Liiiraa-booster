@@ -8,7 +8,9 @@ import {
   FaMicrochip,
   FaMemory,
   FaHdd,
-  FaNetworkWired
+  FaNetworkWired,
+  FaSun,
+  FaMoon
 } from 'react-icons/fa';
 import { BsGpuCard } from 'react-icons/bs';
 import MetricsCard from './components/MetricsCard.jsx';
@@ -82,8 +84,10 @@ export default function App() {
   }, []);
 
 
-  useEffect(() => {
-    const fetchMetrics = async () => {
+useEffect(() => {
+  if (activeSection !== 'Dashboard') return;
+
+  const fetchMetrics = async () => {
       try {
         const output = await window.api.runScript('metrics');
         const data = JSON.parse(output);
@@ -134,7 +138,7 @@ export default function App() {
     fetchMetrics();
     const id = setInterval(fetchMetrics, 5000);
     return () => clearInterval(id);
-  }, [t]);
+  }, [activeSection, t]);
 
   const toggleDark = () => {
     const newDark = !dark;
@@ -188,6 +192,7 @@ export default function App() {
   const handleCpuAmdRestore = () => runCommand('cpu-amd-restore');
   const handleCpuIntelRestore = () => runCommand('cpu-intel-restore');
   const handleGpuNvidia = () => runCommand('gpu-nvidia');
+  const handleGpuIntel = () => runCommand('gpu-intel');
   const handleGpuAmd = () => runCommand('gpu-amd');
   const handlePubg = () => runCommand('pubg');
   const handleCs2 = () => runCommand('cs2');
@@ -205,7 +210,7 @@ export default function App() {
         return (
           <div>
 
-            <div className="mb-4">
+            <div className="mb-4 space-y-1 text-lg font-medium">
               <p>
                 {t('labels.user')}: {username}
               </p>
@@ -367,6 +372,9 @@ export default function App() {
           <div className="space-x-2">
             <button className="btn-success" onClick={handleGpuNvidia}>
               {t('buttons.optimize_nvidia_gpu')}
+            </button>
+            <button className="btn-success" onClick={handleGpuIntel}>
+              {t('buttons.optimize_intel_gpu')}
             </button>
             <button className="btn-success" onClick={handleGpuAmd}>
               {t('buttons.optimize_amd_gpu')}
@@ -531,8 +539,15 @@ export default function App() {
     <div className="flex h-screen">
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
-        <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-primary to-accent flex justify-between items-center text-white">
+        <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-premium via-accent to-secondary backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg flex justify-between items-center text-white">
           <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
+          <button
+            onClick={toggleDark}
+            aria-label={dark ? t('buttons.light_mode') : t('buttons.dark_mode')}
+            data-testid="theme-toggle"
+          >
+            {dark ? <FaSun /> : <FaMoon />}
+          </button>
         </div>
         {renderSection()}
         {loading && <Spinner />}

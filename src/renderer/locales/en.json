@@ -36,6 +36,7 @@
     "restore_amd_cpu": "Restore AMD CPU",
     "restore_intel_cpu": "Restore Intel CPU",
     "optimize_nvidia_gpu": "Optimize Nvidia GPU",
+    "optimize_intel_gpu": "Optimize Intel GPU",
     "optimize_amd_gpu": "Optimize AMD GPU",
     "optimize_pubg": "Optimize PUBG",
     "optimize_cs2": "Optimize CS2",
