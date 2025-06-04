@@ -25,22 +25,15 @@ export default function Sidebar({ activeSection, onSelect }) {
   ];
 
   return (
-
     <div className="w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2">
-      {sections.map(({ label, icon }) => (
-        <button
-          key={label}
-          onClick={() => onSelect(label)}
-          className={`block w-full text-left px-3 py-2 rounded ${activeSection === label ? 'bg-primary text-white' : 'hover:bg-muted dark:hover:bg-muted-dark'}`}
-
-    <div className="w-48 border-r border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 space-y-2">
       {sections.map(({ key, icon, tKey }) => (
         <button
           key={key}
           onClick={() => onSelect(key)}
-          className={`block w-full text-left px-3 py-2 rounded ${activeSection === key ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
-
-        
+          className={`block w-full text-left px-3 py-2 rounded ${
+            activeSection === key ? 'bg-primary text-white' : 'hover:bg-muted dark:hover:bg-muted-dark'
+          }`}
+        >
           <span className="mr-2">{icon}</span>
           {t(tKey)}
         </button>
