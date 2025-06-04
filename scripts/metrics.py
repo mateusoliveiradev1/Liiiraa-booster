@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import sys
+import time
 
 try:
     import psutil
@@ -97,28 +98,15 @@ def _gpu_metrics() -> dict:
             return {}
 
 
-def main() -> None:
-    """Collect metrics and print them as JSON."""
-    if os.name == "nt" and not is_admin():
-        sys.exit("This script must be run as Administrator.")
-
-    logger = _setup_logger()
-    logger.info("Collecting system metrics")
-
+def _collect(drive: str) -> dict:
+    """Collect a single set of metrics."""
     net1 = psutil.net_io_counters()
-    # Shorter sampling interval avoids blocking the UI for a full second
     cpu_percent = psutil.cpu_percent(interval=0.1)
     net2 = psutil.net_io_counters()
     net_up = net2.bytes_sent - net1.bytes_sent
     net_down = net2.bytes_recv - net1.bytes_recv
     net_bytes = net_up + net_down
 
-    drive_arg = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("METRICS_DRIVE")
-    if drive_arg:
-        drive = drive_arg
-    else:
-        drive = os.environ.get('SYSTEMDRIVE', 'C:') + '\\' if os.name == 'nt' else '/'
-    logger.info("Using drive: %s", drive)
     disk = psutil.disk_usage(drive)
     mem = psutil.virtual_memory()
     temps = psutil.sensors_temperatures() if hasattr(psutil, 'sensors_temperatures') else {}
@@ -142,8 +130,32 @@ def main() -> None:
     if cpu_temp is not None:
         metrics["cpu_temp"] = cpu_temp
 
-    logger.info("Metrics collected: %s", metrics)
-    print(json.dumps(metrics))
+    return metrics
+
+
+def main() -> None:
+    """Continuously collect metrics and print JSON objects."""
+    if os.name == "nt" and not is_admin():
+        sys.exit("This script must be run as Administrator.")
+
+    logger = _setup_logger()
+    logger.info("Starting metrics collection loop")
+
+    drive_arg = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("METRICS_DRIVE")
+    drive = (
+        drive_arg
+        if drive_arg
+        else os.environ.get("SYSTEMDRIVE", "C:") + "\\" if os.name == "nt" else "/"
+    )
+    logger.info("Using drive: %s", drive)
+
+    interval = float(os.environ.get("METRICS_INTERVAL", "5"))
+
+    while True:
+        metrics = _collect(drive)
+        logger.info("Metrics collected: %s", metrics)
+        print(json.dumps(metrics), flush=True)
+        time.sleep(interval)
 
 
 if __name__ == "__main__":

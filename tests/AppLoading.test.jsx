@@ -11,6 +11,9 @@ test('shows spinner during command execution', async () => {
   let resolveFn;
   window.api = {
     runScript: jest.fn(() => new Promise(res => { resolveFn = res; })),
+    startMetrics: jest.fn(() => Promise.resolve()),
+    stopMetrics: jest.fn(() => Promise.resolve()),
+    onMetrics: jest.fn(() => {}),
     getLogs: jest.fn(),
     getUser: jest.fn(() => Promise.resolve('alice'))
   };

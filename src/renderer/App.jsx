@@ -98,73 +98,63 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (activeSection !== "Dashboard") return;
+    if (activeSection !== "Dashboard") {
+      window.api.stopMetrics?.();
+      return;
+    }
 
-    const fetchMetrics = async () => {
-      try {
-        const output = await window.api.runScript("metrics");
-        const data = JSON.parse(output);
+    const handleData = (data) => {
+      const cpuPercent = data.cpu_percent;
+      const cpu = `${cpuPercent}%`;
+      const ramPercent = (data.memory_used / data.memory_total) * 100;
+      const ram = `${(data.memory_used / 1024 ** 3).toFixed(1)} GB / ${(data.memory_total / 1024 ** 3).toFixed(1)} GB`;
+      const diskPercent = (data.disk_used / data.disk_total) * 100;
+      const disk = `${(data.disk_used / 1024 ** 3).toFixed(1)} GB / ${(data.disk_total / 1024 ** 3).toFixed(1)} GB`;
+      const bytesPerSec =
+        data.network_bytes_per_sec !== undefined
+          ? data.network_bytes_per_sec
+          : data.net_up + data.net_down;
+      const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
 
-        const cpuPercent = data.cpu_percent;
-        const cpu = `${cpuPercent}%`;
-        const ramPercent = (data.memory_used / data.memory_total) * 100;
-        const ram = `${(data.memory_used / 1024 ** 3).toFixed(1)} GB / ${(
-          data.memory_total /
-          1024 ** 3
-        ).toFixed(1)} GB`;
-        const diskPercent = (data.disk_used / data.disk_total) * 100;
-        const disk = `${(data.disk_used / 1024 ** 3).toFixed(1)} GB / ${(
-          data.disk_total /
-          1024 ** 3
-        ).toFixed(1)} GB`;
-        const bytesPerSec =
-          data.network_bytes_per_sec !== undefined
-            ? data.network_bytes_per_sec
-            : data.net_up + data.net_down;
-        const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
-
-        let gpu = "N/A";
-        let gpuPercent = null;
-        let gpuTemp = null;
-        if (
-          data.gpu_util !== undefined &&
-          data.gpu_mem_used !== undefined &&
-          data.gpu_mem_total !== undefined
-        ) {
-          const util = `${data.gpu_util}%`;
-          const mem = `${(data.gpu_mem_used / 1024 ** 3).toFixed(1)} GB / ${(
-            data.gpu_mem_total /
-            1024 ** 3
-          ).toFixed(1)} GB`;
-          gpu = `${util} - ${mem}`;
-          gpuPercent = data.gpu_util;
-        }
-        if (data.gpu_temp !== undefined) {
-          gpuTemp = `${data.gpu_temp}\u00B0C`;
-        }
-
-        setMetrics({
-          cpu,
-          cpuPercent,
-          gpu,
-          gpuPercent,
-          gpuTemp,
-          ram,
-          ramPercent,
-          disk,
-          diskPercent,
-          network,
-        });
-      } catch (err) {
-        console.error(err);
-        toast.error(t("messages.fetch_failed"));
+      let gpu = "N/A";
+      let gpuPercent = null;
+      let gpuTemp = null;
+      if (
+        data.gpu_util !== undefined &&
+        data.gpu_mem_used !== undefined &&
+        data.gpu_mem_total !== undefined
+      ) {
+        const util = `${data.gpu_util}%`;
+        const mem = `${(data.gpu_mem_used / 1024 ** 3).toFixed(1)} GB / ${(data.gpu_mem_total / 1024 ** 3).toFixed(1)} GB`;
+        gpu = `${util} - ${mem}`;
+        gpuPercent = data.gpu_util;
       }
+      if (data.gpu_temp !== undefined) {
+        gpuTemp = `${data.gpu_temp}\u00B0C`;
+      }
+
+      setMetrics({
+        cpu,
+        cpuPercent,
+        gpu,
+        gpuPercent,
+        gpuTemp,
+        ram,
+        ramPercent,
+        disk,
+        diskPercent,
+        network,
+      });
     };
 
-    fetchMetrics();
-    const id = setInterval(fetchMetrics, 5000);
-    return () => clearInterval(id);
+    window.api.startMetrics?.();
+    const unsubscribe = window.api.onMetrics(handleData);
+    return () => {
+      unsubscribe?.();
+      window.api.stopMetrics?.();
+    };
   }, [activeSection, t]);
+
 
   const toggleDark = () => {
     const newDark = !dark;

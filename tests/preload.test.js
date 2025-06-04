@@ -1,6 +1,6 @@
 jest.mock('electron', () => ({
   contextBridge: { exposeInMainWorld: jest.fn() },
-  ipcRenderer: { invoke: jest.fn(() => Promise.resolve('ok')) }
+  ipcRenderer: { invoke: jest.fn(() => Promise.resolve('ok')), on: jest.fn(), removeListener: jest.fn() }
 }));
 
 require('@testing-library/jest-dom');
@@ -99,6 +99,29 @@ test('runScript supports energy-plan command', async () => {
 test('runScript supports peripheral-energy command', async () => {
   await api.runScript('peripheral-energy');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'peripheral-energy');
+});
+
+test('startMetrics calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.startMetrics();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('start-metrics');
+});
+
+test('stopMetrics calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.stopMetrics();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('stop-metrics');
+});
+
+test('onMetrics registers and removes listener', () => {
+  const cb = jest.fn();
+  const off = api.onMetrics(cb);
+  expect(ipcRenderer.on).toHaveBeenCalledWith('metrics-data', expect.any(Function));
+  const handler = ipcRenderer.on.mock.calls[0][1];
+  handler({}, 'x');
+  expect(cb).toHaveBeenCalledWith('x');
+  off();
+  expect(ipcRenderer.removeListener).toHaveBeenCalledWith('metrics-data', handler);
 });
 
 test('getUser calls ipcRenderer.invoke', async () => {

@@ -40,6 +40,8 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
+let metricsProcess = null;
+
 const scriptsDir = path.resolve(__dirname, '../../scripts');
 const ALLOWED_COMMANDS = {
     hello: {
@@ -284,11 +286,43 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'peripheral-energy.ps1')
       ]
     },
-    metrics: {
-      file: 'python',
-      args: [path.join(scriptsDir, 'metrics.py')]
+  metrics: {
+    file: 'python',
+    args: [path.join(scriptsDir, 'metrics.py')]
+  }
+};
+
+ipcMain.handle('start-metrics', async (event) => {
+  if (metricsProcess) return;
+  const { spawn } = require('child_process');
+  const { file, args } = ALLOWED_COMMANDS.metrics;
+  metricsProcess = spawn(file, args, { windowsHide: true });
+
+  metricsProcess.stdout.on('data', (data) => {
+    const lines = data.toString().split(/\r?\n/).filter(Boolean);
+    for (const line of lines) {
+      try {
+        const json = JSON.parse(line);
+        event.sender.send('metrics-data', json);
+      } catch (e) {
+        /* ignore */
+      }
     }
-  };
+  });
+
+  metricsProcess.stderr.on('data', () => {});
+
+  metricsProcess.on('close', () => {
+    metricsProcess = null;
+  });
+});
+
+ipcMain.handle('stop-metrics', async () => {
+  if (metricsProcess) {
+    metricsProcess.kill();
+    metricsProcess = null;
+  }
+});
 
 ipcMain.handle('run-script', async (_event, command) => {
   // whitelist allowed commands for security
