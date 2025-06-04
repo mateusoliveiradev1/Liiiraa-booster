@@ -73,10 +73,15 @@ project-root/
 
 ## 🧪 Testes
 
-1. Execute `npm install` para instalar todas as dependências do projeto.
-   Em ambientes de CI, prefira `npm ci` para garantir versões exatas.
-2. Depois rode `npm test` para iniciar a suíte de testes.
-   Certifique-se de ter executado `npm install` antes de rodar os testes.
+Antes de rodar a suíte de testes é **obrigatório** instalar todas as dependências:
+
+1. Execute `npm install` para baixar tudo que o projeto necessita. Em ambientes
+   de CI prefira `npm ci` para garantir versões exatas.
+2. Em seguida rode `npm test` para iniciar a suíte de testes.
+
+> **Importante**: `npm test` falhará caso o diretório `node_modules/` não exista.
+> Certifique-se de executar `npm install` ao menos uma vez antes de qualquer
+> execução de testes.
 
 ## 🐍 Requisitos de Python
 

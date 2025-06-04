@@ -8,6 +8,7 @@
     "start": "electron .",
     "build": "vite build",
     "dist": "electron-builder",
+    "pretest": "node scripts/pretest.js",
     "test": "jest"
   },
   "author": "",
