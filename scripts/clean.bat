@@ -18,8 +18,11 @@ set "LOGFILE=%LOGDIR%\clean.log"
 echo [%date% %time%] Cleaning system...>>"%LOGFILE%"
 echo Cleaning system...
 
+REM Directories to clean
+set DIRS="%TEMP%" "%SystemRoot%\Temp" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Download" "%LOCALAPPDATA%\D3DSCache" "%LOCALAPPDATA%\Microsoft\Windows\Explorer" "%LOCALAPPDATA%\Microsoft\Windows\INetCache"
+
 set SIZEBEFORE=0
-for %%D in ("%TEMP%" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Download") do (
+for %%D in (%DIRS%) do (
   for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
     set B=%%A
     set B=!B:,=!
@@ -27,11 +30,11 @@ for %%D in ("%TEMP%" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Down
   )
 )
 
-rem Delete temp files and prefetch data
-del /f /s /q "%TEMP%\*" >>"%LOGFILE%" 2>&1
-for /d %%D in ("%TEMP%\*") do rd /s /q "%%D" >>"%LOGFILE%" 2>&1
-del /f /s /q "C:\Windows\Prefetch\*" >>"%LOGFILE%" 2>&1
-for /d %%D in ("C:\Windows\Prefetch\*") do rd /s /q "%%D" >>"%LOGFILE%" 2>&1
+rem Delete temp files and caches
+for %%D in (%DIRS%) do (
+  del /f /s /q "%%~D\*" >>"%LOGFILE%" 2>&1
+  for /d %%E in ("%%~D\*") do rd /s /q "%%E" >>"%LOGFILE%" 2>&1
+)
 
 rem Clear event logs
 for /f %%G in ('wevtutil el') do wevtutil cl "%%G" >>"%LOGFILE%" 2>&1
@@ -48,7 +51,7 @@ rem Empty recycle bin
 PowerShell -Command "Clear-RecycleBin -Force" >>"%LOGFILE%" 2>&1
 
 set SIZEAFTER=0
-for %%D in ("%TEMP%" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Download") do (
+for %%D in (%DIRS%) do (
   for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
     set B=%%A
     set B=!B:,=!

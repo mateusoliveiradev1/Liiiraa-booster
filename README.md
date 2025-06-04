@@ -118,8 +118,8 @@ Electron via canal `run-script`:
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
  - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU, incluindo a desativação do Power Throttling do Windows (use `-Restore` para desfazer).
-- **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
-  batch.
+- **clean.bat** — limpeza rápida de arquivos temporários e caches do sistema,
+  registrando o espaço liberado.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
  - **cpu-amd.ps1** — otimiza processadores AMD e desativa o Power Throttling (botão *Optimize AMD CPU* na aba **CPU**).
