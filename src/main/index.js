@@ -227,3 +227,7 @@ ipcMain.handle('get-logs', async () => {
     return [];
   }
 });
+
+ipcMain.handle('get-user', async () => {
+  return require('os').userInfo().username;
+});

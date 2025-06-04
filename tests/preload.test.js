@@ -44,3 +44,9 @@ test('runScript supports restore command', async () => {
   await api.runScript('restore');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
 });
+
+test('getUser calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.getUser();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-user');
+});
