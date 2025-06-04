@@ -43,6 +43,7 @@ if (-not ($flagList -contains $true)) {
 
 if ($Restore) {
     if ($DisableUAC) {
+        Write-Output 'Restoring UAC...'
         if (Test-Path $backupPath) {
             Write-Output 'Restoring registry values from backup...'
             reg import $backupPath | Out-Null
@@ -50,9 +51,11 @@ if ($Restore) {
             Write-Warning "Backup file not found: $backupPath"
             Set-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'EnableLUA' -Value 1 -Force
         }
+        Write-Output 'UAC enabled'
     }
 
     if ($DisableUpdate) {
+        Write-Output 'Restoring Windows Update service...'
         $service = Get-Service -Name 'wuauserv' -ErrorAction SilentlyContinue
         if ($service) {
             Set-Service -InputObject $service -StartupType Manual -ErrorAction SilentlyContinue
@@ -62,6 +65,7 @@ if ($Restore) {
     }
 
     if ($DisableDefender) {
+        Write-Output 'Restoring Windows Defender service...'
         $service = Get-Service -Name 'WinDefend' -ErrorAction SilentlyContinue
         if ($service) {
             Set-Service -InputObject $service -StartupType Manual -ErrorAction SilentlyContinue
@@ -71,22 +75,27 @@ if ($Restore) {
     }
 
     if ($DisableMemoryCompression) {
+        Write-Output 'Re-enabling Memory Compression...'
         Enable-MMAgent -mc | Out-Null
     }
 
     if ($DisableMitigations) {
+        Write-Output 'Restoring hardware mitigations...'
         bcdedit /set {current} mitigations default | Out-Null
     }
 
     if ($DisableHVCI) {
+        Write-Output 'Re-enabling Core Isolation...'
         Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'Enabled' -Value 1 -Type DWord -Force
     }
 
     if ($DisableTelemetry) {
+        Write-Output 'Re-enabling telemetry collection...'
         Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows\DataCollection' -Name 'AllowTelemetry' -Value 1 -Type DWord -Force
     }
 
     if ($DisableSmartScreen) {
+        Write-Output 'Restoring SmartScreen...'
         Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Name 'SmartScreenEnabled' -Value 'Warn' -Force
     }
 
@@ -101,10 +110,12 @@ reg export 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System' $bac
 
 try {
     if ($DisableUAC) {
+        Write-Output 'Disabling UAC...'
         Set-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name 'EnableLUA' -Value 0 -Force
     }
 
     if ($DisableDefender) {
+        Write-Output 'Disabling Windows Defender service...'
         $defender = Get-Service -Name 'WinDefend' -ErrorAction SilentlyContinue
         if ($defender) {
             Set-Service -InputObject $defender -StartupType Disabled -ErrorAction SilentlyContinue
@@ -113,6 +124,7 @@ try {
     }
 
     if ($DisableUpdate) {
+        Write-Output 'Disabling Windows Update service...'
         $update = Get-Service -Name 'wuauserv' -ErrorAction SilentlyContinue
         if ($update) {
             Set-Service -InputObject $update -StartupType Disabled -ErrorAction SilentlyContinue
@@ -121,22 +133,27 @@ try {
     }
 
     if ($DisableMemoryCompression) {
+        Write-Output 'Disabling Memory Compression...'
         Disable-MMAgent -mc | Out-Null
     }
 
     if ($DisableMitigations) {
+        Write-Output 'Disabling hardware mitigations...'
         bcdedit /set {current} mitigations off | Out-Null
     }
 
     if ($DisableHVCI) {
+        Write-Output 'Disabling Core Isolation...'
         Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'Enabled' -Value 0 -Type DWord -Force
     }
 
     if ($DisableTelemetry) {
+        Write-Output 'Disabling telemetry collection...'
         Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\Windows\DataCollection' -Name 'AllowTelemetry' -Value 0 -Type DWord -Force
     }
 
     if ($DisableSmartScreen) {
+        Write-Output 'Disabling SmartScreen...'
         Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer' -Name 'SmartScreenEnabled' -Value 'Off' -Force
     }
 
