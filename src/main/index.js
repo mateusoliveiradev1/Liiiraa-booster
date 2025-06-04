@@ -68,18 +68,6 @@ ipcMain.handle('run-script', async (_event, command) => {
       file: 'python',
       args: [path.join(scriptsDir, 'metrics.py')]
     }
-
-  const optimizeScript = path.join(__dirname, '..', '..', 'scripts', 'optimize.ps1');
-  const cleanScript = path.join(__dirname, '..', '..', 'scripts', 'clean.bat');
-  const metricsScript = path.join(__dirname, '..', '..', 'scripts', 'metrics.py');
-
-  const allowed = {
-    'hello': 'echo Hello World',
-    'optimize': `powershell -ExecutionPolicy Bypass -File "${optimizeScript}"`,
-    'clean': `cmd /c "${cleanScript}"`,
-    'restore': `powershell -ExecutionPolicy Bypass -File "${optimizeScript}" -Restore`,
-    'metrics': `python "${metricsScript}"`
-
   };
   if (!allowed[command]) {
     throw new Error('Command not allowed');
