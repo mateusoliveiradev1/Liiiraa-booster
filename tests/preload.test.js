@@ -19,6 +19,7 @@ test('getLogs calls ipcRenderer.invoke', async () => {
   await api.getLogs();
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-logs');
 });
+
 test('runScript supports debloat command', async () => {
   await api.runScript('debloat');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat');
