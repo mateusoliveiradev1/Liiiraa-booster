@@ -1,5 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('api', {
+const api = {
   runScript: (cmd) => ipcRenderer.invoke('run-script', cmd)
-});
+};
+
+contextBridge.exposeInMainWorld('api', api);
+
+module.exports = { api };
