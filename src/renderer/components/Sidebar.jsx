@@ -21,7 +21,7 @@ import { SiAmd, SiIntel, SiNvidia, SiPubg, SiValorant } from 'react-icons/si';
 import { TbBrandFortnite } from 'react-icons/tb';
 import { GiPistolGun } from 'react-icons/gi';
 
-export default function Sidebar({ activeSection, onSelect }) {
+function Sidebar({ activeSection, onSelect }) {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => setCollapsed((c) => !c);
@@ -93,3 +93,5 @@ export default function Sidebar({ activeSection, onSelect }) {
     </div>
   );
 }
+
+export default React.memo(Sidebar);

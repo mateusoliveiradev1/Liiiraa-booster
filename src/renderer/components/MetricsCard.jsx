@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MetricsCard({ label, value, icon, percentage }) {
+function MetricsCard({ label, value, icon, percentage }) {
   return (
     <div className="card transform hover:scale-105">
       <h2 className="text-lg font-semibold mb-2 flex items-center">
@@ -23,3 +23,5 @@ export default function MetricsCard({ label, value, icon, percentage }) {
     </div>
   );
 }
+
+export default React.memo(MetricsCard);

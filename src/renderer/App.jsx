@@ -84,8 +84,10 @@ export default function App() {
   }, []);
 
 
-  useEffect(() => {
-    const fetchMetrics = async () => {
+useEffect(() => {
+  if (activeSection !== 'Dashboard') return;
+
+  const fetchMetrics = async () => {
       try {
         const output = await window.api.runScript('metrics');
         const data = JSON.parse(output);
@@ -136,7 +138,7 @@ export default function App() {
     fetchMetrics();
     const id = setInterval(fetchMetrics, 5000);
     return () => clearInterval(id);
-  }, [t]);
+  }, [activeSection, t]);
 
   const toggleDark = () => {
     const newDark = !dark;
