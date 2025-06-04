@@ -20,7 +20,7 @@ if ($Restore) {
     }
 
     # Re-enable services disabled during optimization
-    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice', 'WSearch')
     foreach ($svc in $services) {
         $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
         if ($service) {
@@ -100,8 +100,8 @@ try {
     }
 
     # --- Disable unnecessary services ---
-    # Added diagnosticshub.standardcollector.service and Dmwappushservice
-    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
+    # Added diagnosticshub.standardcollector.service, Dmwappushservice and WSearch
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice', 'WSearch')
     foreach ($svc in $services) {
         $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
         if ($service) {

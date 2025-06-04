@@ -34,6 +34,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
   (Zune, News, Solitaire, YourPhone, GetHelp, Xbox, People, Skype).
   Use `-Restore` para reinstalar caso necessário
 - Desativa o recurso opcional **XPS Viewer** por padrão
+- Desativa o serviço **Windows Search** (WSearch) para reduzir uso de disco
 - Limpador de sistema e navegadores
 - Modo Game Booster, RAM Flush e tweaks dinâmicos
 - Modo Avançado com tweaks perigosos (UAC, Defender, Update, Memory Compression, mitigações de hardware e Core Isolation)
@@ -113,7 +114,7 @@ Esses scripts são chamados pelo Electron através do canal IPC `run-script`.
 Esta pasta contém quatro scripts principais que podem ser executados a partir do
 Electron via canal `run-script`:
 
-- **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
+- **optimize.ps1** — otimizações de performance no Windows (desativa serviços como Windows Search) usando PowerShell.
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
  - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU, incluindo a desativação do Power Throttling do Windows (use `-Restore` para desfazer).
