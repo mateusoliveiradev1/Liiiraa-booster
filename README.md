@@ -23,13 +23,17 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Dashboard moderno com métricas: CPU, GPU, RAM, Disco, Rede
 - Detecção de hardware e aplicação de tweaks compatíveis
 - Otimização automática de CPU/GPU baseada no fabricante
+- Ajustes de rede TCP para reduzir latência e Throttling de energia desativado
 - Criação de plano de energia personalizado:
   > `Liiiraa Booster - Max Performance and Low Latency`
 - Aba **Energy** para monitorar consumo e aplicar planos de energia
 - Otimizações específicas para:
   - AMD, Intel, NVIDIA
   - Jogos: CS2, Valorant, Warzone, Fortnite, PUBG
-- Debloat total do Windows
+- Debloat completo ou leve do Windows com lista expandida de apps
+  (Zune, News, Solitaire, YourPhone, GetHelp, Xbox, People, Skype).
+  Use `-Restore` para reinstalar caso necessário
+- Desativa o recurso opcional **XPS Viewer** por padrão
 - Limpador de sistema e navegadores
 - Modo Game Booster, RAM Flush e tweaks dinâmicos
 - Modo Avançado com tweaks perigosos (UAC, Defender, Update, Memory Compression, mitigações de hardware e Core Isolation)
@@ -123,11 +127,12 @@ Electron via canal `run-script`:
 - **gamebooster-restore.ps1** — restaura serviços e o Game Bar após usar o Game Booster.
 - **restore-point.ps1** — cria um ponto de restauração do sistema (botão *Create Restore Point* no **Dashboard**).
 
-> ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
-> **Administrador**. Eles modificam configurações do Windows e podem afetar a
-> estabilidade do sistema. O `optimize.ps1` e o `advanced.ps1` realizam um backup do registro antes
-> de aplicar tweaks e podem ser executados com `-Restore` para desfazer as
-> alterações (inclusive os scripts de CPU). Sempre tenha um ponto de restauração ou backup antes de prosseguir.
+> ⚠️ **Atenção**: estes scripts exigem privilégios de **Administrador** e podem
+> alterar profundamente o sistema. O `optimize.ps1`, `advanced.ps1` e também o
+> `debloat.ps1` fazem backup do registro ou registram os apps removidos.
+> Caso algo saia errado, execute-os com `-Restore` para reverter ou reinstalar
+> os aplicativos removidos. Remover apps essenciais pode causar problemas, tenha
+> sempre um ponto de restauração ou backup antes de prosseguir.
 
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de
