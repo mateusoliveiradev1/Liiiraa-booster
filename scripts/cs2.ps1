@@ -1,6 +1,7 @@
 # CS2 optimization script
 # Invoked via `window.api.runScript('cs2')` in Electron
 
+[CmdletBinding()]
 param(
     [switch]$Restore
 )
@@ -15,7 +16,9 @@ if ($Restore) {
         Write-Output 'Restoring CS2 settings...'
         $cfg = Join-Path $env:USERPROFILE 'Documents\My Games\Counter-Strike Global Offensive\cfg\autoexec.cfg'
         if (Test-Path $cfg) {
-            (Get-Content $cfg) | Where-Object { $_ -ne 'fps_max 400' -and $_ -ne 'cl_disablehtmlmotd 1' } | Set-Content $cfg
+            $content = Get-Content $cfg
+            $newContent = $content | Where-Object { $_ -ne 'fps_max 400' -and $_ -ne 'cl_disablehtmlmotd 1' }
+            Set-Content -Path $cfg -Value $newContent
         }
         Write-Output 'Restore complete.'
     } catch {

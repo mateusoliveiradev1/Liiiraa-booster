@@ -1,6 +1,7 @@
 # Fortnite optimization script
 # Invoked via `window.api.runScript('fortnite')` in Electron
 
+[CmdletBinding()]
 param(
     [switch]$Restore
 )
@@ -15,7 +16,9 @@ if ($Restore) {
         Write-Output 'Restoring Fortnite settings...'
         $config = Join-Path $env:LOCALAPPDATA 'FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini'
         if (Test-Path $config) {
-            (Get-Content $config) -replace '^bUseVSync=.*', 'bUseVSync=True' | Set-Content $config
+            $content = Get-Content $config
+            $newContent = $content -replace '^bUseVSync=.*', 'bUseVSync=True'
+            Set-Content -Path $config -Value $newContent
         }
         Write-Output 'Restore complete.'
     } catch {

@@ -257,6 +257,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'pubg.ps1'),
         '-Restore'
@@ -277,6 +278,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cs2.ps1'),
         '-Restore'
@@ -297,6 +299,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'fortnite.ps1'),
         '-Restore'
@@ -317,6 +320,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'warzone.ps1'),
         '-Restore'
@@ -338,6 +342,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'valorant.ps1'),
         '-Restore'

@@ -1,6 +1,7 @@
 # Warzone optimization script
 # Invoked via `window.api.runScript('warzone')` in Electron
 
+[CmdletBinding()]
 param(
     [switch]$Restore
 )
@@ -15,7 +16,9 @@ if ($Restore) {
         Write-Output 'Restoring Warzone settings...'
         $config = Join-Path $env:USERPROFILE 'Documents\Call of Duty Modern Warfare\players\adv_options.ini'
         if (Test-Path $config) {
-            (Get-Content $config) -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.75' | Set-Content $config
+            $content = Get-Content $config
+            $newContent = $content -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.75'
+            Set-Content -Path $config -Value $newContent
         }
         Write-Output 'Restore complete.'
     } catch {
