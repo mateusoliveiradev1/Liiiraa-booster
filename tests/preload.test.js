@@ -20,9 +20,19 @@ test('getLogs calls ipcRenderer.invoke', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-logs');
 });
 
-test('runScript supports debloat command', async () => {
-  await api.runScript('debloat');
-  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat');
+test('runScript supports debloat-full command', async () => {
+  await api.runScript('debloat-full');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat-full');
+});
+
+test('runScript supports debloat-lite command', async () => {
+  await api.runScript('debloat-lite');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat-lite');
+});
+
+test('runScript supports debloat-restore command', async () => {
+  await api.runScript('debloat-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'debloat-restore');
 });
 
 test('runScript supports gamebooster command', async () => {

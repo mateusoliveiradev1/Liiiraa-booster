@@ -122,7 +122,13 @@ export default function App() {
   const handleOptimize = () => runCommand('auto-optimize');
   const handleClean = () => runCommand('clean')
 
+  const handleDebloatFull = () => runCommand('debloat-full');
+  const handleDebloatLite = () => runCommand('debloat-lite');
+  const handleDebloatRestore = () => runCommand('debloat-restore');
+
+
   const handleDebloat = () => runCommand('debloat');
+
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
   const handleRestorePoint = () => runCommand('restore-point');
@@ -214,12 +220,26 @@ export default function App() {
         return (
           <div>
             <p className="mb-2">{t('messages.debloat_desc')}</p>
-            <button
-              className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
-              onClick={handleDebloat}
-            >
-              {t('buttons.run_debloat')}
-            </button>
+            <div className="space-x-2">
+              <button
+                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                onClick={handleDebloatFull}
+              >
+                {t('buttons.debloat_full')}
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                onClick={handleDebloatLite}
+              >
+                {t('buttons.debloat_lite')}
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                onClick={handleDebloatRestore}
+              >
+                {t('buttons.debloat_restore')}
+              </button>
+            </div>
           </div>
         );
       case 'Game Booster':
