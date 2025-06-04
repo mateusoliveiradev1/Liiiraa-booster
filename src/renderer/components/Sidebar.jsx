@@ -3,24 +3,15 @@ import { useTranslation } from "react-i18next";
 import "../i18n";
 import { MdDashboard } from "react-icons/md";
 import {
-  FaBolt,
-  FaBroom,
-  FaTrash,
   FaGamepad,
-  FaMicrochip,
   FaBomb,
-  FaPlug,
   FaTools,
   FaListAlt,
   FaCog,
-  FaBullseye,
-  FaShieldAlt,
+  FaWindows,
 } from "react-icons/fa";
-import { BsGpuCard } from "react-icons/bs";
-import { SiAmd, SiIntel, SiNvidia, SiPubg, SiValorant } from "react-icons/si";
+import { SiAmd, SiNvidia } from "react-icons/si";
 import logo from "../assets/logo.png";
-import { TbBrandFortnite } from "react-icons/tb";
-import { GiPistolGun } from "react-icons/gi";
 
 function Sidebar({ activeSection, onSelect }) {
   const { t } = useTranslation();
@@ -31,24 +22,24 @@ function Sidebar({ activeSection, onSelect }) {
       title: "sidebar.group_system",
       items: [
         { key: "Dashboard", icon: <MdDashboard />, tKey: "sidebar.dashboard" },
-        { key: "System", icon: <FaShieldAlt />, tKey: "sidebar.system" },
+        { key: "System", icon: <FaWindows />, tKey: "sidebar.system" },
       ],
     },
     {
       title: "sidebar.group_hardware",
       items: [
-        { key: "CPU", icon: <FaMicrochip />, tKey: "sidebar.cpu" },
-        { key: "GPU", icon: <BsGpuCard />, tKey: "sidebar.gpu" },
+        { key: "CPU", icon: <SiAmd />, tKey: "sidebar.cpu" },
+        { key: "GPU", icon: <SiNvidia />, tKey: "sidebar.gpu" },
       ],
     },
     {
       title: "sidebar.group_games",
-      items: [{ key: "Games", icon: <FaBullseye />, tKey: "sidebar.games" }],
+      items: [{ key: "Games", icon: <FaGamepad />, tKey: "sidebar.games" }],
     },
     {
       title: "sidebar.group_other",
       items: [
-        { key: "Advanced Tweaks", icon: <FaTools />, tKey: "sidebar.advanced" },
+        { key: "Advanced Tweaks", icon: <FaBomb />, tKey: "sidebar.advanced" },
         { key: "Logs", icon: <FaListAlt />, tKey: "sidebar.logs" },
         { key: "Settings", icon: <FaCog />, tKey: "sidebar.settings" },
       ],
