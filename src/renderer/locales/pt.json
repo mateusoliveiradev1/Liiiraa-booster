@@ -79,7 +79,8 @@
     "dashboard_desc": "Visualize as métricas atuais do sistema.",
     "no_gpu": "Métricas da GPU indisponíveis.",
     "logs_cleared": "Logs limpos com sucesso",
-    "clear_logs_failed": "Falha ao limpar logs"
+    "clear_logs_failed": "Falha ao limpar logs",
+    "logs_truncated": "Exibindo últimas {{lines}} linhas"
 
   },
   "labels": {

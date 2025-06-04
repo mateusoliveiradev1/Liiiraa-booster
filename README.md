@@ -41,6 +41,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Botão **Create Restore Point** para criar pontos de restauração
 - Painel com histórico de boot e plugins
 - Scripts de jogos evitam linhas duplicadas verificando as configurações antes de escrever
+- O visualizador de logs exibe apenas as últimas 500 linhas de cada arquivo
 
 ---
 

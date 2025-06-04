@@ -6,7 +6,7 @@ import Logs from '../src/renderer/components/Logs.jsx';
 test('renders logs returned by api', async () => {
   window.api = {
     getLogs: jest.fn(() =>
-      Promise.resolve([{ file: 'test.log', lines: ['[2024-01-01] Booted'] }])
+      Promise.resolve([{ file: 'test.log', lines: ['[2024-01-01] Booted'], truncated: false }])
     )
   };
 
@@ -32,4 +32,20 @@ test('clear logs button triggers api', async () => {
     fireEvent.click(button);
   });
   expect(window.api.clearLogs).toHaveBeenCalled();
+});
+
+test('shows truncated message when logs are large', async () => {
+  window.api = {
+    getLogs: jest.fn(() =>
+      Promise.resolve([
+        { file: 'big.log', lines: ['last line'], truncated: true }
+      ])
+    )
+  };
+
+  await act(async () => {
+    render(<Logs />);
+  });
+
+  expect(await screen.findByText('messages.logs_truncated')).toBeInTheDocument();
 });

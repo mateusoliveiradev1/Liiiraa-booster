@@ -326,6 +326,7 @@ ipcMain.handle('run-script', async (_event, command) => {
 
 ipcMain.handle('get-logs', async () => {
   const logsDir = path.resolve(__dirname, '../../logs');
+  const MAX_LOG_LINES = 500;
   try {
     const files = (await fs.promises.readdir(logsDir)).filter((f) =>
       f.endsWith('.log')
@@ -337,7 +338,12 @@ ipcMain.handle('get-logs', async () => {
         'utf8'
       );
       const lines = content.trim().split(/\r?\n/);
-      results.push({ file, lines });
+      const truncated = lines.length > MAX_LOG_LINES;
+      results.push({
+        file,
+        lines: lines.slice(-MAX_LOG_LINES),
+        truncated
+      });
     }
     return results;
   } catch (err) {

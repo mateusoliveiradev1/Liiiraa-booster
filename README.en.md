@@ -63,6 +63,7 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **gamebooster-restore.ps1** — restores services and Game Bar settings after using Game Booster.
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
 - Game scripts avoid duplicate entries by checking configuration files before writing.
+- The log viewer shows only the last 500 lines of each file.
 
 ## Debloat Modes
 
