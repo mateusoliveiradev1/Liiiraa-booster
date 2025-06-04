@@ -51,17 +51,47 @@ ipcMain.handle('run-script', async (_event, command) => {
         path.join(scriptsDir, 'optimize.ps1')
       ]
     },
-    clean: {
-      file: 'cmd',
-      args: ['/c', path.join(scriptsDir, 'clean.bat')]
-    },
-    debloat: {
+    'auto-optimize': {
       file: 'powershell',
       args: [
         '-ExecutionPolicy',
         'Bypass',
         '-File',
-        path.join(scriptsDir, 'debloat.ps1')
+        path.join(scriptsDir, 'hardware-optimize.ps1')
+      ]
+    },
+    clean: {
+      file: 'cmd',
+      args: ['/c', path.join(scriptsDir, 'clean.bat')]
+    },
+    'debloat-full': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Full'
+      ]
+    },
+    'debloat-lite': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Lite'
+      ]
+    },
+    'debloat-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Restore'
       ]
     },
     restore: {
@@ -72,6 +102,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         '-File',
         path.join(scriptsDir, 'optimize.ps1'),
         '-Restore'
+      ]
+    },
+    'restore-point': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'restore-point.ps1')
       ]
     },
     gamebooster: {
@@ -226,4 +265,8 @@ ipcMain.handle('get-logs', async () => {
   } catch (err) {
     return [];
   }
+});
+
+ipcMain.handle('get-user', async () => {
+  return require('os').userInfo().username;
 });

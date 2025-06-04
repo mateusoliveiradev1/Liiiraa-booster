@@ -27,6 +27,25 @@ export default function App() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
 
+  const [freedSpace, setFreedSpace] = useState('');
+
+  const [username, setUsername] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    if (window.api?.getUser) {
+      window.api
+        .getUser()
+        .then((name) => setUsername(name))
+        .catch(() => {});
+    }
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
@@ -84,11 +103,35 @@ export default function App() {
     }
   };
 
+
   const handleOptimize = () => runCommand('optimize');
+  const handleClean = async () => {
+    try {
+      const output = await window.api.runScript('clean');
+      setFreedSpace(output.trim());
+      setMessage(t('messages.command_success', { cmd: 'Clean' }));
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError(t('messages.command_failed', { cmd: 'Clean' }));
+      setMessage(null);
+      setFreedSpace('');
+    }
+  };
+
+  const handleOptimize = () => runCommand('auto-optimize');
   const handleClean = () => runCommand('clean')
+
+  const handleDebloatFull = () => runCommand('debloat-full');
+  const handleDebloatLite = () => runCommand('debloat-lite');
+  const handleDebloatRestore = () => runCommand('debloat-restore');
+
+
   const handleDebloat = () => runCommand('debloat');
+
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
+  const handleRestorePoint = () => runCommand('restore-point');
   const handleAdvanced = () => runCommand('advanced');
   const handleCpuAmd = () => runCommand('cpu-amd');
   const handleCpuIntel = () => runCommand('cpu-intel');
@@ -111,12 +154,33 @@ export default function App() {
     switch (activeSection) {
       case 'Dashboard':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <MetricsCard label="CPU" value={metrics.cpu} />
-            <MetricsCard label="GPU" value={metrics.gpu} />
-            <MetricsCard label="RAM" value={metrics.ram} />
-            <MetricsCard label="Disk" value={metrics.disk} />
-            <MetricsCard label="Network" value={metrics.network} />
+          <div>
+
+            <div className="mb-4">
+              <p>
+                {t('labels.user')}: {username}
+              </p>
+              <p>
+                {t('labels.time')}: {currentTime.toLocaleTimeString()}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <MetricsCard label="CPU" value={metrics.cpu} />
+              <MetricsCard label="GPU" value={metrics.gpu} />
+              <MetricsCard label="RAM" value={metrics.ram} />
+              <MetricsCard label="Disk" value={metrics.disk} />
+              <MetricsCard label="Network" value={metrics.network} />
+            </div>
+
+
+            <button
+              className="mt-4 px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              onClick={handleRestorePoint}
+            >
+              {t('buttons.create_restore_point')}
+            </button>
+
           </div>
         );
       case 'Optimize':
@@ -135,24 +199,47 @@ export default function App() {
         return (
           <div>
             <p className="mb-2">{t('messages.clean_desc')}</p>
+            <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+              {t('messages.clean_extra')}
+            </p>
             <button
-              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
+              className="inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleClean}
             >
+              <span className="mr-2" role="img" aria-label="broom">
+                🧹
+              </span>
               {t('buttons.run_clean')}
             </button>
+            {freedSpace && (
+              <p className="mt-2">{t('messages.clean_result', { space: freedSpace })}</p>
+            )}
           </div>
         );
       case 'Debloat':
         return (
           <div>
             <p className="mb-2">{t('messages.debloat_desc')}</p>
-            <button
-              className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
-              onClick={handleDebloat}
-            >
-              {t('buttons.run_debloat')}
-            </button>
+            <div className="space-x-2">
+              <button
+                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                onClick={handleDebloatFull}
+              >
+                {t('buttons.debloat_full')}
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                onClick={handleDebloatLite}
+              >
+                {t('buttons.debloat_lite')}
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                onClick={handleDebloatRestore}
+              >
+                {t('buttons.debloat_restore')}
+              </button>
+            </div>
           </div>
         );
       case 'Game Booster':

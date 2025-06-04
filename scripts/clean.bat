@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 rem Clean temporary files and logs
 rem Invoked via `window.api.runScript('clean')` in Electron
 :: Ensure script is running as Administrator
@@ -16,6 +17,15 @@ if not exist "%LOGDIR%" mkdir "%LOGDIR%"
 set "LOGFILE=%LOGDIR%\clean.log"
 echo [%date% %time%] Cleaning system...>>"%LOGFILE%"
 echo Cleaning system...
+
+set SIZEBEFORE=0
+for %%D in ("%TEMP%" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Download") do (
+  for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
+    set B=%%A
+    set B=!B:,=!
+    set /a SIZEBEFORE+=B
+  )
+)
 
 rem Delete temp files and prefetch data
 del /f /s /q "%TEMP%\*" >>"%LOGFILE%" 2>&1
@@ -37,4 +47,17 @@ net start wuauserv >>"%LOGFILE%" 2>&1
 rem Empty recycle bin
 PowerShell -Command "Clear-RecycleBin -Force" >>"%LOGFILE%" 2>&1
 
+set SIZEAFTER=0
+for %%D in ("%TEMP%" "C:\Windows\Prefetch" "C:\Windows\SoftwareDistribution\Download") do (
+  for /f "tokens=3" %%A in ('dir /s /-c "%%~D" 2^>nul ^| find "File(s)"') do (
+    set B=%%A
+    set B=!B:,=!
+    set /a SIZEAFTER+=B
+  )
+)
+
+set /a FREED=SIZEBEFORE-SIZEAFTER
+set /a FREEDMB=FREED/1048576
+echo Freed !FREEDMB! MB>>"%LOGFILE%"
+echo Freed !FREEDMB! MB
 echo Done.>>"%LOGFILE%"

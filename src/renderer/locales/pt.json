@@ -19,9 +19,12 @@
     "settings": "Configurações"
   },
   "buttons": {
-    "run_optimize": "Executar Otimização",
+    "run_optimize": "Executar Otimização Automática",
     "run_clean": "Executar Limpeza",
     "run_debloat": "Executar Debloat",
+    "debloat_full": "Debloat Completo",
+    "debloat_lite": "Debloat Leve",
+    "debloat_restore": "Desfazer Debloat",
     "start_game_booster": "Iniciar Game Booster",
     "optimize_amd_cpu": "Otimizar CPU AMD",
     "optimize_intel_cpu": "Otimizar CPU Intel",
@@ -35,11 +38,13 @@
     "run_advanced": "Executar Ajustes Avançados",
     "restore_tweaks": "Restaurar Ajustes",
     "light_mode": "Modo Claro",
-    "dark_mode": "Modo Escuro"
+    "dark_mode": "Modo Escuro",
+    "create_restore_point": "Criar Ponto de Restauração"
   },
   "messages": {
-    "optimize_desc": "Aplicar otimizações recomendadas.",
+    "optimize_desc": "Detecta automaticamente CPU e GPU e executa as otimizações correspondentes.",
     "clean_desc": "Remover arquivos temporários e liberar espaço.",
+    "clean_extra": "Isso calculará quanto espaço foi recuperado.",
     "debloat_desc": "Remover apps pré-instalados do Windows.",
     "game_booster_desc": "Desativar serviços temporariamente e liberar memória para jogos.",
     "cpu_amd_desc": "Aplicar otimizações específicas para CPUs AMD.",
@@ -57,6 +62,12 @@
     "load_logs_failed": "Falha ao carregar logs",
     "no_logs": "Nenhum log encontrado.",
     "command_success": "{{cmd}} concluído com sucesso",
+    "command_failed": "{{cmd}} falhou",
+    "clean_result": "Liberado {{space}} de espaço em disco."
     "command_failed": "{{cmd}} falhou"
+  },
+  "labels": {
+    "user": "Usuário",
+    "time": "Hora"
   }
 }
