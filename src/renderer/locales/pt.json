@@ -35,7 +35,8 @@
     "run_advanced": "Executar Ajustes Avançados",
     "restore_tweaks": "Restaurar Ajustes",
     "light_mode": "Modo Claro",
-    "dark_mode": "Modo Escuro"
+    "dark_mode": "Modo Escuro",
+    "create_restore_point": "Criar Ponto de Restauração"
   },
   "messages": {
     "optimize_desc": "Aplicar otimizações recomendadas.",
