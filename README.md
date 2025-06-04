@@ -30,7 +30,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Debloat total do Windows
 - Limpador de sistema e navegadores
 - Modo Game Booster, RAM Flush e tweaks dinâmicos
-- Modo Avançado com tweaks perigosos (UAC, Defender, Update)
+- Modo Avançado com tweaks perigosos (UAC, Defender, Update, Memory Compression, mitigações de hardware e Core Isolation)
 - Reversão segura e logs automáticos
 - Painel com histórico de boot e plugins
 
@@ -95,6 +95,7 @@ Esta pasta contém quatro scripts principais que podem ser executados a partir d
 Electron via canal `run-script`:
 
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
+- **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
 - **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
   batch.
@@ -103,8 +104,8 @@ Electron via canal `run-script`:
 
 > ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
 > **Administrador**. Eles modificam configurações do Windows e podem afetar a
-> estabilidade do sistema. O `optimize.ps1` realiza um backup do registro antes
-> de aplicar tweaks e pode ser executado com `-Restore` para desfazer as
+> estabilidade do sistema. O `optimize.ps1` e o `advanced.ps1` realizam um backup do registro antes
+> de aplicar tweaks e podem ser executados com `-Restore` para desfazer as
 > alterações. Sempre tenha um ponto de restauração ou backup antes de prosseguir.
 
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma

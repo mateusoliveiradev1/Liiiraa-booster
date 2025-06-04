@@ -56,7 +56,7 @@
     "fortnite_desc": "Otimizar o sistema para Fortnite.",
     "warzone_desc": "Otimizar o sistema para Warzone.",
     "valorant_desc": "Otimizar o sistema para Valorant.",
-    "advanced_desc": "Aplicar ajustes arriscados como desativar UAC, Defender e Windows Update.",
+    "advanced_desc": "Aplicar ajustes arriscados como desativar UAC, Defender, Windows Update, Memory Compression, mitigações de hardware e Core Isolation.",
     "settings_desc": "Alternar aparência da aplicação.",
     "fetch_failed": "Falha ao obter métricas",
     "load_logs_failed": "Falha ao carregar logs",
