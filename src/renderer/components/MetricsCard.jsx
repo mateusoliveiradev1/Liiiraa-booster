@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function MetricsCard({ label, value, icon, percentage }) {
   return (
-    <div className="card">
+    <div className="card transform hover:scale-105">
       <h2 className="text-lg font-semibold mb-2 flex items-center">
         {icon && <span className="mr-2">{icon}</span>}
         {label}
@@ -11,7 +11,7 @@ export default function MetricsCard({ label, value, icon, percentage }) {
       {percentage !== undefined && percentage !== null && (
         <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded">
           <div
-            className="bg-primary h-full rounded"
+            className="bg-gradient-to-r from-primary to-secondary h-full rounded"
             style={{ width: `${percentage}%` }}
             role="progressbar"
             aria-valuenow={percentage}

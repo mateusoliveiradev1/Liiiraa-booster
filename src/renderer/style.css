@@ -2,31 +2,31 @@
 @tailwind components;
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark;
+    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark shadow transition;
   }
 
   .btn-success {
-    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark;
+    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark shadow transition;
   }
 
   .btn-warning {
-    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark;
+    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark shadow transition;
   }
 
   .btn-accent {
-    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark;
+    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark shadow transition;
   }
 
   .btn-danger {
-    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark;
+    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark shadow transition;
   }
 
   .btn-neutral {
-    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark;
+    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark shadow transition;
   }
 
   .card {
-    @apply border border-border dark:border-border-dark rounded p-4 bg-surface dark:bg-surface-dark;
+    @apply border border-border dark:border-border-dark rounded-lg p-4 bg-gradient-to-br from-surface to-muted dark:from-surface-dark dark:to-muted-dark shadow-sm hover:shadow-lg transition;
   }
 }
 @tailwind utilities;
