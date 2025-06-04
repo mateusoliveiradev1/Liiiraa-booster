@@ -18,6 +18,7 @@ export default function App() {
     network: mockMetrics.network
   });
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -48,6 +49,21 @@ export default function App() {
     setDark(!dark);
   };
 
+  const runCommand = async (cmd) => {
+    try {
+      await window.api.runScript(cmd);
+      setMessage(`${cmd.charAt(0).toUpperCase() + cmd.slice(1)} completed successfully`);
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError(`${cmd.charAt(0).toUpperCase() + cmd.slice(1)} failed`);
+      setMessage(null);
+    }
+  };
+
+  const handleOptimize = () => runCommand('optimize');
+  const handleClean = () => runCommand('clean');
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
@@ -66,6 +82,21 @@ export default function App() {
         <MetricsCard label="Disk" value={metrics.disk} />
         <MetricsCard label="Network" value={metrics.network} />
       </div>
+      <div className="mt-4 space-x-2">
+        <button
+          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          onClick={handleOptimize}
+        >
+          Optimize
+        </button>
+        <button
+          className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+          onClick={handleClean}
+        >
+          Clean
+        </button>
+      </div>
+      {message && <p className="text-green-600 mt-2">{message}</p>}
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
