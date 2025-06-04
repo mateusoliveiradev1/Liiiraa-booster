@@ -83,6 +83,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         path.join(scriptsDir, 'gamebooster.ps1')
       ]
     },
+    advanced: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'advanced.ps1')
+      ]
+    },
     metrics: {
       file: 'python',
       args: [path.join(scriptsDir, 'metrics.py')]
