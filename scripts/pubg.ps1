@@ -1,6 +1,7 @@
 # PUBG optimization script
 # Invoked via `window.api.runScript('pubg')` in Electron
 
+[CmdletBinding()]
 param(
     [switch]$Restore
 )
@@ -15,7 +16,9 @@ if ($Restore) {
         Write-Output 'Restoring PUBG settings...'
         $config = Join-Path $env:LOCALAPPDATA 'TslGame\Saved\Config\WindowsNoEditor\Engine.ini'
         if (Test-Path $config) {
-            (Get-Content $config) | Where-Object { $_ -ne 'bUseVSync=False' } | Set-Content $config
+            $content = Get-Content $config
+            $newContent = $content | Where-Object { $_ -ne 'bUseVSync=False' }
+            Set-Content -Path $config -Value $newContent
         }
         Write-Output 'Restore complete.'
     } catch {

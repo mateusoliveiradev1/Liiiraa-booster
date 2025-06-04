@@ -1,6 +1,7 @@
 # Valorant optimization script
 # Invoked via `window.api.runScript('valorant')` in Electron
 
+[CmdletBinding()]
 param(
     [switch]$Restore
 )
@@ -15,7 +16,9 @@ if ($Restore) {
         Write-Output 'Restoring Valorant settings...'
         $config = Join-Path $env:LOCALAPPDATA 'VALORANT\Saved\Config\WindowsClient\GameUserSettings.ini'
         if (Test-Path $config) {
-            (Get-Content $config) -replace '^FrameRateLimit=.*', 'FrameRateLimit=60' | Set-Content $config
+            $content = Get-Content $config
+            $newContent = $content -replace '^FrameRateLimit=.*', 'FrameRateLimit=60'
+            Set-Content -Path $config -Value $newContent
         }
         Write-Output 'Restore complete.'
     } catch {
