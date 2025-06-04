@@ -19,7 +19,7 @@
     "settings": "Settings"
   },
   "buttons": {
-    "run_optimize": "Run Optimize",
+    "run_optimize": "Run Auto Optimize",
     "run_clean": "Run Clean",
     "run_debloat": "Run Debloat",
     "debloat_full": "Full Debloat",
@@ -38,11 +38,13 @@
     "run_advanced": "Run Advanced Tweaks",
     "restore_tweaks": "Restore Tweaks",
     "light_mode": "Light Mode",
-    "dark_mode": "Dark Mode"
+    "dark_mode": "Dark Mode",
+    "create_restore_point": "Create Restore Point"
   },
   "messages": {
-    "optimize_desc": "Apply recommended optimization tweaks.",
+    "optimize_desc": "Automatically detect CPU/GPU vendor and run the matching optimizations.",
     "clean_desc": "Remove temporary files and free disk space.",
+    "clean_extra": "This will calculate how much space was recovered.",
     "debloat_desc": "Remove pre-installed Windows apps.",
     "game_booster_desc": "Temporarily disable services and free memory for gaming.",
     "cpu_amd_desc": "Apply AMD CPU specific optimizations.",
@@ -61,5 +63,13 @@
     "no_logs": "No logs found.",
     "command_success": "{{cmd}} completed successfully",
     "command_failed": "{{cmd}} failed"
+
+    ,"clean_result": "Freed {{space}} of disk space."
+
+  },
+  "labels": {
+    "user": "User",
+    "time": "Time"
+
   }
 }
