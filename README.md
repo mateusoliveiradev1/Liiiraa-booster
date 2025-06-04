@@ -68,6 +68,12 @@ project-root/
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
+## 🧪 Testes
+
+1. Instale as dependências com `npm install`.
+   Em ambientes de CI, prefira `npm ci` para garantir versões exatas.
+2. Execute `npm test` para rodar a suíte de testes.
+
 ## 🐍 Requisitos de Python
 
 
