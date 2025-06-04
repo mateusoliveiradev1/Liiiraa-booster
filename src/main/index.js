@@ -53,6 +53,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'optimize.ps1')
       ]
@@ -62,6 +63,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'hardware-optimize.ps1')
       ]
@@ -71,6 +73,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'hardware-optimize.ps1'),
         '-Restore'
@@ -85,6 +88,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'debloat.ps1'),
         '-Full'
@@ -95,6 +99,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'debloat.ps1'),
         '-Lite'
@@ -105,6 +110,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'debloat.ps1'),
         '-Restore'
@@ -115,6 +121,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'optimize.ps1'),
         '-Restore'
@@ -125,6 +132,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'restore-point.ps1')
       ]
@@ -134,6 +142,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'gamebooster.ps1')
       ]
@@ -143,6 +152,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'gamebooster-restore.ps1')
       ]
@@ -153,6 +163,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'advanced.ps1')
       ]
@@ -162,6 +173,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cpu-amd.ps1')
       ]
@@ -171,6 +183,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cpu-amd.ps1'),
         '-Restore'
@@ -181,6 +194,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cpu-intel.ps1')
       ]
@@ -190,6 +204,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cpu-intel.ps1'),
         '-Restore'
@@ -200,6 +215,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'gpu-nvidia.ps1')
       ]
@@ -209,6 +225,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'gpu-intel.ps1')
       ]
@@ -218,6 +235,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'gpu-amd.ps1')
       ]
@@ -227,6 +245,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'pubg.ps1')
       ]
@@ -236,6 +255,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'cs2.ps1')
       ]
@@ -245,6 +265,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'fortnite.ps1')
       ]
@@ -254,6 +275,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'warzone.ps1')
       ]
@@ -263,6 +285,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'valorant.ps1')
 
@@ -273,6 +296,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'energy-plan.ps1')
       ]
@@ -282,6 +306,7 @@ const ALLOWED_COMMANDS = {
       args: [
         '-ExecutionPolicy',
         'Bypass',
+        '-NoProfile',
         '-File',
         path.join(scriptsDir, 'peripheral-energy.ps1')
       ]
