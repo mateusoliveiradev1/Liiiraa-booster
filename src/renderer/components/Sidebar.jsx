@@ -69,7 +69,7 @@ export default function Sidebar({ activeSection, onSelect }) {
   return (
     <div
       data-testid="sidebar"
-      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2`}
+      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2 transition-all duration-300 overflow-hidden`}
     >
       <button
         onClick={toggleCollapsed}
