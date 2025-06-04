@@ -15,6 +15,13 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying Warzone optimizations...'
+
+    # Tune adv_options.ini settings
+    $config = Join-Path $env:USERPROFILE 'Documents\Call of Duty Modern Warfare\players\adv_options.ini'
+    if (Test-Path $config) {
+        (Get-Content $config) -replace '^VideoMemoryScale .*', 'VideoMemoryScale 0.85' | Set-Content $config
+    }
+
     Write-Output 'Game optimization complete.'
 } catch {
     Write-Error $_

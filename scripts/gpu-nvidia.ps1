@@ -15,6 +15,16 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying NVIDIA GPU optimizations...'
+
+    # Enable persistence mode and set power limit when nvidia-smi is present
+    if (Get-Command 'nvidia-smi.exe' -ErrorAction SilentlyContinue) {
+        & nvidia-smi -pm 1 | Out-Null
+        & nvidia-smi -pl 130 | Out-Null
+    }
+
+    # Force hardware accelerated GPU scheduling
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers' -Name 'HwSchMode' -Type DWord -Value 2 -Force
+
     Write-Output 'GPU optimization complete.'
 } catch {
     Write-Error $_

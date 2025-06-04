@@ -15,6 +15,13 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying Fortnite optimizations...'
+
+    # Tweak GameUserSettings.ini values
+    $config = Join-Path $env:LOCALAPPDATA 'FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini'
+    if (Test-Path $config) {
+        (Get-Content $config) -replace '^bUseVSync=.*', 'bUseVSync=False' | Set-Content $config
+    }
+
     Write-Output 'Game optimization complete.'
 } catch {
     Write-Error $_
