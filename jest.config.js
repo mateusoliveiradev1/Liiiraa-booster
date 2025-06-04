@@ -4,6 +4,7 @@ module.exports = {
     '^.+\\.[jt]sx?$': 'babel-jest'
   },
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.json$': '<rootDir>/tests/__mocks__/json.js'
   }
 };
