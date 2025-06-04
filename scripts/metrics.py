@@ -8,6 +8,28 @@ information that can be consumed by the UI.
 from __future__ import annotations
 
 import json
+ codex/atualizar-scripts-para-verificar-privilégios-de-administrado
+import os
+import sys
+import psutil
+
+
+def is_admin():
+    if os.name == 'nt':
+        try:
+            import ctypes
+            return ctypes.windll.shell32.IsUserAnAdmin()
+        except Exception:
+            return False
+    else:
+        return os.geteuid() == 0
+
+
+if os.name == 'nt' and not is_admin():
+    sys.exit("This script must be run as Administrator.")
+
+def main():
+
 import logging
 import os
 import time
@@ -65,6 +87,7 @@ def main() -> None:
 
     disk = psutil.disk_usage("/")
 
+ main
     metrics = {
         "cpu_percent": cpu_percent,
         "memory_used": psutil.virtual_memory().used,

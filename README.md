@@ -88,6 +88,12 @@ Electron via canal `run-script`:
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
 
+> ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
+> **Administrador**. Eles modificam configurações do Windows e podem afetar a
+> estabilidade do sistema. O `optimize.ps1` realiza um backup do registro antes
+> de aplicar tweaks e pode ser executado com `-Restore` para desfazer as
+> alterações. Sempre tenha um ponto de restauração ou backup antes de prosseguir.
+
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de
 renderer (via `window.api.runScript('optimize')`, por exemplo) para que o
