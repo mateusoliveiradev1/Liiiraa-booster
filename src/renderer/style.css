@@ -1,37 +1,37 @@
 :root {
-  --color-primary: #2563eb;
-  --color-secondary: #4c51bf;
-  --color-success: #16a34a;
-  --color-warning: #f59e0b;
-  --color-accent: #8b5cf6;
-  --color-danger: #dc2626;
-  --color-background: #f3f4f6;
+  --color-primary: #3b82f6;
+  --color-secondary: #a855f7;
+  --color-success: #22c55e;
+  --color-warning: #f97316;
+  --color-accent: #ec4899;
+  --color-danger: #ef4444;
+  --color-background: #f1f5f9;
   --color-surface: #ffffff;
   --color-border: #e5e7eb;
-  --color-muted: #f3f4f6;
-  --color-premium: #d4af37;
-  --color-amd: #e53935;
-  --color-intel: #0071c5;
+  --color-muted: #f8fafc;
+  --color-premium: #d1a100;
+  --color-amd: #ff6759;
+  --color-intel: #005dcf;
   --color-nvidia: #76b900;
 
-  --color-primary-dark: #1e40af;
-  --color-secondary-dark: #3730a3;
-  --color-success-dark: #166534;
-  --color-warning-dark: #b45309;
-  --color-accent-dark: #6d28d9;
-  --color-danger-dark: #991b1b;
-  --color-background-dark: #111827;
-  --color-surface-dark: #1f2937;
-  --color-border-dark: #374151;
-  --color-muted-dark: #4b5563;
-  --color-premium-dark: #b8860b;
+  --color-primary-dark: #1e3a8a;
+  --color-secondary-dark: #6b21a8;
+  --color-success-dark: #15803d;
+  --color-warning-dark: #c2410c;
+  --color-accent-dark: #9d174d;
+  --color-danger-dark: #7f1d1d;
+  --color-background-dark: #0f172a;
+  --color-surface-dark: #1e293b;
+  --color-border-dark: #334155;
+  --color-muted-dark: #475569;
+  --color-premium-dark: #b88400;
 }
 
 .dark {
-  --color-background: #111827;
-  --color-surface: #1f2937;
-  --color-border: #374151;
-  --color-muted: #4b5563;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-border: #334155;
+  --color-muted: #475569;
 }
 
 @tailwind base;
@@ -78,7 +78,7 @@
   }
 
   .card {
-    @apply border border-white/20 dark:border-white/20 rounded-lg p-4 bg-white/30 dark:bg-[color:var(--color-surface-dark)/0.4] backdrop-blur-md shadow-md hover:shadow-xl transition transform animate-fadeIn;
+    @apply border border-white/20 dark:border-white/20 rounded-lg p-4 bg-white/30 dark:bg-[color:var(--color-surface-dark)/0.4] backdrop-blur-md shadow-md hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105 animate-fadeIn;
     background-image: linear-gradient(to bottom right, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
   }
 }
