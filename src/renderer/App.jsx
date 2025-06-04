@@ -4,6 +4,14 @@ import './i18n';
 import { FaBroom } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+  FaBroom,
+  FaMicrochip,
+  FaMemory,
+  FaHdd,
+  FaNetworkWired
+} from 'react-icons/fa';
+import { BsGpuCard } from 'react-icons/bs';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Logs from './components/Logs.jsx';
@@ -11,9 +19,13 @@ import Spinner from './components/Spinner.jsx';
 
 const mockMetrics = {
   cpu: '35%',
+  cpuPercent: 35,
   gpu: '45%',
+  gpuPercent: 45,
   ram: '8 GB / 16 GB',
+  ramPercent: 50,
   disk: '120 GB / 512 GB',
+  diskPercent: 23,
   network: '200 Mbps'
 };
 
@@ -23,9 +35,13 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('Dashboard');
   const [metrics, setMetrics] = useState({
     cpu: mockMetrics.cpu,
+    cpuPercent: mockMetrics.cpuPercent,
     gpu: 'N/A',
+    gpuPercent: null,
     ram: mockMetrics.ram,
+    ramPercent: mockMetrics.ramPercent,
     disk: mockMetrics.disk,
+    diskPercent: mockMetrics.diskPercent,
     network: mockMetrics.network
   });
   const [loading, setLoading] = useState(false);
@@ -34,6 +50,24 @@ export default function App() {
 
   const [username, setUsername] = useState('');
   const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    const isDark = stored ? stored === 'dark' : document.documentElement.classList.contains('dark');
+    document.documentElement.classList.toggle('dark', isDark);
+    setDark(isDark);
+  }, []);
+
+  useEffect(() => {
+    if (activeSection === 'Settings') {
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        const isDark = stored === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        setDark(isDark);
+      }
+    }
+  }, [activeSection]);
 
   useEffect(() => {
     if (window.api?.getUser) {
@@ -55,8 +89,11 @@ export default function App() {
         const output = await window.api.runScript('metrics');
         const data = JSON.parse(output);
 
-        const cpu = `${data.cpu_percent}%`;
+        const cpuPercent = data.cpu_percent;
+        const cpu = `${cpuPercent}%`;
+        const ramPercent = (data.memory_used / data.memory_total) * 100;
         const ram = `${(data.memory_used / (1024 ** 3)).toFixed(1)} GB / ${(data.memory_total / (1024 ** 3)).toFixed(1)} GB`;
+        const diskPercent = (data.disk_used / data.disk_total) * 100;
         const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
         const bytesPerSec =
           data.network_bytes_per_sec !== undefined
@@ -65,6 +102,7 @@ export default function App() {
         const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
 
         let gpu = 'N/A';
+        let gpuPercent = null;
         if (
           data.gpu_util !== undefined &&
           data.gpu_mem_used !== undefined &&
@@ -73,9 +111,22 @@ export default function App() {
           const util = `${data.gpu_util}%`;
           const mem = `${(data.gpu_mem_used / (1024 ** 3)).toFixed(1)} GB / ${(data.gpu_mem_total / (1024 ** 3)).toFixed(1)} GB`;
           gpu = `${util} - ${mem}`;
+          gpuPercent = data.gpu_util;
         }
 
         setMetrics({ cpu, gpu, ram, disk, network });
+        setMetrics({
+          cpu,
+          cpuPercent,
+          gpu,
+          gpuPercent,
+          ram,
+          ramPercent,
+          disk,
+          diskPercent,
+          network
+        });
+        setError(null);
       } catch (err) {
         console.error(err);
         toast.error(t('messages.fetch_failed'));
@@ -88,8 +139,10 @@ export default function App() {
   }, [t]);
 
   const toggleDark = () => {
-    document.documentElement.classList.toggle('dark', !dark);
-    setDark(!dark);
+    const newDark = !dark;
+    document.documentElement.classList.toggle('dark', newDark);
+    setDark(newDark);
+    localStorage.setItem('theme', newDark ? 'dark' : 'light');
   };
 
   const runCommand = async (cmd) => {
@@ -162,11 +215,35 @@ export default function App() {
             </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-              <MetricsCard label="CPU" value={metrics.cpu} />
-              <MetricsCard label="GPU" value={metrics.gpu} />
-              <MetricsCard label="RAM" value={metrics.ram} />
-              <MetricsCard label="Disk" value={metrics.disk} />
-              <MetricsCard label="Network" value={metrics.network} />
+              <MetricsCard
+                label="CPU"
+                value={metrics.cpu}
+                icon={<FaMicrochip />}
+                percentage={metrics.cpuPercent}
+              />
+              <MetricsCard
+                label="GPU"
+                value={metrics.gpu}
+                icon={<BsGpuCard />}
+                percentage={metrics.gpuPercent}
+              />
+              <MetricsCard
+                label="RAM"
+                value={metrics.ram}
+                icon={<FaMemory />}
+                percentage={metrics.ramPercent}
+              />
+              <MetricsCard
+                label="Disk"
+                value={metrics.disk}
+                icon={<FaHdd />}
+                percentage={metrics.diskPercent}
+              />
+              <MetricsCard
+                label="Network"
+                value={metrics.network}
+                icon={<FaNetworkWired />}
+              />
             </div>
 
 
@@ -216,19 +293,19 @@ export default function App() {
             <p className="mb-2">{t('messages.debloat_desc')}</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                className="btn-warning"
                 onClick={handleDebloatFull}
               >
                 {t('buttons.debloat_full')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
+                className="btn-warning"
                 onClick={handleDebloatLite}
               >
                 {t('buttons.debloat_lite')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                className="btn-neutral"
                 onClick={handleDebloatRestore}
               >
                 {t('buttons.debloat_restore')}
@@ -241,7 +318,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.game_booster_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleGameBoost}
             >
               {t('buttons.start_game_booster')}
@@ -301,7 +378,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.pubg_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handlePubg}
             >
               {t('buttons.optimize_pubg')}
@@ -313,7 +390,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.cs2_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleCs2}
             >
               {t('buttons.optimize_cs2')}
@@ -325,7 +402,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.fortnite_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleFortnite}
             >
               {t('buttons.optimize_fortnite')}
@@ -337,7 +414,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.warzone_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleWarzone}
             >
               {t('buttons.optimize_warzone')}
@@ -349,7 +426,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.valorant_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
+              className="btn-accent"
               onClick={handleValorant}
             >
               {t('buttons.optimize_valorant')}
@@ -382,13 +459,13 @@ export default function App() {
             <p className="mb-2">{t('messages.advanced_desc')}</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark"
+                className="btn-danger"
                 onClick={handleAdvanced}
               >
                 {t('buttons.run_advanced')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
+                className="btn-neutral"
                 onClick={handleRestore}
               >
                 {t('buttons.restore_tweaks')}
@@ -434,7 +511,7 @@ export default function App() {
     <div className="flex h-screen">
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
-        <div className="flex justify-between items-center mb-4">
+        <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-primary to-accent flex justify-between items-center text-white">
           <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
         </div>
         {renderSection()}

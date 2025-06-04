@@ -9,6 +9,22 @@
     @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark;
   }
 
+  .btn-warning {
+    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark;
+  }
+
+  .btn-accent {
+    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark;
+  }
+
+  .btn-neutral {
+    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark;
+  }
+
   .card {
     @apply border border-border dark:border-border-dark rounded p-4 bg-surface dark:bg-surface-dark;
   }
