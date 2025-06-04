@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { execFile } = require('child_process');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -329,7 +330,6 @@ ipcMain.handle('run-script', async (_event, command) => {
   if (!ALLOWED_COMMANDS[command]) {
     throw new Error('Command not allowed');
   }
-  const { execFile } = require('child_process');
   return new Promise((resolve, reject) => {
     const { file, args } = ALLOWED_COMMANDS[command];
     const child = execFile(file, args, { windowsHide: true });
