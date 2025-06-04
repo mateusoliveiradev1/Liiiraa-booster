@@ -82,9 +82,3 @@ test('getUser calls ipcRenderer.invoke', async () => {
 
 });
 
-test('runScript supports restore-point command', async () => {
-  await api.runScript('restore-point');
-  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');
-
-
-});

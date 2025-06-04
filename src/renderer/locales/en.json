@@ -68,7 +68,7 @@
     "command_failed": "{{cmd}} failed",
 
     "clean_result": "Freed {{space}} of disk space.",
-    "energy_desc": "Configure Windows power settings for maximum performance."
+    "energy_desc": "Configure Windows power settings for maximum performance.",
 
     "clean_result": "Freed {{space}} of disk space."
 
