@@ -66,12 +66,15 @@
     "no_logs": "No logs found.",
     "command_success": "{{cmd}} completed successfully",
     "command_failed": "{{cmd}} failed",
-
     "clean_result": "Freed {{space}} of disk space.",
+
     "energy_desc": "Configure Windows power settings for maximum performance.",
 
     "clean_result": "Freed {{space}} of disk space."
 
+
+
+    "energy_desc": "Configure Windows power settings for maximum performance."
 
   },
   "labels": {

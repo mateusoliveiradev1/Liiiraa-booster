@@ -24,6 +24,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Otimização automática de CPU/GPU baseada no fabricante
 - Criação de plano de energia personalizado:
   > `Liiiraa Booster - Max Performance and Low Latency`
+- Aba **Energy** para monitorar consumo e aplicar planos de energia
 - Otimizações específicas para:
   - AMD, Intel, NVIDIA
   - Jogos: CS2, Valorant, Warzone, Fortnite, PUBG
@@ -32,6 +33,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Modo Game Booster, RAM Flush e tweaks dinâmicos
 - Modo Avançado com tweaks perigosos (UAC, Defender, Update, Memory Compression, mitigações de hardware e Core Isolation)
 - Reversão segura e logs automáticos
+- Botão **Create Restore Point** para criar pontos de restauração
 - Painel com histórico de boot e plugins
 
 ---
@@ -74,6 +76,7 @@ project-root/
 1. Execute `npm install` para instalar todas as dependências do projeto.
    Em ambientes de CI, prefira `npm ci` para garantir versões exatas.
 2. Depois rode `npm test` para iniciar a suíte de testes.
+   Certifique-se de ter executado `npm install` antes de rodar os testes.
 
 ## 🐍 Requisitos de Python
 
