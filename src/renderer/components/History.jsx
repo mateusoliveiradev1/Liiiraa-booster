@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 export default function History() {
+  const { t } = useTranslation();
   const [logs, setLogs] = useState([]);
   const [error, setError] = useState(null);
 
@@ -13,7 +16,7 @@ export default function History() {
         setError(null);
       })
       .catch(() => {
-        setError('Failed to load logs');
+        setError(t('messages.load_logs_failed'));
       });
   }, []);
 
@@ -22,7 +25,7 @@ export default function History() {
   }
 
   if (!logs.length) {
-    return <p>No logs found.</p>;
+    return <p>{t('messages.no_logs')}</p>;
   }
 
   return (
