@@ -30,11 +30,7 @@ export default function Sidebar({ activeSection, onSelect }) {
       title: 'sidebar.group_system',
       items: [
         { key: 'Dashboard', icon: <MdDashboard />, tKey: 'sidebar.dashboard' },
-        { key: 'Optimize', icon: <FaBolt />, tKey: 'sidebar.optimize' },
-        { key: 'Clean', icon: <FaBroom />, tKey: 'sidebar.clean' },
-        { key: 'Debloat', icon: <FaTrash />, tKey: 'sidebar.debloat' },
-        { key: 'Game Booster', icon: <FaGamepad />, tKey: 'sidebar.game_booster' },
-        { key: 'Energy', icon: <FaPlug />, tKey: 'sidebar.energy' }
+        { key: 'System', icon: <FaShieldAlt />, tKey: 'sidebar.system' }
       ]
     },
     {
@@ -47,11 +43,7 @@ export default function Sidebar({ activeSection, onSelect }) {
     {
       title: 'sidebar.group_games',
       items: [
-        { key: 'PUBG', icon: <SiPubg />, tKey: 'sidebar.pubg' },
-        { key: 'CS2', icon: <GiPistolGun />, tKey: 'sidebar.cs2' },
-        { key: 'Fortnite', icon: <TbBrandFortnite />, tKey: 'sidebar.fortnite' },
-        { key: 'Warzone', icon: <FaBomb />, tKey: 'sidebar.warzone' },
-        { key: 'Valorant', icon: <SiValorant />, tKey: 'sidebar.valorant' }
+        { key: 'Games', icon: <FaBullseye />, tKey: 'sidebar.games' }
       ]
     },
     {

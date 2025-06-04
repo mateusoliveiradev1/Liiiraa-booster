@@ -254,6 +254,26 @@ export default function App() {
 
           </div>
         );
+      case 'System':
+        return (
+          <div className="space-x-2">
+            <button className="btn-primary" onClick={() => setActiveSection('Optimize')}>
+              {t('sidebar.optimize')}
+            </button>
+            <button className="btn-primary" onClick={() => setActiveSection('Clean')}>
+              {t('sidebar.clean')}
+            </button>
+            <button className="btn-primary" onClick={() => setActiveSection('Debloat')}>
+              {t('sidebar.debloat')}
+            </button>
+            <button className="btn-primary" onClick={() => setActiveSection('Game Booster')}>
+              {t('sidebar.game_booster')}
+            </button>
+            <button className="btn-primary" onClick={() => setActiveSection('Energy')}>
+              {t('sidebar.energy')}
+            </button>
+          </div>
+        );
       case 'Optimize':
         return (
           <div>
@@ -342,6 +362,26 @@ export default function App() {
             </button>
             <button className="btn-success" onClick={handleGpuAmd}>
               {t('buttons.optimize_amd_gpu')}
+            </button>
+          </div>
+        );
+      case 'Games':
+        return (
+          <div className="space-x-2">
+            <button className="btn-accent" onClick={() => setActiveSection('PUBG')}>
+              {t('sidebar.pubg')}
+            </button>
+            <button className="btn-accent" onClick={() => setActiveSection('CS2')}>
+              {t('sidebar.cs2')}
+            </button>
+            <button className="btn-accent" onClick={() => setActiveSection('Fortnite')}>
+              {t('sidebar.fortnite')}
+            </button>
+            <button className="btn-accent" onClick={() => setActiveSection('Warzone')}>
+              {t('sidebar.warzone')}
+            </button>
+            <button className="btn-accent" onClick={() => setActiveSection('Valorant')}>
+              {t('sidebar.valorant')}
             </button>
           </div>
         );
