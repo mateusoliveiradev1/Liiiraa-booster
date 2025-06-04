@@ -168,7 +168,7 @@ export default function App() {
 
 
             <button
-              className="mt-4 px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              className="mt-4 btn-primary"
               onClick={handleRestorePoint}
             >
               {t('buttons.create_restore_point')}
@@ -181,7 +181,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.optimize_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              className="btn-primary"
               onClick={handleOptimize}
             >
               {t('buttons.run_optimize')}
@@ -196,7 +196,7 @@ export default function App() {
               {t('messages.clean_extra')}
             </p>
             <button
-              className="inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
+              className="btn-success"
               onClick={handleClean}
             >
               <FaBroom className="mr-2" />
@@ -250,7 +250,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.cpu_amd_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              className="btn-primary"
               onClick={handleCpuAmd}
             >
               {t('buttons.optimize_amd_cpu')}
@@ -262,7 +262,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.cpu_intel_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              className="btn-primary"
               onClick={handleCpuIntel}
             >
               {t('buttons.optimize_intel_cpu')}
@@ -274,7 +274,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.gpu_nvidia_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
+              className="btn-success"
               onClick={handleGpuNvidia}
             >
               {t('buttons.optimize_nvidia_gpu')}
@@ -286,7 +286,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t('messages.gpu_amd_desc')}</p>
             <button
-              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
+              className="btn-success"
               onClick={handleGpuAmd}
             >
               {t('buttons.optimize_amd_gpu')}
@@ -359,13 +359,13 @@ export default function App() {
             <p className="mb-2">{t('messages.energy_desc')}</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+                className="btn-primary"
                 onClick={handleEnergyPlan}
               >
                 {t('buttons.apply_energy_plan')}
               </button>
               <button
-                className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+                className="btn-primary"
                 onClick={handlePeripheralEnergy}
               >
                 {t('buttons.tweak_peripheral_power')}
