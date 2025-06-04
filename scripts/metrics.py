@@ -4,7 +4,6 @@ import json
 import logging
 import os
 import sys
-import time
 
 try:
     import psutil
@@ -79,8 +78,15 @@ def main() -> None:
     net_down = net2.bytes_recv - net1.bytes_recv
     net_bytes = net_up + net_down
 
-    disk = psutil.disk_usage("/")
+    drive = os.environ.get('SYSTEMDRIVE', 'C:') + '\\'
+    disk = psutil.disk_usage(drive)
     mem = psutil.virtual_memory()
+    temps = psutil.sensors_temperatures() if hasattr(psutil, 'sensors_temperatures') else {}
+    cpu_temp = None
+    if 'coretemp' in temps:
+        readings = [t.current for t in temps['coretemp'] if t.current is not None]
+        if readings:
+            cpu_temp = sum(readings) / len(readings)
 
     metrics = {
         "cpu_percent": cpu_percent,
@@ -93,6 +99,8 @@ def main() -> None:
         "net_down": net_down,
     }
     metrics.update(_gpu_metrics())
+    if cpu_temp is not None:
+        metrics["cpu_temp"] = cpu_temp
 
     logger.info("Metrics collected: %s", metrics)
     print(json.dumps(metrics))

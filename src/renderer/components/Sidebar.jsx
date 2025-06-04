@@ -1,36 +1,48 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 export default function Sidebar({ activeSection, onSelect }) {
+  const { t } = useTranslation();
   const sections = [
-    { label: 'Dashboard', icon: '📊' },
-    { label: 'Optimize', icon: '⚡' },
-    { label: 'Clean', icon: '🧹' },
-    { label: 'Debloat', icon: '🚮' },
-    { label: 'Game Booster', icon: '🎮' },
-    { label: 'CPU AMD', icon: '🖥️' },
-    { label: 'CPU Intel', icon: '🖥️' },
-    { label: 'GPU Nvidia', icon: '🎮' },
-    { label: 'GPU AMD', icon: '🎮' },
-    { label: 'PUBG', icon: '🎯' },
-    { label: 'CS2', icon: '🔫' },
-    { label: 'Fortnite', icon: '🛡️' },
-    { label: 'Warzone', icon: '💣' },
-    { label: 'Valorant', icon: '🎯' },
-    { label: 'Advanced Tweaks', icon: '⚙️' },
-    { label: 'History', icon: '📜' },
-    { label: 'Settings', icon: '🔧' }
+    { key: 'Dashboard', icon: '📊', tKey: 'sidebar.dashboard' },
+    { key: 'Optimize', icon: '⚡', tKey: 'sidebar.optimize' },
+    { key: 'Clean', icon: '🧹', tKey: 'sidebar.clean' },
+    { key: 'Debloat', icon: '🚮', tKey: 'sidebar.debloat' },
+    { key: 'Game Booster', icon: '🎮', tKey: 'sidebar.game_booster' },
+    { key: 'CPU AMD', icon: '🖥️', tKey: 'sidebar.cpu_amd' },
+    { key: 'CPU Intel', icon: '🖥️', tKey: 'sidebar.cpu_intel' },
+    { key: 'GPU Nvidia', icon: '🎮', tKey: 'sidebar.gpu_nvidia' },
+    { key: 'GPU AMD', icon: '🎮', tKey: 'sidebar.gpu_amd' },
+    { key: 'PUBG', icon: '🎯', tKey: 'sidebar.pubg' },
+    { key: 'CS2', icon: '🔫', tKey: 'sidebar.cs2' },
+    { key: 'Fortnite', icon: '🛡️', tKey: 'sidebar.fortnite' },
+    { key: 'Warzone', icon: '💣', tKey: 'sidebar.warzone' },
+    { key: 'Valorant', icon: '🎯', tKey: 'sidebar.valorant' },
+    { key: 'Advanced Tweaks', icon: '⚙️', tKey: 'sidebar.advanced' },
+    { key: 'History', icon: '📜', tKey: 'sidebar.history' },
+    { key: 'Settings', icon: '🔧', tKey: 'sidebar.settings' }
   ];
 
   return (
+
     <div className="w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2">
       {sections.map(({ label, icon }) => (
         <button
           key={label}
           onClick={() => onSelect(label)}
           className={`block w-full text-left px-3 py-2 rounded ${activeSection === label ? 'bg-primary text-white' : 'hover:bg-muted dark:hover:bg-muted-dark'}`}
-        >
+
+    <div className="w-48 border-r border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 space-y-2">
+      {sections.map(({ key, icon, tKey }) => (
+        <button
+          key={key}
+          onClick={() => onSelect(key)}
+          className={`block w-full text-left px-3 py-2 rounded ${activeSection === key ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+
+        
           <span className="mr-2">{icon}</span>
-          {label}
+          {t(tKey)}
         </button>
       ))}
     </div>

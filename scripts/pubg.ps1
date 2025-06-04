@@ -15,6 +15,14 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying PUBG optimizations...'
+
+    # Edit Engine.ini for better input latency
+    $config = Join-Path $env:LOCALAPPDATA 'TslGame\Saved\Config\WindowsNoEditor\Engine.ini'
+    if (Test-Path $config) {
+        Add-Content -Path $config -Value '[SystemSettings]'
+        Add-Content -Path $config -Value 'bUseVSync=False'
+    }
+
     Write-Output 'Game optimization complete.'
 } catch {
     Write-Error $_

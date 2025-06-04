@@ -26,6 +26,14 @@ for /d %%D in ("C:\Windows\Prefetch\*") do rd /s /q "%%D" >>"%LOGFILE%" 2>&1
 rem Clear event logs
 for /f %%G in ('wevtutil el') do wevtutil cl "%%G" >>"%LOGFILE%" 2>&1
 
+rem Flush DNS cache
+ipconfig /flushdns >>"%LOGFILE%" 2>&1
+
+rem Remove Windows Update downloads
+net stop wuauserv >>"%LOGFILE%" 2>&1
+del /f /s /q "C:\Windows\SoftwareDistribution\Download\*" >>"%LOGFILE%" 2>&1
+net start wuauserv >>"%LOGFILE%" 2>&1
+
 rem Empty recycle bin
 PowerShell -Command "Clear-RecycleBin -Force" >>"%LOGFILE%" 2>&1
 

@@ -15,6 +15,13 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Applying AMD GPU optimizations...'
+
+    # Disable Ultra Low Power State to prevent clocks from dropping too low
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000' -Name 'EnableUlps' -Value 0 -Type DWord -Force
+
+    # Extend TDR delay to reduce driver reset crashes
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers' -Name 'TdrDelay' -Value 10 -Type DWord -Force
+
     Write-Output 'GPU optimization complete.'
 } catch {
     Write-Error $_

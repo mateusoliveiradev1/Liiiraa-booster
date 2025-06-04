@@ -24,6 +24,13 @@ try {
             Write-Output "Service $svc stopped"
         }
     }
+
+    # Disable Game Bar during the session
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\GameBar' -Name 'AllowAutoGameMode' -Value 0 -Force
+
+    # Boost foreground process priority
+    $process = Get-Process -Id $pid
+    $process.PriorityClass = 'High'
     [System.GC]::Collect()
     Write-Output 'RAM flush triggered.'
     Write-Output 'Game Booster ready.'
