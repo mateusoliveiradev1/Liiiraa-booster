@@ -81,3 +81,9 @@ lista de comandos permitidos. Basta enviar o nome do script pela camada de
 renderer (via `window.api.runScript('optimize')`, por exemplo) para que o
 Electron execute o comando correspondente em segurança.
 
+
+---
+
+## 📂 Git e Builds
+
+Os artefatos gerados nas pastas `dist/` e `build/` não são versionados. Estes diretórios estão listados no arquivo `.gitignore` para evitar que arquivos de build sejam enviados ao repositório.
