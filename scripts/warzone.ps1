@@ -2,16 +2,9 @@
 # Invoked via `window.api.runScript('warzone')` in Electron
 
 # Ensure script is running as Administrator
-$principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Error 'This script must be run as Administrator. Exiting.'
-    exit 1
-}
-
-$logDir = Join-Path $PSScriptRoot '..\logs'
-if (!(Test-Path $logDir)) { New-Item -Path $logDir -ItemType Directory | Out-Null }
-$logFile = Join-Path $logDir 'warzone.log'
-Start-Transcript -Path $logFile -Append | Out-Null
+Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Require-Admin
+Start-LiiiraaLog 'warzone.log'
 
 try {
     Write-Output 'Applying Warzone optimizations...'

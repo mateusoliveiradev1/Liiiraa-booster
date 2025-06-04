@@ -2,18 +2,12 @@
 # Invoked via `window.api.runScript('gamebooster')` in Electron
 
 # Ensure script is running as Administrator
-$principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Error 'This script must be run as Administrator. Exiting.'
-    exit 1
-}
+Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Require-Admin
 
 Write-Warning 'Applying temporary tweaks for gaming session.'
 
-$logDir = Join-Path $PSScriptRoot '..\logs'
-if (!(Test-Path $logDir)) { New-Item -Path $logDir -ItemType Directory | Out-Null }
-$logFile = Join-Path $logDir 'gamebooster.log'
-Start-Transcript -Path $logFile -Append | Out-Null
+Start-LiiiraaLog 'gamebooster.log'
 
 try {
     $services = @('wuauserv', 'Spooler')
