@@ -56,7 +56,7 @@
     "fortnite_desc": "Optimize system for Fortnite.",
     "warzone_desc": "Optimize system for Warzone.",
     "valorant_desc": "Optimize system for Valorant.",
-    "advanced_desc": "Apply risky tweaks like disabling UAC, Defender and Windows Update.",
+    "advanced_desc": "Apply risky tweaks like disabling UAC, Defender, Windows Update, Memory Compression, hardware mitigations and Core Isolation.",
     "settings_desc": "Toggle application appearance.",
     "fetch_failed": "Failed to fetch metrics",
     "load_logs_failed": "Failed to load logs",
