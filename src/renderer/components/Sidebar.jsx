@@ -1,28 +1,47 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { MdDashboard } from 'react-icons/md';
+import {
+  FaBolt,
+  FaBroom,
+  FaTrash,
+  FaGamepad,
+  FaMicrochip,
+  FaBomb,
+  FaPlug,
+  FaTools,
+  FaListAlt,
+  FaCog,
+  FaBullseye,
+  FaShieldAlt
+} from 'react-icons/fa';
+import { BsGpuCard } from 'react-icons/bs';
+import { SiAmd, SiIntel, SiNvidia, SiPubg, SiValorant } from 'react-icons/si';
+import { TbBrandFortnite } from 'react-icons/tb';
+import { GiPistolGun } from 'react-icons/gi';
 
 export default function Sidebar({ activeSection, onSelect }) {
   const { t } = useTranslation();
   const sections = [
-    { key: 'Dashboard', icon: '📊', tKey: 'sidebar.dashboard' },
-    { key: 'Optimize', icon: '⚡', tKey: 'sidebar.optimize' },
-    { key: 'Clean', icon: '🧹', tKey: 'sidebar.clean' },
-    { key: 'Debloat', icon: '🚮', tKey: 'sidebar.debloat' },
-    { key: 'Game Booster', icon: '🎮', tKey: 'sidebar.game_booster' },
-    { key: 'CPU AMD', icon: '🖥️', tKey: 'sidebar.cpu_amd' },
-    { key: 'CPU Intel', icon: '🖥️', tKey: 'sidebar.cpu_intel' },
-    { key: 'GPU Nvidia', icon: '🎮', tKey: 'sidebar.gpu_nvidia' },
-    { key: 'GPU AMD', icon: '🎮', tKey: 'sidebar.gpu_amd' },
-    { key: 'PUBG', icon: '🎯', tKey: 'sidebar.pubg' },
-    { key: 'CS2', icon: '🔫', tKey: 'sidebar.cs2' },
-    { key: 'Fortnite', icon: '🛡️', tKey: 'sidebar.fortnite' },
-    { key: 'Warzone', icon: '💣', tKey: 'sidebar.warzone' },
-    { key: 'Valorant', icon: '🎯', tKey: 'sidebar.valorant' },
-    { key: 'Energy', icon: '🔌', tKey: 'sidebar.energy' },
-    { key: 'Advanced Tweaks', icon: '⚙️', tKey: 'sidebar.advanced' },
-    { key: 'Logs', icon: '📜', tKey: 'sidebar.logs' },
-    { key: 'Settings', icon: '🔧', tKey: 'sidebar.settings' }
+    { key: 'Dashboard', icon: <MdDashboard />, tKey: 'sidebar.dashboard' },
+    { key: 'Optimize', icon: <FaBolt />, tKey: 'sidebar.optimize' },
+    { key: 'Clean', icon: <FaBroom />, tKey: 'sidebar.clean' },
+    { key: 'Debloat', icon: <FaTrash />, tKey: 'sidebar.debloat' },
+    { key: 'Game Booster', icon: <FaGamepad />, tKey: 'sidebar.game_booster' },
+    { key: 'CPU AMD', icon: <FaMicrochip />, tKey: 'sidebar.cpu_amd' },
+    { key: 'CPU Intel', icon: <FaMicrochip />, tKey: 'sidebar.cpu_intel' },
+    { key: 'GPU Nvidia', icon: <BsGpuCard />, tKey: 'sidebar.gpu_nvidia' },
+    { key: 'GPU AMD', icon: <BsGpuCard />, tKey: 'sidebar.gpu_amd' },
+    { key: 'PUBG', icon: <SiPubg />, tKey: 'sidebar.pubg' },
+    { key: 'CS2', icon: <GiPistolGun />, tKey: 'sidebar.cs2' },
+    { key: 'Fortnite', icon: <TbBrandFortnite />, tKey: 'sidebar.fortnite' },
+    { key: 'Warzone', icon: <FaBomb />, tKey: 'sidebar.warzone' },
+    { key: 'Valorant', icon: <SiValorant />, tKey: 'sidebar.valorant' },
+    { key: 'Energy', icon: <FaPlug />, tKey: 'sidebar.energy' },
+    { key: 'Advanced Tweaks', icon: <FaTools />, tKey: 'sidebar.advanced' },
+    { key: 'Logs', icon: <FaListAlt />, tKey: 'sidebar.logs' },
+    { key: 'Settings', icon: <FaCog />, tKey: 'sidebar.settings' }
   ];
 
   return (

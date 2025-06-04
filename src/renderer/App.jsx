@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './i18n';
+import { FaBroom } from 'react-icons/fa';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Logs from './components/Logs.jsx';
@@ -198,9 +199,7 @@ export default function App() {
               className="inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleClean}
             >
-              <span className="mr-2" role="img" aria-label="broom">
-                🧹
-              </span>
+              <FaBroom className="mr-2" />
               {t('buttons.run_clean')}
             </button>
             {freedSpace && (
