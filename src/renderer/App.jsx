@@ -17,7 +17,6 @@ import MetricsCard from "./components/MetricsCard.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Logs from "./components/Logs.jsx";
 import Spinner from "./components/Spinner.jsx";
-import logo from "./assets/logo.png";
 
 const mockMetrics = {
   cpu: "35%",
@@ -536,10 +535,7 @@ export default function App() {
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
         <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-premium via-accent to-secondary backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg flex justify-between items-center text-white">
-          <div className="flex items-center space-x-2">
-            <img src={logo} alt="Liiiraa Booster logo" className="h-8 w-8" />
-            <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
-          </div>
+          <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
           <button
             onClick={toggleDark}
             aria-label={dark ? t("buttons.light_mode") : t("buttons.dark_mode")}
