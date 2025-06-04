@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MetricsCard from './components/MetricsCard.jsx';
+import Sidebar from './components/Sidebar.jsx';
 
 const mockMetrics = {
   cpu: '35%',
@@ -11,6 +12,7 @@ const mockMetrics = {
 
 export default function App() {
   const [dark, setDark] = useState(false);
+  const [activeSection, setActiveSection] = useState('Dashboard');
   const [metrics, setMetrics] = useState({
     cpu: mockMetrics.cpu,
     gpu: 'N/A',
@@ -79,8 +81,85 @@ export default function App() {
 
   const handleOptimize = () => runCommand('optimize');
   const handleClean = () => runCommand('clean');
+  const handleRestore = () => runCommand('restore');
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'Dashboard':
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <MetricsCard label="CPU" value={metrics.cpu} />
+            <MetricsCard label="GPU" value={mockMetrics.gpu} />
+            <MetricsCard label="RAM" value={metrics.ram} />
+            <MetricsCard label="Disk" value={metrics.disk} />
+            <MetricsCard label="Network" value={metrics.network} />
+          </div>
+        );
+      case 'Optimize':
+        return (
+          <div>
+            <p className="mb-2">Apply recommended optimization tweaks.</p>
+            <button
+              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              onClick={handleOptimize}
+            >
+              Run Optimize
+            </button>
+          </div>
+        );
+      case 'Clean':
+        return (
+          <div>
+            <p className="mb-2">Remove temporary files and free disk space.</p>
+            <button
+              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              onClick={handleClean}
+            >
+              Run Clean
+            </button>
+          </div>
+        );
+      case 'Advanced Tweaks':
+        return (
+          <div>
+            <p className="mb-2">Restore all tweaks to default settings.</p>
+            <button
+              className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+              onClick={handleRestore}
+            >
+              Restore Tweaks
+            </button>
+          </div>
+        );
+      case 'Settings':
+        return (
+          <div>
+            <p className="mb-2">Toggle application appearance.</p>
+            <button
+              className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
+              onClick={toggleDark}
+            >
+              {dark ? 'Light' : 'Dark'} Mode
+            </button>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
+
+    <div className="flex h-screen">
+      <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
+      <div className="flex-1 p-4 overflow-auto">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
+        </div>
+        {renderSection()}
+        {message && <p className="text-green-600 mt-2">{message}</p>}
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
@@ -111,9 +190,8 @@ export default function App() {
         >
           Clean
         </button>
+
       </div>
-      {message && <p className="text-green-600 mt-2">{message}</p>}
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
