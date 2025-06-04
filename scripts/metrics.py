@@ -47,12 +47,21 @@ def _gpu_metrics() -> dict:
         handle = pynvml.nvmlDeviceGetHandleByIndex(0)
         mem = pynvml.nvmlDeviceGetMemoryInfo(handle)
         util = pynvml.nvmlDeviceGetUtilizationRates(handle)
+        try:
+            temp = pynvml.nvmlDeviceGetTemperature(
+                handle, pynvml.NVML_TEMPERATURE_GPU
+            )
+        except Exception:
+            temp = None
         pynvml.nvmlShutdown()
-        return {
+        metrics = {
             "gpu_util": util.gpu,
             "gpu_mem_used": mem.used,
             "gpu_mem_total": mem.total,
         }
+        if temp is not None:
+            metrics["gpu_temp"] = temp
+        return metrics
     except Exception:
         # Fallback to GPUtil which supports multiple vendors
         try:
@@ -62,11 +71,14 @@ def _gpu_metrics() -> dict:
             if not gpus:
                 return {}
             gpu = gpus[0]
-            return {
+            metrics = {
                 "gpu_util": round(gpu.load * 100),
                 "gpu_mem_used": int(gpu.memoryUsed * 1024**2),
                 "gpu_mem_total": int(gpu.memoryTotal * 1024**2),
             }
+            if gpu.temperature is not None:
+                metrics["gpu_temp"] = gpu.temperature
+            return metrics
         except Exception as exc:  # pragma: no cover - optional dependency
             logging.getLogger(__name__).warning(
                 "GPU metrics unavailable: %s", exc

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MetricsCard({ label, value, icon, percentage }) {
+function MetricsCard({ label, value, icon, percentage, temperature }) {
   return (
     <div className="card transform hover:scale-105">
       <h2 className="text-lg font-semibold mb-2 flex items-center">
@@ -8,6 +8,7 @@ function MetricsCard({ label, value, icon, percentage }) {
         {label}
       </h2>
       <p className="text-xl">{value}</p>
+      {temperature && <p className="text-sm">{temperature}</p>}
       {percentage !== undefined && percentage !== null && (
         <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded">
           <div
