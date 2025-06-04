@@ -26,7 +26,9 @@ module.exports = {
         border: '#e5e7eb',
         'border-dark': '#374151',
         muted: '#f3f4f6',
-        'muted-dark': '#4b5563'
+        'muted-dark': '#4b5563',
+        premium: '#d4af37',
+        'premium-dark': '#b8860b'
       }
     }
   },
