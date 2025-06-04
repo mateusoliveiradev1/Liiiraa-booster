@@ -35,6 +35,11 @@ test('runScript supports optimize command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'optimize');
 });
 
+test('runScript supports auto-optimize command', async () => {
+  await api.runScript('auto-optimize');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'auto-optimize');
+});
+
 test('runScript supports clean command', async () => {
   await api.runScript('clean');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'clean');

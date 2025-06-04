@@ -19,7 +19,7 @@
     "settings": "Configurações"
   },
   "buttons": {
-    "run_optimize": "Executar Otimização",
+    "run_optimize": "Executar Otimização Automática",
     "run_clean": "Executar Limpeza",
     "run_debloat": "Executar Debloat",
     "start_game_booster": "Iniciar Game Booster",
@@ -38,7 +38,7 @@
     "dark_mode": "Modo Escuro"
   },
   "messages": {
-    "optimize_desc": "Aplicar otimizações recomendadas.",
+    "optimize_desc": "Detecta automaticamente CPU e GPU e executa as otimizações correspondentes.",
     "clean_desc": "Remover arquivos temporários e liberar espaço.",
     "debloat_desc": "Remover apps pré-instalados do Windows.",
     "game_booster_desc": "Desativar serviços temporariamente e liberar memória para jogos.",
