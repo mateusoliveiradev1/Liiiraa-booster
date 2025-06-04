@@ -323,26 +323,13 @@ export default function App() {
             </button>
           </div>
         );
-      case 'CPU AMD':
+      case 'CPU':
         return (
-          <div>
-            <p className="mb-2">{t('messages.cpu_amd_desc')}</p>
-            <button
-              className="btn-primary"
-              onClick={handleCpuAmd}
-            >
+          <div className="space-x-2">
+            <button className="btn-primary" onClick={handleCpuAmd}>
               {t('buttons.optimize_amd_cpu')}
             </button>
-          </div>
-        );
-      case 'CPU Intel':
-        return (
-          <div>
-            <p className="mb-2">{t('messages.cpu_intel_desc')}</p>
-            <button
-              className="btn-primary"
-              onClick={handleCpuIntel}
-            >
+            <button className="btn-primary" onClick={handleCpuIntel}>
               {t('buttons.optimize_intel_cpu')}
             </button>
           </div>
