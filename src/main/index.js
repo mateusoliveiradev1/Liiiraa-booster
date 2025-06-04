@@ -38,6 +38,7 @@ ipcMain.handle('run-script', async (_event, command) => {
     'hello': 'echo Hello World',
     'optimize': 'powershell -ExecutionPolicy Bypass -File scripts/optimize.ps1',
     'clean': 'cmd /c scripts/clean.bat',
+    'restore': 'powershell -ExecutionPolicy Bypass -File scripts/optimize.ps1 -Restore',
     'metrics': 'python scripts/metrics.py'
   };
   if (!allowed[command]) {
