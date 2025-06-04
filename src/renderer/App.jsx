@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import "./i18n";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,21 +13,21 @@ import {
   FaMoon,
 } from "react-icons/fa";
 import { BsGpuCard } from "react-icons/bs";
-import {
-  SiAmd,
-  SiIntel,
-  SiNvidia,
-  SiPubg,
-  SiCounterstrike,
-  SiEpicgames,
-  SiValorant,
-  SiActivision,
-} from "react-icons/si";
-import { TbBrandFortnite } from "react-icons/tb";
 import MetricsCard from "./components/MetricsCard.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Logs from "./components/Logs.jsx";
 import Spinner from "./components/Spinner.jsx";
+
+const Optimize = lazy(() => import("./pages/Optimize.jsx"));
+const Debloat = lazy(() => import("./pages/Debloat.jsx"));
+const CPU = lazy(() => import("./pages/CPU.jsx"));
+const GPU = lazy(() => import("./pages/GPU.jsx"));
+const Games = lazy(() => import("./pages/Games.jsx"));
+const Pubg = lazy(() => import("./pages/Pubg.jsx"));
+const Cs2 = lazy(() => import("./pages/Cs2.jsx"));
+const Fortnite = lazy(() => import("./pages/Fortnite.jsx"));
+const Warzone = lazy(() => import("./pages/Warzone.jsx"));
+const Valorant = lazy(() => import("./pages/Valorant.jsx"));
 
 const mockMetrics = {
   cpu: "35%",
@@ -328,12 +328,9 @@ export default function App() {
         );
       case "Optimize":
         return (
-          <div>
-            <p className="mb-2">{t("messages.optimize_desc")}</p>
-            <button className="btn-primary" onClick={handleOptimize}>
-              {t("buttons.run_optimize")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Optimize onRun={handleOptimize} />
+          </Suspense>
         );
       case "Clean":
         return (
@@ -355,20 +352,13 @@ export default function App() {
         );
       case "Debloat":
         return (
-          <div>
-            <p className="mb-2">{t("messages.debloat_desc")}</p>
-            <div className="space-x-2">
-              <button className="btn-warning" onClick={handleDebloatFull}>
-                {t("buttons.debloat_full")}
-              </button>
-              <button className="btn-warning" onClick={handleDebloatLite}>
-                {t("buttons.debloat_lite")}
-              </button>
-              <button className="btn-neutral" onClick={handleDebloatRestore}>
-                {t("buttons.debloat_restore")}
-              </button>
-            </div>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Debloat
+              onFull={handleDebloatFull}
+              onLite={handleDebloatLite}
+              onRestore={handleDebloatRestore}
+            />
+          </Suspense>
         );
       case "Game Booster":
         return (
@@ -381,131 +371,60 @@ export default function App() {
         );
       case "CPU":
         return (
-          <div className="space-x-2">
-            <button className="btn-amd" onClick={handleCpuAmd}>
-              <SiAmd className="inline mr-1" />
-              {t("buttons.optimize_amd_cpu")}
-            </button>
-            <button className="btn-amd" onClick={handleCpuAmdRestore}>
-              <SiAmd className="inline mr-1" />
-              {t("buttons.restore_amd_cpu")}
-            </button>
-            <button className="btn-intel" onClick={handleCpuIntel}>
-              <SiIntel className="inline mr-1" />
-              {t("buttons.optimize_intel_cpu")}
-            </button>
-            <button className="btn-intel" onClick={handleCpuIntelRestore}>
-              <SiIntel className="inline mr-1" />
-              {t("buttons.restore_intel_cpu")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <CPU
+              onAmd={handleCpuAmd}
+              onIntel={handleCpuIntel}
+              onAmdRestore={handleCpuAmdRestore}
+              onIntelRestore={handleCpuIntelRestore}
+            />
+          </Suspense>
         );
       case "GPU":
         return (
-          <div className="space-x-2">
-            <button className="btn-nvidia" onClick={handleGpuNvidia}>
-              <SiNvidia className="inline mr-1" />
-              {t("buttons.optimize_nvidia_gpu")}
-            </button>
-            <button className="btn-intel" onClick={handleGpuIntel}>
-              <SiIntel className="inline mr-1" />
-              {t("buttons.optimize_intel_gpu")}
-            </button>
-            <button className="btn-amd" onClick={handleGpuAmd}>
-              <SiAmd className="inline mr-1" />
-              {t("buttons.optimize_amd_gpu")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <GPU
+              onNvidia={handleGpuNvidia}
+              onIntel={handleGpuIntel}
+              onAmd={handleGpuAmd}
+            />
+          </Suspense>
         );
       case "Games":
         return (
-          <div className="space-x-2">
-            <button
-              className="btn-accent"
-              onClick={() => setActiveSection("PUBG")}
-            >
-              <SiPubg className="inline mr-1" />
-              {t("sidebar.pubg")}
-            </button>
-            <button
-              className="btn-accent"
-              onClick={() => setActiveSection("CS2")}
-            >
-              <SiCounterstrike className="inline mr-1" />
-              {t("sidebar.cs2")}
-            </button>
-            <button
-              className="btn-accent"
-              onClick={() => setActiveSection("Fortnite")}
-            >
-              <TbBrandFortnite className="inline mr-1" />
-              {t("sidebar.fortnite")}
-            </button>
-            <button
-              className="btn-accent"
-              onClick={() => setActiveSection("Warzone")}
-            >
-              <SiActivision className="inline mr-1" />
-              {t("sidebar.warzone")}
-            </button>
-            <button
-              className="btn-accent"
-              onClick={() => setActiveSection("Valorant")}
-            >
-              <SiValorant className="inline mr-1" />
-              {t("sidebar.valorant")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Games onSelect={setActiveSection} />
+          </Suspense>
         );
       case "PUBG":
         return (
-          <div>
-            <p className="mb-2">{t("messages.pubg_desc")}</p>
-            <button className="btn-accent" onClick={handlePubg}>
-              <SiPubg className="inline mr-1" />
-              {t("buttons.optimize_pubg")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Pubg onRun={handlePubg} />
+          </Suspense>
         );
       case "CS2":
         return (
-          <div>
-            <p className="mb-2">{t("messages.cs2_desc")}</p>
-            <button className="btn-accent" onClick={handleCs2}>
-              <SiCounterstrike className="inline mr-1" />
-              {t("buttons.optimize_cs2")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Cs2 onRun={handleCs2} />
+          </Suspense>
         );
       case "Fortnite":
         return (
-          <div>
-            <p className="mb-2">{t("messages.fortnite_desc")}</p>
-            <button className="btn-accent" onClick={handleFortnite}>
-              <SiEpicgames className="inline mr-1" />
-              {t("buttons.optimize_fortnite")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Fortnite onRun={handleFortnite} />
+          </Suspense>
         );
       case "Warzone":
         return (
-          <div>
-            <p className="mb-2">{t("messages.warzone_desc")}</p>
-            <button className="btn-accent" onClick={handleWarzone}>
-              <SiActivision className="inline mr-1" />
-              {t("buttons.optimize_warzone")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Warzone onRun={handleWarzone} />
+          </Suspense>
         );
       case "Valorant":
         return (
-          <div>
-            <p className="mb-2">{t("messages.valorant_desc")}</p>
-            <button className="btn-accent" onClick={handleValorant}>
-              <SiValorant className="inline mr-1" />
-              {t("buttons.optimize_valorant")}
-            </button>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Valorant onRun={handleValorant} />
+          </Suspense>
         );
       case "Energy":
         return (
