@@ -328,6 +328,19 @@ ipcMain.handle('get-logs', async () => {
   }
 });
 
+ipcMain.handle('clear-logs', async () => {
+  const logsDir = path.resolve(__dirname, '../../logs');
+  try {
+    const files = fs.readdirSync(logsDir).filter((f) => f.endsWith('.log'));
+    for (const file of files) {
+      fs.unlinkSync(path.join(logsDir, file));
+    }
+    return true;
+  } catch (err) {
+    throw err;
+  }
+});
+
 ipcMain.handle('get-user', async () => {
   return require('os').userInfo().username;
 });
