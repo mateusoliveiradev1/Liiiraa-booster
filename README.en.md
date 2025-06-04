@@ -58,3 +58,18 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
 - Game scripts avoid duplicate entries by checking configuration files before writing.
 
+## Debloat Modes
+
+The `debloat.ps1` script now supports **Full** and **Lite** modes with an
+expanded list of removable apps (Zune, News, Solitaire, YourPhone, GetHelp and
+additional Xbox, People and Skype packages). It also disables the optional
+**XPS Viewer** feature by default. Removing built-in apps can break some Windows
+features. Run with `-Restore` to reinstall any removed packages if you encounter
+issues.
+
+## New Optimization Tweaks
+
+`optimize.ps1` includes TCP latency tweaks (`TCPAckFrequency` and
+`TcpDelAckTicks`) and both CPU scripts turn off Windows Power Throttling for
+better boost behavior.
+
