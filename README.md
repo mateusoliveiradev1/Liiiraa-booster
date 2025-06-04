@@ -57,6 +57,7 @@ project-root/
 3. Rode `npm install` para baixar as dependências.
 4. Para desenvolvimento execute `npm run dev` e o aplicativo abrirá com recarregamento automático.
 
+
 ## 📦 Builds e Distribuição
 
 1. Gere os arquivos otimizados do frontend com `npm run build`.
@@ -64,6 +65,17 @@ project-root/
    - Windows: `.exe`
    - macOS: `.dmg`
    - Linux: `.AppImage`
+
+## 🐍 Requisitos de Python
+
+Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Após
+instalar o Python rode:
+
+```bash
+pip install psutil
+```
+
+Esses scripts são chamados pelo Electron através do canal IPC `run-script`.
 
 ## 📝 Scripts e IPC
 
