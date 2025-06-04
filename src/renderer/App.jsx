@@ -159,38 +159,6 @@ export default function App() {
         {renderSection()}
         {message && <p className="text-green-600 mt-2">{message}</p>}
         {error && <p className="text-red-500 mt-2">{error}</p>}
-
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
-        <button
-          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
-          onClick={toggleDark}
-        >
-          {dark ? 'Light' : 'Dark'}
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <MetricsCard label="CPU" value={metrics.cpu} />
-        <MetricsCard label="GPU" value={metrics.gpu} />
-        <MetricsCard label="RAM" value={metrics.ram} />
-        <MetricsCard label="Disk" value={metrics.disk} />
-        <MetricsCard label="Network" value={metrics.network} />
-      </div>
-      <div className="mt-4 space-x-2">
-        <button
-          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-          onClick={handleOptimize}
-        >
-          Optimize
-        </button>
-        <button
-          className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
-          onClick={handleClean}
-        >
-          Clean
-        </button>
-
       </div>
     </div>
   );
