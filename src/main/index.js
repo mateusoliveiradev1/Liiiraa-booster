@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const { execFile } = require('child_process');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -232,6 +233,16 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'pubg.ps1')
       ]
     },
+    'pubg-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'pubg.ps1'),
+        '-Restore'
+      ]
+    },
     cs2: {
       file: 'powershell',
       args: [
@@ -239,6 +250,16 @@ const ALLOWED_COMMANDS = {
         'Bypass',
         '-File',
         path.join(scriptsDir, 'cs2.ps1')
+      ]
+    },
+    'cs2-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'cs2.ps1'),
+        '-Restore'
       ]
     },
     fortnite: {
@@ -250,6 +271,16 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'fortnite.ps1')
       ]
     },
+    'fortnite-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'fortnite.ps1'),
+        '-Restore'
+      ]
+    },
     warzone: {
       file: 'powershell',
       args: [
@@ -257,6 +288,16 @@ const ALLOWED_COMMANDS = {
         'Bypass',
         '-File',
         path.join(scriptsDir, 'warzone.ps1')
+      ]
+    },
+    'warzone-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'warzone.ps1'),
+        '-Restore'
       ]
     },
     valorant: {
@@ -267,6 +308,16 @@ const ALLOWED_COMMANDS = {
         '-File',
         path.join(scriptsDir, 'valorant.ps1')
 
+      ]
+    },
+    'valorant-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'valorant.ps1'),
+        '-Restore'
       ]
     },
     'energy-plan': {
@@ -330,7 +381,6 @@ ipcMain.handle('run-script', async (_event, command) => {
   if (!ALLOWED_COMMANDS[command]) {
     throw new Error('Command not allowed');
   }
-  const { execFile } = require('child_process');
   return new Promise((resolve, reject) => {
     const { file, args } = ALLOWED_COMMANDS[command];
     const child = execFile(file, args, { windowsHide: true });

@@ -26,6 +26,10 @@ try {
         $cpuArgs += '-Restore'
         $gpuArgs += '-Restore'
     }
+    elseif ($gpuName -match 'NVIDIA') {
+        $gpuArgs += '-MaxPower'
+        $gpuArgs += '-LockMaxClock'
+    }
 
     if ($cpuVendor -match 'AMD') {
         Write-Output ($Restore ? 'Restoring AMD CPU settings...' : 'Running AMD CPU optimizations...')

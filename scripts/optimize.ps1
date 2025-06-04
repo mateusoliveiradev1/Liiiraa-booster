@@ -20,7 +20,7 @@ if ($Restore) {
     }
 
     # Re-enable services disabled during optimization
-    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice', 'WSearch')
     foreach ($svc in $services) {
         $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
         if ($service) {
@@ -86,7 +86,7 @@ Write-Output "Optimizing system..."
 
 try {
     # --- Power plan ---
-    $planName = 'Liiiraa Booster - Max Performance and Low Latency'
+    $planName = 'Liiiraa Booster - Max Performance and Low Latêncy'
     $planGuid = (powercfg -l | Where-Object { $_ -match [regex]::Escape($planName) }) -replace '\s*([\w-]+)\s+.*', '$1'
     if (-not $planGuid) {
         $dup = powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
@@ -100,8 +100,8 @@ try {
     }
 
     # --- Disable unnecessary services ---
-    # Added diagnosticshub.standardcollector.service and Dmwappushservice
-    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
+    # Added diagnosticshub.standardcollector.service, Dmwappushservice and WSearch
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice', 'WSearch')
     foreach ($svc in $services) {
         $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
         if ($service) {
