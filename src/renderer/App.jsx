@@ -138,7 +138,6 @@ export default function App() {
           gpuPercent = data.gpu_util;
         }
 
-        setMetrics({ cpu, gpu, ram, disk, network });
         setMetrics({
           cpu,
           cpuPercent,
