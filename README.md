@@ -123,7 +123,7 @@ Electron via canal `run-script`:
   - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho; `-Restore` reverte.
   - **gpu-amd.ps1** — otimizações para placas AMD (use `-Restore` para desfazer).
   - **gpu-intel.ps1** — otimizações para GPUs Intel.
-- **clean.bat** — limpeza rápida de arquivos temporários e caches do sistema, registrando o espaço liberado.
+- **clean.bat** — limpeza rápida de arquivos temporários e caches do sistema, registrando o espaço liberado. O cálculo agora usa PowerShell para funcionar em qualquer idioma do Windows.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e [psutil](https://pypi.org/project/psutil/).
 - **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster.
 - **peripheral-energy.ps1** — ajusta energia de periféricos USB.

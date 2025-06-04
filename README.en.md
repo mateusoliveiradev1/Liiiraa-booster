@@ -62,7 +62,7 @@ The `scripts/` folder contains several automation files. They must be run with *
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
 - **gamebooster-restore.ps1** — restores services and Game Bar settings after using Game Booster.
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
-- **clean.bat** — quick cleanup of temporary files and caches with freed space feedback.
+- **clean.bat** — quick cleanup of temporary files and caches with freed space feedback. Calculation now relies on PowerShell so it works on any Windows locale.
 - **metrics.py** — gathers basic system metrics using Python and psutil.
 - Game scripts avoid duplicate entries by checking configuration files before writing.
 - The log viewer shows only the last 500 lines of each file.
