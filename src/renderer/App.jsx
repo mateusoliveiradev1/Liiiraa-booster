@@ -82,6 +82,12 @@ export default function App() {
 
   const handleOptimize = () => runCommand('optimize');
   const handleClean = () => runCommand('clean');
+
+const handleDebloat = () => runCommand('debloat');
+const handleGameBoost = () => runCommand('gamebooster');
+const handleRestore = () => runCommand('restore');
+const handleAdvanced = () => runCommand('advanced');
+
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
@@ -94,6 +100,7 @@ export default function App() {
   const handleFortnite = () => runCommand('fortnite');
   const handleWarzone = () => runCommand('warzone');
   const handleValorant = () => runCommand('valorant');
+
 
   const renderPlaceholder = (text) => (
     <div>
@@ -272,13 +279,21 @@ export default function App() {
       case 'Advanced Tweaks':
         return (
           <div>
-            <p className="mb-2">Restore all tweaks to default settings.</p>
-            <button
-              className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
-              onClick={handleRestore}
-            >
-              Restore Tweaks
-            </button>
+            <p className="mb-2">Apply risky tweaks like disabling UAC, Defender and Windows Update.</p>
+            <div className="space-x-2">
+              <button
+                className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+                onClick={handleAdvanced}
+              >
+                Run Advanced Tweaks
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-gray-600 text-white hover:bg-gray-700"
+                onClick={handleRestore}
+              >
+                Restore Tweaks
+              </button>
+            </div>
           </div>
         );
       case 'History':
