@@ -64,7 +64,6 @@
     "command_success": "{{cmd}} concluído com sucesso",
     "command_failed": "{{cmd}} falhou",
     "clean_result": "Liberado {{space}} de espaço em disco."
-    "command_failed": "{{cmd}} falhou"
   },
   "labels": {
     "user": "Usuário",
