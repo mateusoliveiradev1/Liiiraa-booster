@@ -334,26 +334,13 @@ export default function App() {
             </button>
           </div>
         );
-      case 'GPU Nvidia':
+      case 'GPU':
         return (
-          <div>
-            <p className="mb-2">{t('messages.gpu_nvidia_desc')}</p>
-            <button
-              className="btn-success"
-              onClick={handleGpuNvidia}
-            >
+          <div className="space-x-2">
+            <button className="btn-success" onClick={handleGpuNvidia}>
               {t('buttons.optimize_nvidia_gpu')}
             </button>
-          </div>
-        );
-      case 'GPU AMD':
-        return (
-          <div>
-            <p className="mb-2">{t('messages.gpu_amd_desc')}</p>
-            <button
-              className="btn-success"
-              onClick={handleGpuAmd}
-            >
+            <button className="btn-success" onClick={handleGpuAmd}>
               {t('buttons.optimize_amd_gpu')}
             </button>
           </div>

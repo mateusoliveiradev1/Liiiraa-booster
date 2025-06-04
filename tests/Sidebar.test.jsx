@@ -80,3 +80,12 @@ test('clicks on CPU tab', () => {
   fireEvent.click(cpu);
   expect(onSelect).toHaveBeenCalledWith('CPU');
 });
+
+test('clicks on GPU tab', () => {
+  const onSelect = jest.fn();
+  render(<Sidebar activeSection="GPU" onSelect={onSelect} />);
+  const gpu = screen.getByRole('button', { name: /sidebar.gpu/ });
+  expect(gpu).toHaveClass('bg-primary');
+  fireEvent.click(gpu);
+  expect(onSelect).toHaveBeenCalledWith('GPU');
+});
