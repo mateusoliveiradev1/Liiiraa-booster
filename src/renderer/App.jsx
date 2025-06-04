@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './i18n';
+import { FaBroom } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   FaBroom,
   FaMicrochip,
@@ -12,6 +15,7 @@ import { BsGpuCard } from 'react-icons/bs';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Logs from './components/Logs.jsx';
+import Spinner from './components/Spinner.jsx';
 
 const mockMetrics = {
   cpu: '35%',
@@ -40,8 +44,7 @@ export default function App() {
     diskPercent: mockMetrics.diskPercent,
     network: mockMetrics.network
   });
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [freedSpace, setFreedSpace] = useState('');
 
@@ -111,6 +114,7 @@ export default function App() {
           gpuPercent = data.gpu_util;
         }
 
+        setMetrics({ cpu, gpu, ram, disk, network });
         setMetrics({
           cpu,
           cpuPercent,
@@ -125,7 +129,7 @@ export default function App() {
         setError(null);
       } catch (err) {
         console.error(err);
-        setError(t('messages.fetch_failed'));
+        toast.error(t('messages.fetch_failed'));
       }
     };
 
@@ -143,29 +147,31 @@ export default function App() {
 
   const runCommand = async (cmd) => {
     const name = cmd.charAt(0).toUpperCase() + cmd.slice(1);
+    setLoading(true);
     try {
       await window.api.runScript(cmd);
-      setMessage(t('messages.command_success', { cmd: name }));
-      setError(null);
+      toast.success(t('messages.command_success', { cmd: name }));
     } catch (err) {
       console.error(err);
-      setError(t('messages.command_failed', { cmd: name }));
-      setMessage(null);
+      toast.error(t('messages.command_failed', { cmd: name }));
+    } finally {
+      setLoading(false);
     }
   };
   const handleOptimize = () => runCommand('auto-optimize');
 
   const handleClean = async () => {
+    setLoading(true);
     try {
       const output = await window.api.runScript('clean');
       setFreedSpace(output.trim());
-      setMessage(t('messages.command_success', { cmd: 'Clean' }));
-      setError(null);
+      toast.success(t('messages.command_success', { cmd: 'Clean' }));
     } catch (err) {
       console.error(err);
-      setError(t('messages.command_failed', { cmd: 'Clean' }));
-      setMessage(null);
+      toast.error(t('messages.command_failed', { cmd: 'Clean' }));
       setFreedSpace('');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -509,8 +515,8 @@ export default function App() {
           <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
         </div>
         {renderSection()}
-        {message && <p className="text-green-600 mt-2">{message}</p>}
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {loading && <Spinner />}
+        <ToastContainer position="bottom-right" />
       </div>
     </div>
   );
