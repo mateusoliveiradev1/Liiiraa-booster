@@ -15,8 +15,8 @@ Start-Transcript -Path $logFile -Append | Out-Null
 
 try {
     Write-Output 'Detecting hardware...'
-    $cpuVendor = (Get-WmiObject Win32_Processor | Select-Object -First 1 -ExpandProperty Manufacturer)
-    $gpuName   = (Get-WmiObject Win32_VideoController | Select-Object -First 1 -ExpandProperty Name)
+    $cpuVendor = (Get-CimInstance -ClassName Win32_Processor | Select-Object -First 1 -ExpandProperty Manufacturer)
+    $gpuName   = (Get-CimInstance -ClassName Win32_VideoController | Select-Object -First 1 -ExpandProperty Name)
 
     Write-Output "CPU Vendor: $cpuVendor"
     Write-Output "GPU Name: $gpuName"
