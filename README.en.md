@@ -49,12 +49,33 @@ The `scripts/` folder contains several automation files. They must be run with *
 
  - **cpu-amd.ps1** — optimizes AMD processors and disables Windows Power Throttling (via *Optimize AMD CPU* in the **CPU** tab).
  - **cpu-intel.ps1** — optimizes Intel processors and disables Windows Power Throttling (via *Optimize Intel CPU* in the **CPU** tab).
+
  - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab, use `-Restore` to revert).
  - **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab, use `-Restore` to revert).
+
+- **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab).
+- **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab).
+- **gpu-intel.ps1** — tweaks for Intel GPUs (via *Optimize Intel GPU* in the **GPU** tab).
+
 - **energy-plan.ps1** — applies the custom power plan (via *Apply Energy Plan* in **Energy**).
 - **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy**).
 - **gamebooster.ps1** — temporary tweaks for gaming sessions (via *Start Game Booster*).
 - **gamebooster-restore.ps1** — restores services and Game Bar settings after using Game Booster.
 - **restore-point.ps1** — creates a system restore point (via *Create Restore Point* on the dashboard).
 - Game scripts avoid duplicate entries by checking configuration files before writing.
+
+## Debloat Modes
+
+The `debloat.ps1` script now supports **Full** and **Lite** modes with an
+expanded list of removable apps (Zune, News, Solitaire, YourPhone, GetHelp and
+additional Xbox, People and Skype packages). It also disables the optional
+**XPS Viewer** feature by default. Removing built-in apps can break some Windows
+features. Run with `-Restore` to reinstall any removed packages if you encounter
+issues.
+
+## New Optimization Tweaks
+
+`optimize.ps1` includes TCP latency tweaks (`TCPAckFrequency` and
+`TcpDelAckTicks`) and both CPU scripts turn off Windows Power Throttling for
+better boost behavior.
 
