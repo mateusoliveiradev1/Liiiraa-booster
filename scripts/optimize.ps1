@@ -44,13 +44,18 @@ Write-Output "Optimizing system..."
 
 try {
     # --- Power plan ---
-    $plan = (powercfg -l | Where-Object { $_ -match 'Ultimate Performance' }) -replace '\s*([\w-]+)\s+.*', '$1'
-    if (-not $plan) {
-        powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-        $plan = (powercfg -l | Where-Object { $_ -match 'Ultimate Performance' }) -replace '\s*([\w-]+)\s+.*', '$1'
+    $planName = 'Liiiraa Booster - Max Performance and Low Latency'
+    $planGuid = (powercfg -l | Where-Object { $_ -match [regex]::Escape($planName) }) -replace '\s*([\w-]+)\s+.*', '$1'
+    if (-not $planGuid) {
+        $dup = powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+        $planGuid = $dup -replace '.*GUID:\s*([A-Fa-f0-9-]+).*', '$1'
+        powercfg -changename $planGuid $planName | Out-Null
+        Write-Output "Power plan '$planName' created"
     }
-    if ($plan) { powercfg -setactive $plan }
-    Write-Output "Ultimate Performance plan activated"
+    if ($planGuid) {
+        powercfg -setactive $planGuid | Out-Null
+        Write-Output "Power plan '$planName' activated"
+    }
 
     # --- Disable unnecessary services ---
     $services = @('DiagTrack', 'SysMain')
