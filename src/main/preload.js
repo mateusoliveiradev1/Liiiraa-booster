@@ -6,6 +6,8 @@ const api = {
   getUser: () => ipcRenderer.invoke('get-user')
 };
 
+Object.freeze(api);
+
 contextBridge.exposeInMainWorld('api', api);
 
 module.exports = { api };
