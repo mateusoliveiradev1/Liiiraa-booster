@@ -83,7 +83,8 @@ def main() -> None:
     logger.info("Collecting system metrics")
 
     net1 = psutil.net_io_counters()
-    cpu_percent = psutil.cpu_percent(interval=1)
+    # Shorter sampling interval avoids blocking the UI for a full second
+    cpu_percent = psutil.cpu_percent(interval=0.1)
     net2 = psutil.net_io_counters()
     net_up = net2.bytes_sent - net1.bytes_sent
     net_down = net2.bytes_recv - net1.bytes_recv
