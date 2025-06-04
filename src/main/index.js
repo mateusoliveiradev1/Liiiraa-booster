@@ -55,13 +55,34 @@ ipcMain.handle('run-script', async (_event, command) => {
       file: 'cmd',
       args: ['/c', path.join(scriptsDir, 'clean.bat')]
     },
-    debloat: {
+    'debloat-full': {
       file: 'powershell',
       args: [
         '-ExecutionPolicy',
         'Bypass',
         '-File',
-        path.join(scriptsDir, 'debloat.ps1')
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Full'
+      ]
+    },
+    'debloat-lite': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Lite'
+      ]
+    },
+    'debloat-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'debloat.ps1'),
+        '-Restore'
       ]
     },
     restore: {
