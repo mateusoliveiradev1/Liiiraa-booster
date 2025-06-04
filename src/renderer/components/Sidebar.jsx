@@ -18,6 +18,7 @@ import {
 } from 'react-icons/fa';
 import { BsGpuCard } from 'react-icons/bs';
 import { SiAmd, SiIntel, SiNvidia, SiPubg, SiValorant } from 'react-icons/si';
+import logo from '../assets/logo.png';
 import { TbBrandFortnite } from 'react-icons/tb';
 import { GiPistolGun } from 'react-icons/gi';
 
@@ -68,6 +69,7 @@ function Sidebar({ activeSection, onSelect }) {
       >
         &#9776;
       </button>
+      <img src={logo} alt="Liiiraa Booster logo" className="h-12 w-12 mx-auto" />
       {sectionGroups.map(({ title, items }, idx) => (
         <React.Fragment key={title}>
           {!collapsed && (
