@@ -83,6 +83,95 @@ ipcMain.handle('run-script', async (_event, command) => {
         path.join(scriptsDir, 'gamebooster.ps1')
       ]
     },
+
+    advanced: {
+
+    'cpu-amd': {
+
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+
+        path.join(scriptsDir, 'advanced.ps1')
+
+        path.join(scriptsDir, 'cpu-amd.ps1')
+      ]
+    },
+    'cpu-intel': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'cpu-intel.ps1')
+      ]
+    },
+    'gpu-nvidia': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'gpu-nvidia.ps1')
+      ]
+    },
+    'gpu-amd': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'gpu-amd.ps1')
+      ]
+    },
+    pubg: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'pubg.ps1')
+      ]
+    },
+    cs2: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'cs2.ps1')
+      ]
+    },
+    fortnite: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'fortnite.ps1')
+      ]
+    },
+    warzone: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'warzone.ps1')
+      ]
+    },
+    valorant: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'valorant.ps1')
+
+      ]
+    },
     metrics: {
       file: 'python',
       args: [path.join(scriptsDir, 'metrics.py')]
