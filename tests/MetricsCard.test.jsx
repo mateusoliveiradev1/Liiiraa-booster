@@ -22,3 +22,8 @@ test('renders progress bar with correct value', () => {
   const bar = screen.getByRole('progressbar');
   expect(bar).toHaveAttribute('aria-valuenow', '50');
 });
+
+test('renders temperature when provided', () => {
+  render(<MetricsCard label="GPU" value="50%" temperature="Temp: 70°C" />);
+  expect(screen.getByText('Temp: 70°C')).toBeInTheDocument();
+});

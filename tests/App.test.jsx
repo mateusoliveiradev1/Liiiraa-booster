@@ -36,3 +36,29 @@ test('displays username and updates time', async () => {
   const second = screen.getByText(/^labels.time/).textContent;
   expect(second).not.toBe(first);
 });
+
+test('renders gpu temperature when provided', async () => {
+  const metrics = JSON.stringify({
+    cpu_percent: 0,
+    memory_used: 0,
+    memory_total: 1,
+    disk_used: 0,
+    disk_total: 1,
+    network_bytes_per_sec: 0,
+    gpu_util: 50,
+    gpu_mem_used: 0,
+    gpu_mem_total: 1,
+    gpu_temp: 65
+  });
+  window.api = {
+    getUser: jest.fn(() => Promise.resolve('alice')),
+    runScript: jest.fn(() => Promise.resolve(metrics)),
+    getLogs: jest.fn()
+  };
+
+  render(<App />);
+
+  expect(
+    await screen.findByText('labels.temperature: 65°C')
+  ).toBeInTheDocument();
+});

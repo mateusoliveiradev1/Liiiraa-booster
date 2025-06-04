@@ -50,6 +50,7 @@ export default function App() {
     cpuPercent: mockMetrics.cpuPercent,
     gpu: "N/A",
     gpuPercent: null,
+    gpuTemp: null,
     ram: mockMetrics.ram,
     ramPercent: mockMetrics.ramPercent,
     disk: mockMetrics.disk,
@@ -124,6 +125,7 @@ export default function App() {
 
         let gpu = "N/A";
         let gpuPercent = null;
+        let gpuTemp = null;
         if (
           data.gpu_util !== undefined &&
           data.gpu_mem_used !== undefined &&
@@ -137,12 +139,16 @@ export default function App() {
           gpu = `${util} - ${mem}`;
           gpuPercent = data.gpu_util;
         }
+        if (data.gpu_temp !== undefined) {
+          gpuTemp = `${data.gpu_temp}\u00B0C`;
+        }
 
         setMetrics({
           cpu,
           cpuPercent,
           gpu,
           gpuPercent,
+          gpuTemp,
           ram,
           ramPercent,
           disk,
@@ -255,6 +261,11 @@ export default function App() {
                 }
                 icon={<BsGpuCard />}
                 percentage={metrics.gpuPercent}
+                temperature={
+                  metrics.gpuTemp
+                    ? `${t("labels.temperature")}: ${metrics.gpuTemp}`
+                    : null
+                }
               />
               <MetricsCard
                 label="RAM"

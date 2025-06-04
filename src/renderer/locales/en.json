@@ -84,6 +84,7 @@
   "labels": {
     "user": "User",
     "time": "Time",
-    "date": "Date"
+    "date": "Date",
+    "temperature": "Temperature"
   }
 }
