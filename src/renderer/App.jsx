@@ -125,7 +125,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Apply recommended optimization tweaks.</p>
             <button
-              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
               onClick={handleOptimize}
             >
               Run Optimize
@@ -137,7 +137,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Remove temporary files and free disk space.</p>
             <button
-              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleClean}
             >
               Run Clean
@@ -149,7 +149,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Remove pre-installed Windows apps.</p>
             <button
-              className="px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700"
+              className="px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark"
               onClick={handleDebloat}
             >
               Run Debloat
@@ -161,7 +161,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Temporarily disable services and free memory for gaming.</p>
             <button
-              className="px-4 py-2 rounded bg-purple-600 text-white hover:bg-purple-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handleGameBoost}
             >
               Start Game Booster
@@ -173,7 +173,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Apply AMD CPU specific optimizations.</p>
             <button
-              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
               onClick={handleCpuAmd}
             >
               Optimize AMD CPU
@@ -185,7 +185,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Apply Intel CPU specific optimizations.</p>
             <button
-              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
               onClick={handleCpuIntel}
             >
               Optimize Intel CPU
@@ -197,7 +197,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Apply Nvidia GPU specific optimizations.</p>
             <button
-              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleGpuNvidia}
             >
               Optimize Nvidia GPU
@@ -209,7 +209,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Apply AMD GPU specific optimizations.</p>
             <button
-              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleGpuAmd}
             >
               Optimize AMD GPU
@@ -221,7 +221,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Optimize system for PUBG.</p>
             <button
-              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handlePubg}
             >
               Optimize PUBG
@@ -233,7 +233,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Optimize system for CS2.</p>
             <button
-              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handleCs2}
             >
               Optimize CS2
@@ -245,7 +245,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Optimize system for Fortnite.</p>
             <button
-              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handleFortnite}
             >
               Optimize Fortnite
@@ -257,7 +257,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Optimize system for Warzone.</p>
             <button
-              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handleWarzone}
             >
               Optimize Warzone
@@ -269,7 +269,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Optimize system for Valorant.</p>
             <button
-              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              className="px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark"
               onClick={handleValorant}
             >
               Optimize Valorant
@@ -282,13 +282,13 @@ const handleAdvanced = () => runCommand('advanced');
             <p className="mb-2">Apply risky tweaks like disabling UAC, Defender and Windows Update.</p>
             <div className="space-x-2">
               <button
-                className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+                className="px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark"
                 onClick={handleAdvanced}
               >
                 Run Advanced Tweaks
               </button>
               <button
-                className="px-4 py-2 rounded bg-gray-600 text-white hover:bg-gray-700"
+                className="px-4 py-2 rounded bg-border text-white hover:bg-border-dark"
                 onClick={handleRestore}
               >
                 Restore Tweaks
@@ -303,7 +303,7 @@ const handleAdvanced = () => runCommand('advanced');
           <div>
             <p className="mb-2">Toggle application appearance.</p>
             <button
-              className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
+              className="px-3 py-1 rounded bg-muted dark:bg-muted-dark"
               onClick={toggleDark}
             >
               {dark ? 'Light' : 'Dark'} Mode
