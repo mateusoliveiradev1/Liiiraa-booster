@@ -55,7 +55,7 @@ project-root/
 1. Instale o [Node.js](https://nodejs.org/) (v18 ou superior recomendado).
 2. Clone este repositório e acesse a pasta do projeto.
 3. Rode `npm install` para baixar as dependências.
-4. Para desenvolvimento execute `npm run dev`, que inicia o Vite e o Electron simultaneamente com recarregamento automático.
+4. Para desenvolvimento execute `npm run dev`, que usa **concurrently** para rodar `vite` e `electron .` em paralelo com recarregamento automático.
 
 
 ## 📦 Builds e Distribuição
@@ -88,6 +88,12 @@ Electron via canal `run-script`:
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
 
+> ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
+> **Administrador**. Eles modificam configurações do Windows e podem afetar a
+> estabilidade do sistema. O `optimize.ps1` realiza um backup do registro antes
+> de aplicar tweaks e pode ser executado com `-Restore` para desfazer as
+> alterações. Sempre tenha um ponto de restauração ou backup antes de prosseguir.
+
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de
 renderer (via `window.api.runScript('optimize')`, por exemplo) para que o
@@ -98,4 +104,4 @@ Electron execute o comando correspondente em segurança.
 
 ## 📂 Git e Builds
 
-Os artefatos gerados nas pastas `dist/` e `build/` não são versionados. Estes diretórios estão listados no arquivo `.gitignore` para evitar que arquivos de build sejam enviados ao repositório.
+Os artefatos gerados nas pastas `dist/` e `build/` não são versionados. Estes diretórios estão listados no arquivo `.gitignore` para evitar que arquivos de build sejam enviados ao repositório. Além disso, o diretório `node_modules/` e qualquer arquivo `*.log` são automaticamente ignorados para manter o repositório limpo.
