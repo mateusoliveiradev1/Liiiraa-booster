@@ -102,9 +102,7 @@ export default function App() {
       setMessage(null);
     }
   };
-
-
-
+  const handleOptimize = () => runCommand('auto-optimize');
 
   const handleClean = async () => {
     try {
