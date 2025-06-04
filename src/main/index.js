@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -99,4 +100,20 @@ ipcMain.handle('run-script', async (_event, command) => {
       reject(error.message);
     });
   });
+});
+
+ipcMain.handle('get-logs', async () => {
+  const logsDir = path.resolve(__dirname, '../../logs');
+  try {
+    const files = fs
+      .readdirSync(logsDir)
+      .filter((f) => f.endsWith('.log'));
+    return files.map((file) => {
+      const content = fs.readFileSync(path.join(logsDir, file), 'utf8');
+      const lines = content.trim().split(/\r?\n/);
+      return { file, lines };
+    });
+  } catch (err) {
+    return [];
+  }
 });

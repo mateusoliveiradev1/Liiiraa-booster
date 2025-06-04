@@ -12,3 +12,9 @@ test('runScript calls ipcRenderer.invoke', async () => {
   await api.runScript('hello');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'hello');
 });
+
+test('getLogs calls ipcRenderer.invoke', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.getLogs();
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-logs');
+});

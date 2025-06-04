@@ -1,0 +1,17 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import History from '../src/renderer/components/History.jsx';
+
+test('renders logs returned by api', async () => {
+  window.api = {
+    getLogs: jest.fn(() =>
+      Promise.resolve([{ file: 'test.log', lines: ['[2024-01-01] Booted'] }])
+    )
+  };
+
+  render(<History />);
+
+  expect(await screen.findByText('test.log')).toBeInTheDocument();
+  expect(screen.getByText('[2024-01-01] Booted')).toBeInTheDocument();
+});

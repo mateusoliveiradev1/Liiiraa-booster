@@ -1,7 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 const api = {
-  runScript: (cmd) => ipcRenderer.invoke('run-script', cmd)
+  runScript: (cmd) => ipcRenderer.invoke('run-script', cmd),
+  getLogs: () => ipcRenderer.invoke('get-logs')
 };
 
 contextBridge.exposeInMainWorld('api', api);

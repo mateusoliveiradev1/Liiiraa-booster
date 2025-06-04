@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
+import History from './components/History.jsx';
 
 const mockMetrics = {
   cpu: '35%',
@@ -142,7 +143,7 @@ export default function App() {
           </div>
         );
       case 'History':
-        return renderPlaceholder('Boot history and logs will appear here.');
+        return <History />;
       case 'Settings':
         return (
           <div>
