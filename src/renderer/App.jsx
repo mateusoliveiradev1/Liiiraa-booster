@@ -489,8 +489,14 @@ export default function App() {
     <div className="flex h-screen">
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
-        <div className="sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r from-premium via-accent to-secondary backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg flex justify-between items-center text-white">
-          <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
+        <div
+          className={`sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg flex justify-between items-center text-white ${
+            dark
+              ? 'from-premium-dark via-accent-dark to-secondary-dark'
+              : 'from-premium via-accent to-secondary'
+          }`}
+        >
+          <h1 className="text-2xl font-display font-bold">Liiiraa Booster</h1>
           <button
             onClick={toggleDark}
             aria-label={dark ? t("buttons.light_mode") : t("buttons.dark_mode")}
