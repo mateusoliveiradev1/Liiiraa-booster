@@ -83,6 +83,12 @@ export default function App() {
   const handleClean = () => runCommand('clean');
   const handleRestore = () => runCommand('restore');
 
+  const renderPlaceholder = (text) => (
+    <div>
+      <p className="mb-2">{text}</p>
+    </div>
+  );
+
   const renderSection = () => {
     switch (activeSection) {
       case 'Dashboard':
@@ -119,6 +125,10 @@ export default function App() {
             </button>
           </div>
         );
+      case 'Debloat':
+        return renderPlaceholder('Windows debloat features coming soon.');
+      case 'Game Booster':
+        return renderPlaceholder('Game Booster mode is under construction.');
       case 'Advanced Tweaks':
         return (
           <div>
@@ -131,6 +141,8 @@ export default function App() {
             </button>
           </div>
         );
+      case 'History':
+        return renderPlaceholder('Boot history and logs will appear here.');
       case 'Settings':
         return (
           <div>
