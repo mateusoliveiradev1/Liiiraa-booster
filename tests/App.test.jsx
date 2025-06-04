@@ -26,6 +26,7 @@ test('displays username and updates time', async () => {
   render(<App />);
 
   expect(await screen.findByText('labels.user: alice')).toBeInTheDocument();
+  expect(screen.getByText(/^labels.date/)).toBeInTheDocument();
   expect(window.api.getUser).toHaveBeenCalled();
 
   const first = screen.getByText(/^labels.time/).textContent;
