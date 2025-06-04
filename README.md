@@ -110,6 +110,14 @@ Electron via canal `run-script`:
   batch.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
+- **cpu-amd.ps1** — otimiza processadores AMD (botão *Optimize AMD CPU* na aba **CPU**).
+- **cpu-intel.ps1** — otimiza processadores Intel (botão *Optimize Intel CPU* na aba **CPU**).
+- **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**).
+- **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**).
+- **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster (botão *Apply Energy Plan* em **Energy**).
+- **peripheral-energy.ps1** — ajusta energia de periféricos USB (botão *Peripheral Power Tweak* em **Energy**).
+- **gamebooster.ps1** — tweaks temporários para jogos (botão *Start Game Booster* na aba **Game Booster**).
+- **restore-point.ps1** — cria um ponto de restauração do sistema (botão *Create Restore Point* no **Dashboard**).
 
 > ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
 > **Administrador**. Eles modificam configurações do Windows e podem afetar a
