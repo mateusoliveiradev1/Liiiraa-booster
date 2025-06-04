@@ -117,15 +117,27 @@ Electron via canal `run-script`:
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
  - **cpu-amd.ps1** — otimiza processadores AMD e desativa o Power Throttling (botão *Optimize AMD CPU* na aba **CPU**).
+ - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
+ - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**, use `-Restore` para desfazer).
+ - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**, use `-Restore` para desfazer).
+
 - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
 - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**).
 - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**).
 - **gpu-intel.ps1** — otimizações para GPUs Intel (botão *Optimize Intel GPU* em **GPU**).
+
 - **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster (botão *Apply Energy Plan* em **Energy**).
 - **peripheral-energy.ps1** — ajusta energia de periféricos USB (botão *Peripheral Power Tweak* em **Energy**).
 - **gamebooster.ps1** — tweaks temporários para jogos (botão *Start Game Booster* na aba **Game Booster**).
 - **gamebooster-restore.ps1** — restaura serviços e o Game Bar após usar o Game Booster.
 - **restore-point.ps1** — cria um ponto de restauração do sistema (botão *Create Restore Point* no **Dashboard**).
+
+
+> ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
+> **Administrador**. Eles modificam configurações do Windows e podem afetar a
+> estabilidade do sistema. O `optimize.ps1` e o `advanced.ps1` realizam um backup do registro antes
+> de aplicar tweaks e podem ser executados com `-Restore` para desfazer as
+> alterações (inclusive os scripts de CPU e GPU). Sempre tenha um ponto de restauração ou backup antes de prosseguir.
 
 > ⚠️ **Atenção**: estes scripts exigem privilégios de **Administrador** e podem
 > alterar profundamente o sistema. O `optimize.ps1`, `advanced.ps1` e também o
@@ -133,6 +145,7 @@ Electron via canal `run-script`:
 > Caso algo saia errado, execute-os com `-Restore` para reverter ou reinstalar
 > os aplicativos removidos. Remover apps essenciais pode causar problemas, tenha
 > sempre um ponto de restauração ou backup antes de prosseguir.
+
 
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de

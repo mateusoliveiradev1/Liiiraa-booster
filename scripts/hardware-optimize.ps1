@@ -21,7 +21,11 @@ try {
     $scriptDir = $PSScriptRoot
 
     $cpuArgs = @()
-    if ($Restore) { $cpuArgs += '-Restore' }
+    $gpuArgs = @()
+    if ($Restore) {
+        $cpuArgs += '-Restore'
+        $gpuArgs += '-Restore'
+    }
 
     if ($cpuVendor -match 'AMD') {
         Write-Output ($Restore ? 'Restoring AMD CPU settings...' : 'Running AMD CPU optimizations...')
@@ -34,14 +38,14 @@ try {
     }
 
     if ($gpuName -match 'NVIDIA') {
-        Write-Output 'Running NVIDIA GPU optimizations...'
-        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-nvidia.ps1')
+        Write-Output ($Restore ? 'Restoring NVIDIA GPU settings...' : 'Running NVIDIA GPU optimizations...')
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-nvidia.ps1') @gpuArgs
     } elseif ($gpuName -match 'AMD' -or $gpuName -match 'Radeon') {
-        Write-Output 'Running AMD GPU optimizations...'
-        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-amd.ps1')
+        Write-Output ($Restore ? 'Restoring AMD GPU settings...' : 'Running AMD GPU optimizations...')
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-amd.ps1') @gpuArgs
     } elseif ($gpuName -match 'Intel') {
-        Write-Output 'Running Intel GPU optimizations...'
-        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-intel.ps1')
+        Write-Output ($Restore ? 'Restoring Intel GPU settings...' : 'Running Intel GPU optimizations...')
+        & powershell -ExecutionPolicy Bypass -File (Join-Path $scriptDir 'gpu-intel.ps1') @gpuArgs
     } else {
         Write-Warning "Unknown GPU vendor: $gpuName"
     }
