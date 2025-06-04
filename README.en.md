@@ -50,10 +50,10 @@ The `scripts/` folder contains several automation files. They must be run with *
  - **cpu-amd.ps1** — optimizes AMD processors and disables Windows Power Throttling (via *Optimize AMD CPU* in the **CPU** tab).
  - **cpu-intel.ps1** — optimizes Intel processors and disables Windows Power Throttling (via *Optimize Intel CPU* in the **CPU** tab).
 
- - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab, use `-Restore` to revert).
+ - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab). Use `-MaxPower` to apply the maximum power limit and `-LockMaxClock` to hold peak clocks for higher performance; `-Restore` reverts.
  - **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab, use `-Restore` to revert).
 
-- **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab).
+ - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab). Use `-MaxPower` and `-LockMaxClock` for extra performance and `-Restore` to undo.
 - **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab).
 - **gpu-intel.ps1** — tweaks for Intel GPUs (via *Optimize Intel GPU* in the **GPU** tab).
 
