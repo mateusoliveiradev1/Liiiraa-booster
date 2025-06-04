@@ -15,7 +15,7 @@
     "warzone": "Warzone",
     "valorant": "Valorant",
     "advanced": "Advanced Tweaks",
-    "history": "History",
+    "logs": "Logs",
     "settings": "Settings",
     "energy": "Energy"
   },
@@ -45,8 +45,8 @@
     "tweak_peripheral_power": "Peripheral Power Tweak"
   },
   "messages": {
-    "optimize_desc": "Automatically detect CPU/GPU vendor and run the matching optimizations.",
-    "clean_desc": "Remove temporary files and free disk space.",
+    "optimize_desc": "Verify your hardware and apply optimizations specific to it for best performance.",
+    "clean_desc": "Remove system and browser temporary files to reclaim storage.",
     "clean_extra": "This will calculate how much space was recovered.",
     "debloat_desc": "Remove pre-installed Windows apps.",
     "game_booster_desc": "Temporarily disable services and free memory for gaming.",

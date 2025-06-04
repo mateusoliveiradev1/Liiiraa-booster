@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18n';
 
-export default function History() {
+export default function Logs() {
   const { t } = useTranslation();
   const [logs, setLogs] = useState([]);
   const [error, setError] = useState(null);

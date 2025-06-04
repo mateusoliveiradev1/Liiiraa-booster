@@ -15,7 +15,7 @@
     "warzone": "Warzone",
     "valorant": "Valorant",
     "advanced": "Ajustes Avançados",
-    "history": "Histórico",
+    "logs": "Logs",
     "settings": "Configurações",
     "energy": "Energia"
   },
@@ -45,8 +45,8 @@
     "tweak_peripheral_power": "Ajustar Energia de Periféricos"
   },
   "messages": {
-    "optimize_desc": "Detecta automaticamente CPU e GPU e executa as otimizações correspondentes.",
-    "clean_desc": "Remover arquivos temporários e liberar espaço.",
+    "optimize_desc": "Verifica seu hardware e aplica otimizações específicas para máximo desempenho.",
+    "clean_desc": "Remove arquivos temporários do sistema e navegadores, liberando espaço.",
     "clean_extra": "Isso calculará quanto espaço foi recuperado.",
     "debloat_desc": "Remover apps pré-instalados do Windows.",
     "game_booster_desc": "Desativar serviços temporariamente e liberar memória para jogos.",

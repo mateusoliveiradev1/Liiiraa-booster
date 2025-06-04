@@ -39,15 +39,10 @@ def _setup_logger() -> logging.Logger:
 
 
 def _gpu_metrics() -> dict:
-    """Return GPU metrics if ``pynvml`` is available."""
-    try:
+    """Return GPU metrics using ``pynvml`` or ``GPUtil`` if available."""
+    try:  # First try Nvidia NVML
         import pynvml  # type: ignore
-    except ImportError:  # pragma: no cover - optional dependency
-        logging.getLogger(__name__).warning(
-            "pynvml not installed; GPU metrics will be skipped"
-        )
-        return {}
-    try:
+
         pynvml.nvmlInit()
         handle = pynvml.nvmlDeviceGetHandleByIndex(0)
         mem = pynvml.nvmlDeviceGetMemoryInfo(handle)
@@ -58,9 +53,25 @@ def _gpu_metrics() -> dict:
             "gpu_mem_used": mem.used,
             "gpu_mem_total": mem.total,
         }
-    except Exception as exc:  # pragma: no cover - optional dependency
-        logging.getLogger(__name__).warning("GPU metrics unavailable: %s", exc)
-        return {}
+    except Exception:
+        # Fallback to GPUtil which supports multiple vendors
+        try:
+            import GPUtil  # type: ignore
+
+            gpus = GPUtil.getGPUs()
+            if not gpus:
+                return {}
+            gpu = gpus[0]
+            return {
+                "gpu_util": round(gpu.load * 100),
+                "gpu_mem_used": int(gpu.memoryUsed * 1024**2),
+                "gpu_mem_total": int(gpu.memoryTotal * 1024**2),
+            }
+        except Exception as exc:  # pragma: no cover - optional dependency
+            logging.getLogger(__name__).warning(
+                "GPU metrics unavailable: %s", exc
+            )
+            return {}
 
 
 def main() -> None:

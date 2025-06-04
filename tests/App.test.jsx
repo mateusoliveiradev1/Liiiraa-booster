@@ -25,13 +25,13 @@ test('displays username and updates time', async () => {
 
   render(<App />);
 
-  expect(await screen.findByText('User: alice')).toBeInTheDocument();
+  expect(await screen.findByText('labels.user: alice')).toBeInTheDocument();
   expect(window.api.getUser).toHaveBeenCalled();
 
-  const first = screen.getByText(/^Time:/).textContent;
+  const first = screen.getByText(/^labels.time/).textContent;
   act(() => {
     jest.advanceTimersByTime(1000);
   });
-  const second = screen.getByText(/^Time:/).textContent;
+  const second = screen.getByText(/^labels.time/).textContent;
   expect(second).not.toBe(first);
 });
