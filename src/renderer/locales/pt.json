@@ -49,7 +49,8 @@
     "dark_mode": "Modo Escuro",
     "create_restore_point": "Criar Ponto de Restauração",
     "apply_energy_plan": "Aplicar Plano de Energia",
-    "tweak_peripheral_power": "Ajustar Energia de Periféricos"
+    "tweak_peripheral_power": "Ajustar Energia de Periféricos",
+    "clear_logs": "Limpar Logs"
   },
   "messages": {
     "optimize_desc": "Verifica seu hardware e aplica otimizações específicas para máximo desempenho.",
@@ -76,7 +77,9 @@
     "clean_result": "Liberado {{space}} de espaço em disco.",
     "energy_desc": "Configurar as opções de energia para máximo desempenho.",
     "dashboard_desc": "Visualize as métricas atuais do sistema.",
-    "no_gpu": "Métricas da GPU indisponíveis."
+    "no_gpu": "Métricas da GPU indisponíveis.",
+    "logs_cleared": "Logs limpos com sucesso",
+    "clear_logs_failed": "Falha ao limpar logs"
 
   },
   "labels": {

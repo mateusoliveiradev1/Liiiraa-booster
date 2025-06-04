@@ -49,7 +49,8 @@
     "dark_mode": "Dark Mode",
     "create_restore_point": "Create Restore Point",
     "apply_energy_plan": "Apply Energy Plan",
-    "tweak_peripheral_power": "Peripheral Power Tweak"
+    "tweak_peripheral_power": "Peripheral Power Tweak",
+    "clear_logs": "Clear Logs"
   },
   "messages": {
     "optimize_desc": "Verify your hardware and apply optimizations specific to it for best performance.",
@@ -76,7 +77,9 @@
     "clean_result": "Freed {{space}} of disk space.",
     "energy_desc": "Configure Windows power settings for maximum performance.",
     "dashboard_desc": "View your current system metrics.",
-    "no_gpu": "GPU metrics unavailable."
+    "no_gpu": "GPU metrics unavailable.",
+    "logs_cleared": "Logs cleared successfully",
+    "clear_logs_failed": "Failed to clear logs"
   },
   "labels": {
     "user": "User",
