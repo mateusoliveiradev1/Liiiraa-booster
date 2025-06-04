@@ -107,13 +107,13 @@ Electron via canal `run-script`:
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
-- **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU (use `-Restore` para desfazer).
+ - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU, incluindo a desativação do Power Throttling do Windows (use `-Restore` para desfazer).
 - **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
   batch.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
-- **cpu-amd.ps1** — otimiza processadores AMD (botão *Optimize AMD CPU* na aba **CPU**).
-- **cpu-intel.ps1** — otimiza processadores Intel (botão *Optimize Intel CPU* na aba **CPU**).
+ - **cpu-amd.ps1** — otimiza processadores AMD e desativa o Power Throttling (botão *Optimize AMD CPU* na aba **CPU**).
+ - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
 - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**).
 - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**).
 - **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster (botão *Apply Energy Plan* em **Energy**).
