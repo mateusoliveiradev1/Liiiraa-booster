@@ -68,12 +68,16 @@ project-root/
 
 ## 🐍 Requisitos de Python
 
-Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Após
-instalar o Python rode:
+
+Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Depo
+is instale as dependências de métricas:
 
 ```bash
-pip install psutil
+pip install psutil pynvml
 ```
+
+O pacote `pynvml` é opcional e habilita a coleta de métricas de GPU caso haja
+uma placa NVIDIA disponível.
 
 Esses scripts são chamados pelo Electron através do canal IPC `run-script`.
 

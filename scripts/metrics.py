@@ -6,7 +6,12 @@ import os
 import sys
 import time
 
-import psutil
+try:
+    import psutil
+except ImportError:
+    sys.exit(
+        "Missing required dependency 'psutil'. Install it with 'pip install psutil'"
+    )
 
 
 def is_admin() -> bool:
@@ -38,7 +43,12 @@ def _gpu_metrics() -> dict:
     """Return GPU metrics if ``pynvml`` is available."""
     try:
         import pynvml  # type: ignore
-
+    except ImportError:  # pragma: no cover - optional dependency
+        logging.getLogger(__name__).warning(
+            "pynvml not installed; GPU metrics will be skipped"
+        )
+        return {}
+    try:
         pynvml.nvmlInit()
         handle = pynvml.nvmlDeviceGetHandleByIndex(0)
         mem = pynvml.nvmlDeviceGetMemoryInfo(handle)
