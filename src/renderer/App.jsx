@@ -95,7 +95,7 @@ export default function App() {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <MetricsCard label="CPU" value={metrics.cpu} />
-            <MetricsCard label="GPU" value={mockMetrics.gpu} />
+            <MetricsCard label="GPU" value={metrics.gpu} />
             <MetricsCard label="RAM" value={metrics.ram} />
             <MetricsCard label="Disk" value={metrics.disk} />
             <MetricsCard label="Network" value={metrics.network} />
