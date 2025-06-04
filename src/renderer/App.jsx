@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MetricsCard from './components/MetricsCard.jsx';
 
 const mockMetrics = {
@@ -11,6 +11,28 @@ const mockMetrics = {
 
 export default function App() {
   const [dark, setDark] = useState(false);
+  const [metrics, setMetrics] = useState({ cpu: mockMetrics.cpu, ram: mockMetrics.ram });
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const output = await window.api.runScript('metrics');
+        const data = JSON.parse(output);
+        const cpu = `${data.cpu_percent}%`;
+        const ramGb = (data.memory_used / (1024 ** 3)).toFixed(1);
+        setMetrics({ cpu, ram: `${ramGb} GB` });
+        setError(null);
+      } catch (err) {
+        console.error(err);
+        setError('Failed to fetch metrics');
+      }
+    };
+
+    fetchMetrics();
+    const id = setInterval(fetchMetrics, 5000);
+    return () => clearInterval(id);
+  }, []);
 
   const toggleDark = () => {
     document.documentElement.classList.toggle('dark', !dark);
@@ -29,12 +51,13 @@ export default function App() {
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <MetricsCard label="CPU" value={mockMetrics.cpu} />
+        <MetricsCard label="CPU" value={metrics.cpu} />
         <MetricsCard label="GPU" value={mockMetrics.gpu} />
-        <MetricsCard label="RAM" value={mockMetrics.ram} />
+        <MetricsCard label="RAM" value={metrics.ram} />
         <MetricsCard label="Disk" value={mockMetrics.disk} />
         <MetricsCard label="Network" value={mockMetrics.network} />
       </div>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
