@@ -1,4 +1,5 @@
 # 🚀 Liiiraa Booster
+[English](README.en.md) | [Português](README.md)
 
 **Liiiraa Booster** é um aplicativo de otimização total para Windows, construído com **Electron + Vite** para entregar performance nativa, visual moderno e automações profundas no sistema operacional.
 
