@@ -13,6 +13,17 @@ import {
   FaMoon,
 } from "react-icons/fa";
 import { BsGpuCard } from "react-icons/bs";
+import {
+  SiAmd,
+  SiIntel,
+  SiNvidia,
+  SiPubg,
+  SiCounterstrike,
+  SiEpicgames,
+  SiValorant,
+  SiActivision,
+} from "react-icons/si";
+import { TbBrandFortnite } from "react-icons/tb";
 import MetricsCard from "./components/MetricsCard.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Logs from "./components/Logs.jsx";
@@ -362,15 +373,19 @@ export default function App() {
         return (
           <div className="space-x-2">
             <button className="btn-primary" onClick={handleCpuAmd}>
+              <SiAmd className="inline mr-1" />
               {t("buttons.optimize_amd_cpu")}
             </button>
             <button className="btn-neutral" onClick={handleCpuAmdRestore}>
+              <SiAmd className="inline mr-1" />
               {t("buttons.restore_amd_cpu")}
             </button>
             <button className="btn-primary" onClick={handleCpuIntel}>
+              <SiIntel className="inline mr-1" />
               {t("buttons.optimize_intel_cpu")}
             </button>
             <button className="btn-neutral" onClick={handleCpuIntelRestore}>
+              <SiIntel className="inline mr-1" />
               {t("buttons.restore_intel_cpu")}
             </button>
           </div>
@@ -379,12 +394,15 @@ export default function App() {
         return (
           <div className="space-x-2">
             <button className="btn-success" onClick={handleGpuNvidia}>
+              <SiNvidia className="inline mr-1" />
               {t("buttons.optimize_nvidia_gpu")}
             </button>
             <button className="btn-success" onClick={handleGpuIntel}>
+              <SiIntel className="inline mr-1" />
               {t("buttons.optimize_intel_gpu")}
             </button>
             <button className="btn-success" onClick={handleGpuAmd}>
+              <SiAmd className="inline mr-1" />
               {t("buttons.optimize_amd_gpu")}
             </button>
           </div>
@@ -396,30 +414,35 @@ export default function App() {
               className="btn-accent"
               onClick={() => setActiveSection("PUBG")}
             >
+              <SiPubg className="inline mr-1" />
               {t("sidebar.pubg")}
             </button>
             <button
               className="btn-accent"
               onClick={() => setActiveSection("CS2")}
             >
+              <SiCounterstrike className="inline mr-1" />
               {t("sidebar.cs2")}
             </button>
             <button
               className="btn-accent"
               onClick={() => setActiveSection("Fortnite")}
             >
+              <TbBrandFortnite className="inline mr-1" />
               {t("sidebar.fortnite")}
             </button>
             <button
               className="btn-accent"
               onClick={() => setActiveSection("Warzone")}
             >
+              <SiActivision className="inline mr-1" />
               {t("sidebar.warzone")}
             </button>
             <button
               className="btn-accent"
               onClick={() => setActiveSection("Valorant")}
             >
+              <SiValorant className="inline mr-1" />
               {t("sidebar.valorant")}
             </button>
           </div>
@@ -429,6 +452,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t("messages.pubg_desc")}</p>
             <button className="btn-accent" onClick={handlePubg}>
+              <SiPubg className="inline mr-1" />
               {t("buttons.optimize_pubg")}
             </button>
           </div>
@@ -438,6 +462,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t("messages.cs2_desc")}</p>
             <button className="btn-accent" onClick={handleCs2}>
+              <SiCounterstrike className="inline mr-1" />
               {t("buttons.optimize_cs2")}
             </button>
           </div>
@@ -447,6 +472,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t("messages.fortnite_desc")}</p>
             <button className="btn-accent" onClick={handleFortnite}>
+              <SiEpicgames className="inline mr-1" />
               {t("buttons.optimize_fortnite")}
             </button>
           </div>
@@ -456,6 +482,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t("messages.warzone_desc")}</p>
             <button className="btn-accent" onClick={handleWarzone}>
+              <SiActivision className="inline mr-1" />
               {t("buttons.optimize_warzone")}
             </button>
           </div>
@@ -465,6 +492,7 @@ export default function App() {
           <div>
             <p className="mb-2">{t("messages.valorant_desc")}</p>
             <button className="btn-accent" onClick={handleValorant}>
+              <SiValorant className="inline mr-1" />
               {t("buttons.optimize_valorant")}
             </button>
           </div>
