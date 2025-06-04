@@ -60,7 +60,7 @@ function Sidebar({ activeSection, onSelect }) {
   return (
     <div
       data-testid="sidebar"
-      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-gradient-to-b from-surface to-muted dark:from-surface-dark dark:to-muted-dark p-4 space-y-2 transition-all duration-300 overflow-hidden`}
+      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-gradient-to-b from-surface to-muted dark:from-surface-dark dark:to-muted-dark pt-8 px-4 pb-4 space-y-2 transition-all duration-300 overflow-hidden`}
     >
       <button
         onClick={toggleCollapsed}
@@ -69,6 +69,11 @@ function Sidebar({ activeSection, onSelect }) {
       >
         &#9776;
       </button>
+      <img
+        src={logo}
+        alt="Liiiraa Booster logo"
+        className="h-24 w-24 mx-auto animate-bounce hover:animate-spin transition-transform"
+      />
       <img src={logo} alt="Liiiraa Booster logo" className="h-12 w-12 mx-auto" />
       {sectionGroups.map(({ title, items }, idx) => (
         <React.Fragment key={title}>
