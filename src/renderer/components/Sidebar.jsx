@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18n';
 
 export default function Sidebar({ activeSection, onSelect }) {
   const { t } = useTranslation();
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => setCollapsed((c) => !c);
   const sections = [
     { key: 'Dashboard', icon: '📊', tKey: 'sidebar.dashboard' },
     { key: 'Optimize', icon: '⚡', tKey: 'sidebar.optimize' },
@@ -26,17 +28,27 @@ export default function Sidebar({ activeSection, onSelect }) {
   ];
 
   return (
-    <div className="w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2">
+    <div
+      data-testid="sidebar"
+      className={`${collapsed ? 'w-12' : 'w-48'} md:w-48 border-r border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-4 space-y-2`}
+    >
+      <button
+        onClick={toggleCollapsed}
+        aria-label="Toggle sidebar"
+        className="md:hidden mb-2 p-2"
+      >
+        &#9776;
+      </button>
       {sections.map(({ key, icon, tKey }) => (
         <button
           key={key}
           onClick={() => onSelect(key)}
-          className={`block w-full text-left px-3 py-2 rounded ${
+          className={`flex items-center w-full text-left px-3 py-2 rounded ${
             activeSection === key ? 'bg-primary text-white' : 'hover:bg-muted dark:hover:bg-muted-dark'
           }`}
         >
           <span className="mr-2">{icon}</span>
-          {t(tKey)}
+          <span className={collapsed ? 'hidden md:inline' : ''}>{t(tKey)}</span>
         </button>
       ))}
     </div>
