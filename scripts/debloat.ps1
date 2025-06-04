@@ -35,18 +35,27 @@ try {
         return
     }
 
+    # Apps removed in lite mode. These are also removed when running the full
+    # debloat option.
     $liteApps = @(
         'Microsoft.ZuneMusic',
         'Microsoft.ZuneVideo',
         'Microsoft.BingNews',
         'Microsoft.MicrosoftSolitaireCollection',
         'Microsoft.YourPhone',
-        'Microsoft.GetHelp'
+        'Microsoft.GetHelp',
+        'Microsoft.WindowsFeedbackHub',
+        'Microsoft.3DBuilder',
+        'Microsoft.Getstarted'
     )
+
+    # Additional apps removed only with the full debloat option.
     $fullExtra = @(
         'Microsoft.XboxApp',
         'Microsoft.People',
-        'Microsoft.SkypeApp'
+        'Microsoft.SkypeApp',
+        'Microsoft.XboxGameOverlay',
+        'Microsoft.XboxGameCallableUI'
     )
 
     $apps = if ($Lite) { $liteApps } else { $liteApps + $fullExtra }
@@ -55,14 +64,25 @@ try {
         $pkg = Get-AppxPackage -Name $app -AllUsers -ErrorAction SilentlyContinue
         if ($pkg) {
             Remove-AppxPackage -Package $pkg.PackageFullName -AllUsers -ErrorAction SilentlyContinue
+            # Log removed package for possible restoration
             $app | Out-File -FilePath $removedFile -Append
             Write-Output "Removed $app"
         }
     }
 
     # Disable optional features that waste resources
-    $features = @('XPS-Viewer')
-    foreach ($feature in $features) {
+    $features = @(
+        'XPS-Viewer'
+    )
+    # Extra features disabled only when running the full debloat option
+    $featuresExtra = @(
+        'Print3D',
+        'FaxServicesClientPackage'
+    )
+
+    $featuresToDisable = if ($Lite) { $features } else { $features + $featuresExtra }
+
+    foreach ($feature in $featuresToDisable) {
         Disable-WindowsOptionalFeature -FeatureName $feature -Online -NoRestart -ErrorAction SilentlyContinue
         Write-Output "Feature $feature disabled"
     }
