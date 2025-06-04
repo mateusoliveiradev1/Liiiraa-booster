@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import './i18n';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import History from './components/History.jsx';
@@ -12,6 +14,7 @@ const mockMetrics = {
 };
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const [dark, setDark] = useState(false);
   const [activeSection, setActiveSection] = useState('Dashboard');
   const [metrics, setMetrics] = useState({
@@ -54,7 +57,7 @@ export default function App() {
         setError(null);
       } catch (err) {
         console.error(err);
-        setError('Failed to fetch metrics');
+        setError(t('messages.fetch_failed'));
       }
     };
 
@@ -69,20 +72,20 @@ export default function App() {
   };
 
   const runCommand = async (cmd) => {
+    const name = cmd.charAt(0).toUpperCase() + cmd.slice(1);
     try {
       await window.api.runScript(cmd);
-      setMessage(`${cmd.charAt(0).toUpperCase() + cmd.slice(1)} completed successfully`);
+      setMessage(t('messages.command_success', { cmd: name }));
       setError(null);
     } catch (err) {
       console.error(err);
-      setError(`${cmd.charAt(0).toUpperCase() + cmd.slice(1)} failed`);
+      setError(t('messages.command_failed', { cmd: name }));
       setMessage(null);
     }
   };
 
   const handleOptimize = () => runCommand('optimize');
-  const handleClean = () => runCommand('clean');
-
+  const handleClean = () => runCommand('clean')
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
@@ -119,175 +122,175 @@ export default function App() {
       case 'Optimize':
         return (
           <div>
-            <p className="mb-2">Apply recommended optimization tweaks.</p>
+            <p className="mb-2">{t('messages.optimize_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
               onClick={handleOptimize}
             >
-              Run Optimize
+              {t('buttons.run_optimize')}
             </button>
           </div>
         );
       case 'Clean':
         return (
           <div>
-            <p className="mb-2">Remove temporary files and free disk space.</p>
+            <p className="mb-2">{t('messages.clean_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
               onClick={handleClean}
             >
-              Run Clean
+              {t('buttons.run_clean')}
             </button>
           </div>
         );
       case 'Debloat':
         return (
           <div>
-            <p className="mb-2">Remove pre-installed Windows apps.</p>
+            <p className="mb-2">{t('messages.debloat_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-yellow-600 text-white hover:bg-yellow-700"
               onClick={handleDebloat}
             >
-              Run Debloat
+              {t('buttons.run_debloat')}
             </button>
           </div>
         );
       case 'Game Booster':
         return (
           <div>
-            <p className="mb-2">Temporarily disable services and free memory for gaming.</p>
+            <p className="mb-2">{t('messages.game_booster_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-purple-600 text-white hover:bg-purple-700"
               onClick={handleGameBoost}
             >
-              Start Game Booster
+              {t('buttons.start_game_booster')}
             </button>
           </div>
         );
       case 'CPU AMD':
         return (
           <div>
-            <p className="mb-2">Apply AMD CPU specific optimizations.</p>
+            <p className="mb-2">{t('messages.cpu_amd_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
               onClick={handleCpuAmd}
             >
-              Optimize AMD CPU
+              {t('buttons.optimize_amd_cpu')}
             </button>
           </div>
         );
       case 'CPU Intel':
         return (
           <div>
-            <p className="mb-2">Apply Intel CPU specific optimizations.</p>
+            <p className="mb-2">{t('messages.cpu_intel_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
               onClick={handleCpuIntel}
             >
-              Optimize Intel CPU
+              {t('buttons.optimize_intel_cpu')}
             </button>
           </div>
         );
       case 'GPU Nvidia':
         return (
           <div>
-            <p className="mb-2">Apply Nvidia GPU specific optimizations.</p>
+            <p className="mb-2">{t('messages.gpu_nvidia_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
               onClick={handleGpuNvidia}
             >
-              Optimize Nvidia GPU
+              {t('buttons.optimize_nvidia_gpu')}
             </button>
           </div>
         );
       case 'GPU AMD':
         return (
           <div>
-            <p className="mb-2">Apply AMD GPU specific optimizations.</p>
+            <p className="mb-2">{t('messages.gpu_amd_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
               onClick={handleGpuAmd}
             >
-              Optimize AMD GPU
+              {t('buttons.optimize_amd_gpu')}
             </button>
           </div>
         );
       case 'PUBG':
         return (
           <div>
-            <p className="mb-2">Optimize system for PUBG.</p>
+            <p className="mb-2">{t('messages.pubg_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={handlePubg}
             >
-              Optimize PUBG
+              {t('buttons.optimize_pubg')}
             </button>
           </div>
         );
       case 'CS2':
         return (
           <div>
-            <p className="mb-2">Optimize system for CS2.</p>
+            <p className="mb-2">{t('messages.cs2_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={handleCs2}
             >
-              Optimize CS2
+              {t('buttons.optimize_cs2')}
             </button>
           </div>
         );
       case 'Fortnite':
         return (
           <div>
-            <p className="mb-2">Optimize system for Fortnite.</p>
+            <p className="mb-2">{t('messages.fortnite_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={handleFortnite}
             >
-              Optimize Fortnite
+              {t('buttons.optimize_fortnite')}
             </button>
           </div>
         );
       case 'Warzone':
         return (
           <div>
-            <p className="mb-2">Optimize system for Warzone.</p>
+            <p className="mb-2">{t('messages.warzone_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={handleWarzone}
             >
-              Optimize Warzone
+              {t('buttons.optimize_warzone')}
             </button>
           </div>
         );
       case 'Valorant':
         return (
           <div>
-            <p className="mb-2">Optimize system for Valorant.</p>
+            <p className="mb-2">{t('messages.valorant_desc')}</p>
             <button
               className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
               onClick={handleValorant}
             >
-              Optimize Valorant
+              {t('buttons.optimize_valorant')}
             </button>
           </div>
         );
       case 'Advanced Tweaks':
         return (
           <div>
-            <p className="mb-2">Apply risky tweaks like disabling UAC, Defender and Windows Update.</p>
+            <p className="mb-2">{t('messages.advanced_desc')}</p>
             <div className="space-x-2">
               <button
                 className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
                 onClick={handleAdvanced}
               >
-                Run Advanced Tweaks
+                {t('buttons.run_advanced')}
               </button>
               <button
                 className="px-4 py-2 rounded bg-gray-600 text-white hover:bg-gray-700"
                 onClick={handleRestore}
               >
-                Restore Tweaks
+                {t('buttons.restore_tweaks')}
               </button>
             </div>
           </div>
@@ -297,13 +300,27 @@ export default function App() {
       case 'Settings':
         return (
           <div>
-            <p className="mb-2">Toggle application appearance.</p>
+            <p className="mb-2">{t('messages.settings_desc')}</p>
             <button
               className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
               onClick={toggleDark}
             >
-              {dark ? 'Light' : 'Dark'} Mode
+              {dark ? t('buttons.light_mode') : t('buttons.dark_mode')}
             </button>
+            <div className="space-x-2 mt-2">
+              <button
+                className="px-3 py-1 rounded bg-blue-600 text-white"
+                onClick={() => i18n.changeLanguage('en')}
+              >
+                English
+              </button>
+              <button
+                className="px-3 py-1 rounded bg-blue-600 text-white"
+                onClick={() => i18n.changeLanguage('pt')}
+              >
+                Português
+              </button>
+            </div>
           </div>
         );
       default:
