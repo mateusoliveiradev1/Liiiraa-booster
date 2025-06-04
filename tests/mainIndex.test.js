@@ -70,6 +70,7 @@ test('run-script passes -NoProfile in args', async () => {
   await handler({}, 'optimize');
   const args = execFile.mock.calls[0][1];
   expect(args).toContain('-NoProfile');
+});
 test('BrowserWindow called with sandbox true', async () => {
   await Promise.resolve();
   expect(BrowserWindow).toHaveBeenCalledWith(
