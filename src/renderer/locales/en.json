@@ -79,7 +79,8 @@
     "dashboard_desc": "View your current system metrics.",
     "no_gpu": "GPU metrics unavailable.",
     "logs_cleared": "Logs cleared successfully",
-    "clear_logs_failed": "Failed to clear logs"
+    "clear_logs_failed": "Failed to clear logs",
+    "logs_truncated": "Showing last {{lines}} lines"
   },
   "labels": {
     "user": "User",

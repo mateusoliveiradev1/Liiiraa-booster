@@ -47,9 +47,14 @@ export default function Logs() {
         {t('buttons.clear_logs')}
       </button>
       {logs.length ? (
-        logs.map(({ file, lines }) => (
+        logs.map(({ file, lines, truncated }) => (
           <div key={file} className="mb-4">
             <h3 className="font-semibold">{file}</h3>
+            {truncated && (
+              <p className="text-sm text-gray-500">
+                {t('messages.logs_truncated', { lines: 500 })}
+              </p>
+            )}
             <ul className="ml-4 list-disc">
               {lines.map((line, idx) => (
                 <li key={idx} className="font-mono whitespace-pre-wrap">
