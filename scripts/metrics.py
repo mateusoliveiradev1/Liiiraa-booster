@@ -89,7 +89,12 @@ def main() -> None:
     net_down = net2.bytes_recv - net1.bytes_recv
     net_bytes = net_up + net_down
 
-    drive = os.environ.get('SYSTEMDRIVE', 'C:') + '\\'
+    drive_arg = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("METRICS_DRIVE")
+    if drive_arg:
+        drive = drive_arg
+    else:
+        drive = os.environ.get('SYSTEMDRIVE', 'C:') + '\\' if os.name == 'nt' else '/'
+    logger.info("Using drive: %s", drive)
     disk = psutil.disk_usage(drive)
     mem = psutil.virtual_memory()
     temps = psutil.sensors_temperatures() if hasattr(psutil, 'sensors_temperatures') else {}
