@@ -20,7 +20,6 @@ function createWindow () {
   win.removeMenu();
 
   // Disable the default menu bar to provide a cleaner UI
-  win.removeMenu();
 
   if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:5173');
