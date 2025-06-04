@@ -104,7 +104,7 @@ export default function App() {
   };
 
 
-  const handleOptimize = () => runCommand('optimize');
+  const handleOptimize = () => runCommand('auto-optimize');
   const handleClean = async () => {
     try {
       const output = await window.api.runScript('clean');
@@ -119,8 +119,6 @@ export default function App() {
     }
   };
 
-  const handleOptimize = () => runCommand('auto-optimize');
-  const handleClean = () => runCommand('clean')
 
   const handleDebloatFull = () => runCommand('debloat-full');
   const handleDebloatLite = () => runCommand('debloat-lite');

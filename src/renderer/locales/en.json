@@ -62,14 +62,11 @@
     "load_logs_failed": "Failed to load logs",
     "no_logs": "No logs found.",
     "command_success": "{{cmd}} completed successfully",
-    "command_failed": "{{cmd}} failed"
-
-    ,"clean_result": "Freed {{space}} of disk space."
-
+    "command_failed": "{{cmd}} failed",
+    "clean_result": "Freed {{space}} of disk space."
   },
   "labels": {
     "user": "User",
     "time": "Time"
-
   }
 }
