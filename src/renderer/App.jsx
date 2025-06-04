@@ -15,6 +15,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('Dashboard');
   const [metrics, setMetrics] = useState({
     cpu: mockMetrics.cpu,
+    gpu: 'N/A',
     ram: mockMetrics.ram,
     disk: mockMetrics.disk,
     network: mockMetrics.network
@@ -31,9 +32,24 @@ export default function App() {
         const cpu = `${data.cpu_percent}%`;
         const ram = `${(data.memory_used / (1024 ** 3)).toFixed(1)} GB / ${(data.memory_total / (1024 ** 3)).toFixed(1)} GB`;
         const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
-        const network = `${(((data.net_up + data.net_down) * 8) / (1024 ** 2)).toFixed(1)} Mbps`;
+        const bytesPerSec =
+          data.network_bytes_per_sec !== undefined
+            ? data.network_bytes_per_sec
+            : (data.net_up + data.net_down);
+        const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
 
-        setMetrics({ cpu, ram, disk, network });
+        let gpu = 'N/A';
+        if (
+          data.gpu_util !== undefined &&
+          data.gpu_mem_used !== undefined &&
+          data.gpu_mem_total !== undefined
+        ) {
+          const util = `${data.gpu_util}%`;
+          const mem = `${(data.gpu_mem_used / (1024 ** 3)).toFixed(1)} GB / ${(data.gpu_mem_total / (1024 ** 3)).toFixed(1)} GB`;
+          gpu = `${util} - ${mem}`;
+        }
+
+        setMetrics({ cpu, gpu, ram, disk, network });
         setError(null);
       } catch (err) {
         console.error(err);
@@ -133,6 +149,7 @@ export default function App() {
   };
 
   return (
+
     <div className="flex h-screen">
       <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
       <div className="flex-1 p-4 overflow-auto">
@@ -142,6 +159,38 @@ export default function App() {
         {renderSection()}
         {message && <p className="text-green-600 mt-2">{message}</p>}
         {error && <p className="text-red-500 mt-2">{error}</p>}
+
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Liiiraa Booster</h1>
+        <button
+          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
+          onClick={toggleDark}
+        >
+          {dark ? 'Light' : 'Dark'}
+        </button>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <MetricsCard label="CPU" value={metrics.cpu} />
+        <MetricsCard label="GPU" value={metrics.gpu} />
+        <MetricsCard label="RAM" value={metrics.ram} />
+        <MetricsCard label="Disk" value={metrics.disk} />
+        <MetricsCard label="Network" value={metrics.network} />
+      </div>
+      <div className="mt-4 space-x-2">
+        <button
+          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          onClick={handleOptimize}
+        >
+          Optimize
+        </button>
+        <button
+          className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+          onClick={handleClean}
+        >
+          Clean
+        </button>
+
       </div>
     </div>
   );
