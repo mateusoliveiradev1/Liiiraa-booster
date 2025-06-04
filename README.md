@@ -25,7 +25,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 - Otimização automática de CPU/GPU baseada no fabricante
 - Ajustes de rede TCP para reduzir latência e Throttling de energia desativado
 - Criação de plano de energia personalizado:
-  > `Liiiraa Booster - Max Performance and Low Latency`
+  > `Liiiraa Booster - Max Performance and Low Latêncy`
 - Aba **Energy** para monitorar consumo e aplicar planos de energia
 - Otimizações específicas para:
   - AMD, Intel, NVIDIA
@@ -34,6 +34,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
   (Zune, News, Solitaire, YourPhone, GetHelp, Xbox, People, Skype).
   Use `-Restore` para reinstalar caso necessário
 - Desativa o recurso opcional **XPS Viewer** por padrão
+- Desativa o serviço **Windows Search** (WSearch) para reduzir uso de disco
 - Limpador de sistema e navegadores
 - Modo Game Booster, RAM Flush e tweaks dinâmicos
 - Modo Avançado com tweaks perigosos (UAC, Defender, Update, Memory Compression, mitigações de hardware e Core Isolation)
@@ -114,25 +115,27 @@ Esta pasta contém quatro scripts principais que podem ser executados a partir d
 Electron via canal `run-script`:
 
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
+- **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação, Core Isolation, Telemetry e SmartScreen. Agora aceita `-DisableUAC`, `-DisableDefender`, `-DisableUpdate`, `-DisableMemoryCompression`, `-DisableMitigations`, `-DisableHVCI`, `-DisableTelemetry` e `-DisableSmartScreen` (use `-Restore` com os mesmos parâmetros para reverter).
+- **optimize.ps1** — otimizações de performance no Windows (desativa serviços como Windows Search) usando PowerShell.
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
  - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU, incluindo a desativação do Power Throttling do Windows (use `-Restore` para desfazer).
-- **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
-  batch.
+- **clean.bat** — limpeza rápida de arquivos temporários e caches do sistema,
+  registrando o espaço liberado.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
   [psutil](https://pypi.org/project/psutil/).
  - **cpu-amd.ps1** — otimiza processadores AMD e desativa o Power Throttling (botão *Optimize AMD CPU* na aba **CPU**).
  - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
- - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**, use `-Restore` para desfazer).
+ - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` para definir o limite máximo de energia e `-LockMaxClock` para travar as frequências máximas, aumentando o desempenho; `-Restore` desfaz as alterações.
  - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**, use `-Restore` para desfazer).
 
 - **cpu-intel.ps1** — otimiza processadores Intel e desativa o Power Throttling (botão *Optimize Intel CPU* na aba **CPU**).
-- **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**).
+ - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho e `-Restore` para reverter.
 - **gpu-amd.ps1** — otimizações para placas AMD (botão *Optimize AMD GPU* em **GPU**).
 - **gpu-intel.ps1** — otimizações para GPUs Intel (botão *Optimize Intel GPU* em **GPU**).
 
 - **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster (botão *Apply Energy Plan* em **Energy**).
-- **peripheral-energy.ps1** — ajusta energia de periféricos USB (botão *Peripheral Power Tweak* em **Energy**).
+- **peripheral-energy.ps1** — ajusta energia de periféricos USB (botão *Peripheral Power Tweak* em **Energy** ou **Sistema**).
 - **gamebooster.ps1** — tweaks temporários para jogos (botão *Start Game Booster* na aba **Game Booster**).
 - **gamebooster-restore.ps1** — restaura serviços e o Game Bar após usar o Game Booster.
 - **restore-point.ps1** — cria um ponto de restauração do sistema (botão *Create Restore Point* no **Dashboard**).

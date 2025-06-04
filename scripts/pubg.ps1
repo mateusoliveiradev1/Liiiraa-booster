@@ -1,10 +1,29 @@
 # PUBG optimization script
 # Invoked via `window.api.runScript('pubg')` in Electron
 
+param(
+    [switch]$Restore
+)
+
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
 Require-Admin
 Start-LiiiraaLog 'pubg.log'
+
+if ($Restore) {
+    try {
+        Write-Output 'Restoring PUBG settings...'
+        $config = Join-Path $env:LOCALAPPDATA 'TslGame\Saved\Config\WindowsNoEditor\Engine.ini'
+        if (Test-Path $config) {
+            (Get-Content $config) | Where-Object { $_ -ne 'bUseVSync=False' } | Set-Content $config
+        }
+        Write-Output 'Restore complete.'
+    } catch {
+        Write-Error $_
+    }
+    Stop-Transcript | Out-Null
+    exit
+}
 
 try {
     Write-Output 'Applying PUBG optimizations...'
