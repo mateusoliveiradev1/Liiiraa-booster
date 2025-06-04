@@ -34,6 +34,24 @@ export default function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    const isDark = stored ? stored === 'dark' : document.documentElement.classList.contains('dark');
+    document.documentElement.classList.toggle('dark', isDark);
+    setDark(isDark);
+  }, []);
+
+  useEffect(() => {
+    if (activeSection === 'Settings') {
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        const isDark = stored === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        setDark(isDark);
+      }
+    }
+  }, [activeSection]);
+
+  useEffect(() => {
     if (window.api?.getUser) {
       window.api
         .getUser()
@@ -87,8 +105,10 @@ export default function App() {
   }, [t]);
 
   const toggleDark = () => {
-    document.documentElement.classList.toggle('dark', !dark);
-    setDark(!dark);
+    const newDark = !dark;
+    document.documentElement.classList.toggle('dark', newDark);
+    setDark(newDark);
+    localStorage.setItem('theme', newDark ? 'dark' : 'light');
   };
 
   const runCommand = async (cmd) => {
