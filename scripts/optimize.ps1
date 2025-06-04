@@ -19,6 +19,31 @@ if ($Restore) {
         Write-Error "Backup file not found: $backupPath"
     }
 
+    # Re-enable services disabled during optimization
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
+    foreach ($svc in $services) {
+        $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
+        if ($service) {
+            Set-Service -InputObject $service -StartupType Manual -ErrorAction SilentlyContinue
+            Start-Service -InputObject $service -ErrorAction SilentlyContinue
+            Write-Output "Service $svc restored"
+        }
+    }
+
+    # Re-enable scheduled tasks
+    $tasks = @(
+        @{ Path='\Microsoft\Windows\Application Experience\'; Name='ProgramDataUpdater' },
+        @{ Path='\Microsoft\Windows\Customer Experience Improvement Program\'; Name='Consolidator' },
+        @{ Path='\Microsoft\Windows\Application Experience\'; Name='Microsoft Compatibility Appraiser' },
+        @{ Path='\Microsoft\Windows\Customer Experience Improvement Program\'; Name='UsbCeip' }
+    )
+    foreach ($t in $tasks) {
+        try {
+            Enable-ScheduledTask -TaskPath $t.Path -TaskName $t.Name -ErrorAction Stop
+            Write-Output "Task $($t.Path)$($t.Name) enabled"
+        } catch {}
+    }
+
     # Remove network latency tweaks if present
     $activeAdapters = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }
     foreach ($adp in $activeAdapters) {
@@ -31,7 +56,23 @@ if ($Restore) {
 
 Write-Warning 'This script modifies system settings and may affect stability.'
 Write-Output "Creating registry backup at $backupPath..."
-reg export 'HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia' $backupPath /y | Out-Null
+
+# Backup multiple registry locations so they can be restored with -Restore
+$backupKeys = @(
+    'HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia',
+    'HKCU\System\GameConfigStore',
+    'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects',
+    'HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy'
+)
+
+# Recreate backup file each run
+if (Test-Path $backupPath) { Remove-Item $backupPath }
+foreach ($key in $backupKeys) {
+    $tmp = New-TemporaryFile
+    reg export $key $tmp /y | Out-Null
+    Get-Content $tmp | Out-File $backupPath -Encoding ASCII -Append
+    Remove-Item $tmp
+}
 
 Write-Output 'Optimizing system...'
 # Example optimization step
@@ -59,7 +100,8 @@ try {
     }
 
     # --- Disable unnecessary services ---
-    $services = @('DiagTrack', 'SysMain')
+    # Added diagnosticshub.standardcollector.service and Dmwappushservice
+    $services = @('DiagTrack', 'SysMain', 'diagnosticshub.standardcollector.service', 'Dmwappushservice')
     foreach ($svc in $services) {
         $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
         if ($service) {
@@ -70,9 +112,12 @@ try {
     }
 
     # --- Disable scheduled tasks ---
+    # Added Microsoft Compatibility Appraiser and UsbCeip tasks
     $tasks = @(
         @{ Path='\Microsoft\Windows\Application Experience\'; Name='ProgramDataUpdater' },
-        @{ Path='\Microsoft\Windows\Customer Experience Improvement Program\'; Name='Consolidator' }
+        @{ Path='\Microsoft\Windows\Customer Experience Improvement Program\'; Name='Consolidator' },
+        @{ Path='\Microsoft\Windows\Application Experience\'; Name='Microsoft Compatibility Appraiser' },
+        @{ Path='\Microsoft\Windows\Customer Experience Improvement Program\'; Name='UsbCeip' }
     )
     foreach ($t in $tasks) {
         try {
@@ -85,6 +130,15 @@ try {
     Set-ItemProperty -Path 'HKCU:\Software\Microsoft\GameBar' -Name 'AllowAutoGameMode' -Value 1 -Force
     Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\MSMQ' -Name 'TCPNoDelay' -Value 1 -Force
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers' -Name 'HwSchMode' -Value 2 -Type DWord -Force
+
+    # Disable Game DVR to prevent background recording
+    Set-ItemProperty -Path 'HKCU:\System\GameConfigStore' -Name 'GameDVR_Enabled' -Value 0 -Type DWord -Force
+
+    # Turn off visual effects animations for better performance
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2 -Type DWord -Force
+
+    # Prevent apps from running in the background
+    Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy' -Name 'LetAppsRunInBackground' -Value 2 -Type DWord -Force
 
     # Prioritize multimedia tasks and remove network throttling
     Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile' -Name 'NetworkThrottlingIndex' -Value 0xffffffff -Type DWord -Force
