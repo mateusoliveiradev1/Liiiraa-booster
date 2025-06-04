@@ -29,7 +29,11 @@ export default function App() {
         const cpu = `${data.cpu_percent}%`;
         const ram = `${(data.memory_used / (1024 ** 3)).toFixed(1)} GB / ${(data.memory_total / (1024 ** 3)).toFixed(1)} GB`;
         const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
-        const network = `${(((data.net_up + data.net_down) * 8) / (1024 ** 2)).toFixed(1)} Mbps`;
+        const bytesPerSec =
+          data.network_bytes_per_sec !== undefined
+            ? data.network_bytes_per_sec
+            : (data.net_up + data.net_down);
+        const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
 
         setMetrics({ cpu, ram, disk, network });
         setError(null);

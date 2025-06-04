@@ -65,9 +65,9 @@ def main() -> None:
     net1 = psutil.net_io_counters()
     cpu_percent = psutil.cpu_percent(interval=1)
     net2 = psutil.net_io_counters()
-    net_bytes = (net2.bytes_sent + net2.bytes_recv) - (
-        net1.bytes_sent + net1.bytes_recv
-    )
+    net_up = net2.bytes_sent - net1.bytes_sent
+    net_down = net2.bytes_recv - net1.bytes_recv
+    net_bytes = net_up + net_down
 
     disk = psutil.disk_usage("/")
     mem = psutil.virtual_memory()
@@ -79,6 +79,8 @@ def main() -> None:
         "disk_used": disk.used,
         "disk_total": disk.total,
         "network_bytes_per_sec": net_bytes,
+        "net_up": net_up,
+        "net_down": net_down,
     }
     metrics.update(_gpu_metrics())
 
