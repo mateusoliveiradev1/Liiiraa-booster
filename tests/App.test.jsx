@@ -17,13 +17,22 @@ function mockMetrics() {
 }
 
 test('displays username and updates time', async () => {
+  let send;
   window.api = {
     getUser: jest.fn(() => Promise.resolve('alice')),
-    runScript: jest.fn(() => Promise.resolve(mockMetrics())),
+    startMetrics: jest.fn(() => Promise.resolve()),
+    stopMetrics: jest.fn(() => Promise.resolve()),
+    onMetrics: jest.fn((cb) => {
+      send = cb;
+    }),
+    runScript: jest.fn(),
     getLogs: jest.fn()
   };
 
   render(<App />);
+  act(() => {
+    send(JSON.parse(mockMetrics()));
+  });
 
   expect(await screen.findByText('labels.user: alice')).toBeInTheDocument();
   expect(screen.getByText(/^labels.date/)).toBeInTheDocument();
@@ -38,7 +47,7 @@ test('displays username and updates time', async () => {
 });
 
 test('renders gpu temperature when provided', async () => {
-  const metrics = JSON.stringify({
+  const payload = {
     cpu_percent: 0,
     memory_used: 0,
     memory_total: 1,
@@ -49,14 +58,23 @@ test('renders gpu temperature when provided', async () => {
     gpu_mem_used: 0,
     gpu_mem_total: 1,
     gpu_temp: 65
-  });
+  };
+  let send;
   window.api = {
     getUser: jest.fn(() => Promise.resolve('alice')),
-    runScript: jest.fn(() => Promise.resolve(metrics)),
+    startMetrics: jest.fn(() => Promise.resolve()),
+    stopMetrics: jest.fn(() => Promise.resolve()),
+    onMetrics: jest.fn((cb) => {
+      send = cb;
+    }),
+    runScript: jest.fn(),
     getLogs: jest.fn()
   };
 
   render(<App />);
+  act(() => {
+    send(payload);
+  });
 
   expect(
     await screen.findByText('labels.temperature: 65°C')
