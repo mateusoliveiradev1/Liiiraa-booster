@@ -74,6 +74,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         '-Restore'
       ]
     },
+    'restore-point': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'restore-point.ps1')
+      ]
+    },
     gamebooster: {
       file: 'powershell',
       args: [
