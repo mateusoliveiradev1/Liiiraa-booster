@@ -19,7 +19,7 @@
     "settings": "Settings"
   },
   "buttons": {
-    "run_optimize": "Run Optimize",
+    "run_optimize": "Run Auto Optimize",
     "run_clean": "Run Clean",
     "run_debloat": "Run Debloat",
     "start_game_booster": "Start Game Booster",
@@ -39,7 +39,7 @@
     "create_restore_point": "Create Restore Point"
   },
   "messages": {
-    "optimize_desc": "Apply recommended optimization tweaks.",
+    "optimize_desc": "Automatically detect CPU/GPU vendor and run the matching optimizations.",
     "clean_desc": "Remove temporary files and free disk space.",
     "debloat_desc": "Remove pre-installed Windows apps.",
     "game_booster_desc": "Temporarily disable services and free memory for gaming.",

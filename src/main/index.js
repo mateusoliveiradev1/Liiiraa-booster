@@ -51,6 +51,15 @@ ipcMain.handle('run-script', async (_event, command) => {
         path.join(scriptsDir, 'optimize.ps1')
       ]
     },
+    'auto-optimize': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'hardware-optimize.ps1')
+      ]
+    },
     clean: {
       file: 'cmd',
       args: ['/c', path.join(scriptsDir, 'clean.bat')]

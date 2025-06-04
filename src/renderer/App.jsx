@@ -99,7 +99,7 @@ export default function App() {
     }
   };
 
-  const handleOptimize = () => runCommand('optimize');
+  const handleOptimize = () => runCommand('auto-optimize');
   const handleClean = () => runCommand('clean')
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');

@@ -21,6 +21,7 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 
 - Dashboard moderno com métricas: CPU, GPU, RAM, Disco, Rede
 - Detecção de hardware e aplicação de tweaks compatíveis
+- Otimização automática de CPU/GPU baseada no fabricante
 - Criação de plano de energia personalizado:
   > `Liiiraa Booster - Max Performance and Low Latency`
 - Otimizações específicas para:
@@ -91,10 +92,11 @@ Esses scripts são chamados pelo Electron através do canal IPC `run-script`.
 
 ## 📝 Scripts e IPC
 
-Esta pasta contém três scripts principais que podem ser executados a partir do
+Esta pasta contém quatro scripts principais que podem ser executados a partir do
 Electron via canal `run-script`:
 
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
+- **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
 - **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
   batch.
 - **metrics.py** — coleta de métricas básicas do sistema com Python e
@@ -108,7 +110,7 @@ Electron via canal `run-script`:
 
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de
-renderer (via `window.api.runScript('optimize')`, por exemplo) para que o
+renderer (via `window.api.runScript('auto-optimize')`, por exemplo) para que o
 Electron execute o comando correspondente em segurança.
 
 
