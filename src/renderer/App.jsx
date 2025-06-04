@@ -26,6 +26,9 @@ export default function App() {
   });
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+
+  const [freedSpace, setFreedSpace] = useState('');
+
   const [username, setUsername] = useState('');
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -41,6 +44,7 @@ export default function App() {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -99,8 +103,25 @@ export default function App() {
     }
   };
 
+
+  const handleOptimize = () => runCommand('optimize');
+  const handleClean = async () => {
+    try {
+      const output = await window.api.runScript('clean');
+      setFreedSpace(output.trim());
+      setMessage(t('messages.command_success', { cmd: 'Clean' }));
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError(t('messages.command_failed', { cmd: 'Clean' }));
+      setMessage(null);
+      setFreedSpace('');
+    }
+  };
+
   const handleOptimize = () => runCommand('auto-optimize');
   const handleClean = () => runCommand('clean')
+
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
@@ -172,12 +193,21 @@ export default function App() {
         return (
           <div>
             <p className="mb-2">{t('messages.clean_desc')}</p>
+            <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+              {t('messages.clean_extra')}
+            </p>
             <button
-              className="px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
+              className="inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark"
               onClick={handleClean}
             >
+              <span className="mr-2" role="img" aria-label="broom">
+                🧹
+              </span>
               {t('buttons.run_clean')}
             </button>
+            {freedSpace && (
+              <p className="mt-2">{t('messages.clean_result', { space: freedSpace })}</p>
+            )}
           </div>
         );
       case 'Debloat':
