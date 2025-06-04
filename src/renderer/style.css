@@ -30,8 +30,12 @@
   }
 
   .card {
-    @apply border border-white/20 dark:border-white/20 rounded-lg p-4 bg-white/30 dark:bg-surface-dark/40 backdrop-blur-md shadow-md hover:shadow-xl transition transform animate-fadeIn;
+    @apply border border-white/20 dark:border-white/15 rounded-lg p-4 bg-white/30 dark:bg-surface-dark/60 backdrop-blur-md shadow-md hover:shadow-xl dark:shadow-lg transition transform animate-fadeIn;
     background-image: linear-gradient(to bottom right, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  }
+
+  .dark .card {
+    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
   }
 }
 @tailwind utilities;
