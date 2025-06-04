@@ -114,7 +114,7 @@ Esta pasta contém quatro scripts principais que podem ser executados a partir d
 Electron via canal `run-script`:
 
 - **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
-- **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação e Core Isolation (use `-Restore` para reverter).
+- **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação, Core Isolation, Telemetry e SmartScreen. Agora aceita `-DisableUAC`, `-DisableDefender`, `-DisableUpdate`, `-DisableMemoryCompression`, `-DisableMitigations`, `-DisableHVCI`, `-DisableTelemetry` e `-DisableSmartScreen` (use `-Restore` com os mesmos parâmetros para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
  - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante de CPU, incluindo a desativação do Power Throttling do Windows (use `-Restore` para desfazer).
 - **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
