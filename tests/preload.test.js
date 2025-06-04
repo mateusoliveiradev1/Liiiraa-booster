@@ -44,3 +44,8 @@ test('runScript supports restore command', async () => {
   await api.runScript('restore');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
 });
+
+test('runScript supports restore-point command', async () => {
+  await api.runScript('restore-point');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');
+});

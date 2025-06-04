@@ -89,6 +89,7 @@ export default function App() {
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
+  const handleRestorePoint = () => runCommand('restore-point');
   const handleAdvanced = () => runCommand('advanced');
   const handleCpuAmd = () => runCommand('cpu-amd');
   const handleCpuIntel = () => runCommand('cpu-intel');
@@ -111,12 +112,20 @@ export default function App() {
     switch (activeSection) {
       case 'Dashboard':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <MetricsCard label="CPU" value={metrics.cpu} />
-            <MetricsCard label="GPU" value={metrics.gpu} />
-            <MetricsCard label="RAM" value={metrics.ram} />
-            <MetricsCard label="Disk" value={metrics.disk} />
-            <MetricsCard label="Network" value={metrics.network} />
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <MetricsCard label="CPU" value={metrics.cpu} />
+              <MetricsCard label="GPU" value={metrics.gpu} />
+              <MetricsCard label="RAM" value={metrics.ram} />
+              <MetricsCard label="Disk" value={metrics.disk} />
+              <MetricsCard label="Network" value={metrics.network} />
+            </div>
+            <button
+              className="mt-4 px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+              onClick={handleRestorePoint}
+            >
+              {t('buttons.create_restore_point')}
+            </button>
           </div>
         );
       case 'Optimize':

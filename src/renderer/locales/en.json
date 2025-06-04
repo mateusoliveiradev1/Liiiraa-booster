@@ -35,7 +35,8 @@
     "run_advanced": "Run Advanced Tweaks",
     "restore_tweaks": "Restore Tweaks",
     "light_mode": "Light Mode",
-    "dark_mode": "Dark Mode"
+    "dark_mode": "Dark Mode",
+    "create_restore_point": "Create Restore Point"
   },
   "messages": {
     "optimize_desc": "Apply recommended optimization tweaks.",
