@@ -5,6 +5,8 @@
 
 Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle, alta performance e privacidade.
 
+Um arquivo `logo-placeholder.svg` está presente em `src/renderer/` para servir como marca provisória no topo da interface. Substitua-o pela sua logo quando desejar personalizar o dashboard.
+
 ---
 
 ## 🧰 Stack Tecnológica

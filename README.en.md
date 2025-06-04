@@ -2,6 +2,8 @@
 [English](README.en.md) | [Português](README.md)
 
 This file contains the English instructions for setting up, building and testing the project.
+A `logo-placeholder.svg` file lives in `src/renderer/` as a temporary logo at the top of the dashboard. Replace it with your own graphic whenever you like.
+
 
 ## 🚀 Getting Started
 
