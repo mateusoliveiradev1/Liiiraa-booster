@@ -32,12 +32,8 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// Basic secure IPC example
-ipcMain.handle('run-script', async (_event, command) => {
-  // whitelist allowed commands for security
-
-  const scriptsDir = path.resolve(__dirname, '../../scripts');
-  const allowed = {
+const scriptsDir = path.resolve(__dirname, '../../scripts');
+const ALLOWED_COMMANDS = {
     hello: {
       file: 'cmd',
       args: ['/c', 'echo', 'Hello', 'World']
@@ -237,12 +233,15 @@ ipcMain.handle('run-script', async (_event, command) => {
       args: [path.join(scriptsDir, 'metrics.py')]
     }
   };
-  if (!allowed[command]) {
+
+ipcMain.handle('run-script', async (_event, command) => {
+  // whitelist allowed commands for security
+  if (!ALLOWED_COMMANDS[command]) {
     throw new Error('Command not allowed');
   }
   const { execFile } = require('child_process');
   return new Promise((resolve, reject) => {
-    const { file, args } = allowed[command];
+    const { file, args } = ALLOWED_COMMANDS[command];
     const child = execFile(file, args, { windowsHide: true });
     let stdout = '';
     let stderr = '';
