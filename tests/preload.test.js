@@ -80,6 +80,12 @@ test('runScript supports restore command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
 });
 
+test('runScript supports restore command after optimization', async () => {
+  ipcRenderer.invoke.mockClear();
+  await api.runScript('restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
+});
+
 test('runScript supports restore-point command', async () => {
   await api.runScript('restore-point');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');

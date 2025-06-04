@@ -18,6 +18,14 @@ if ($Restore) {
     } else {
         Write-Error "Backup file not found: $backupPath"
     }
+
+    # Remove network latency tweaks if present
+    $activeAdapters = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }
+    foreach ($adp in $activeAdapters) {
+        $ifaceKey = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$($adp.InterfaceGuid)"
+        Remove-ItemProperty -Path $ifaceKey -Name 'TCPAckFrequency' -ErrorAction SilentlyContinue
+        Remove-ItemProperty -Path $ifaceKey -Name 'TcpDelAckTicks' -ErrorAction SilentlyContinue
+    }
     exit
 }
 
@@ -81,6 +89,18 @@ try {
     # Prioritize multimedia tasks and remove network throttling
     Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile' -Name 'NetworkThrottlingIndex' -Value 0xffffffff -Type DWord -Force
     Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile' -Name 'SystemResponsiveness' -Value 10 -Type DWord -Force
+
+    # --- Reduce TCP acknowledgement delay for each active adapter ---
+    # TCPAckFrequency controls how often ACKs are sent. Setting it to 1 sends an
+    # ACK for every packet, reducing latency in some games.
+    # TcpDelAckTicks specifies the delay (in 100ms units) before an ACK is sent
+    # when delayed acknowledgements are enabled. Setting it to 0 removes the delay.
+    $activeAdapters = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }
+    foreach ($adp in $activeAdapters) {
+        $ifaceKey = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$($adp.InterfaceGuid)"
+        Set-ItemProperty -Path $ifaceKey -Name 'TCPAckFrequency' -Value 1 -Type DWord -Force
+        Set-ItemProperty -Path $ifaceKey -Name 'TcpDelAckTicks' -Value 0 -Type DWord -Force
+    }
 
     Write-Output "Optimization complete"
 } catch {
