@@ -38,6 +38,7 @@ require('@testing-library/jest-dom');
 require('../src/main/index.js');
 
 const { __removeMenu, __browserWindowOptions } = require('electron');
+
 const { execFile } = require('child_process');
 const { BrowserWindow } = require('electron');
 
