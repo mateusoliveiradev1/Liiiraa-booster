@@ -85,6 +85,15 @@ export default function App() {
   const handleDebloat = () => runCommand('debloat');
   const handleGameBoost = () => runCommand('gamebooster');
   const handleRestore = () => runCommand('restore');
+  const handleCpuAmd = () => runCommand('cpu-amd');
+  const handleCpuIntel = () => runCommand('cpu-intel');
+  const handleGpuNvidia = () => runCommand('gpu-nvidia');
+  const handleGpuAmd = () => runCommand('gpu-amd');
+  const handlePubg = () => runCommand('pubg');
+  const handleCs2 = () => runCommand('cs2');
+  const handleFortnite = () => runCommand('fortnite');
+  const handleWarzone = () => runCommand('warzone');
+  const handleValorant = () => runCommand('valorant');
 
   const renderPlaceholder = (text) => (
     <div>
@@ -149,6 +158,114 @@ export default function App() {
               onClick={handleGameBoost}
             >
               Start Game Booster
+            </button>
+          </div>
+        );
+      case 'CPU AMD':
+        return (
+          <div>
+            <p className="mb-2">Apply AMD CPU specific optimizations.</p>
+            <button
+              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              onClick={handleCpuAmd}
+            >
+              Optimize AMD CPU
+            </button>
+          </div>
+        );
+      case 'CPU Intel':
+        return (
+          <div>
+            <p className="mb-2">Apply Intel CPU specific optimizations.</p>
+            <button
+              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              onClick={handleCpuIntel}
+            >
+              Optimize Intel CPU
+            </button>
+          </div>
+        );
+      case 'GPU Nvidia':
+        return (
+          <div>
+            <p className="mb-2">Apply Nvidia GPU specific optimizations.</p>
+            <button
+              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              onClick={handleGpuNvidia}
+            >
+              Optimize Nvidia GPU
+            </button>
+          </div>
+        );
+      case 'GPU AMD':
+        return (
+          <div>
+            <p className="mb-2">Apply AMD GPU specific optimizations.</p>
+            <button
+              className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+              onClick={handleGpuAmd}
+            >
+              Optimize AMD GPU
+            </button>
+          </div>
+        );
+      case 'PUBG':
+        return (
+          <div>
+            <p className="mb-2">Optimize system for PUBG.</p>
+            <button
+              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handlePubg}
+            >
+              Optimize PUBG
+            </button>
+          </div>
+        );
+      case 'CS2':
+        return (
+          <div>
+            <p className="mb-2">Optimize system for CS2.</p>
+            <button
+              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handleCs2}
+            >
+              Optimize CS2
+            </button>
+          </div>
+        );
+      case 'Fortnite':
+        return (
+          <div>
+            <p className="mb-2">Optimize system for Fortnite.</p>
+            <button
+              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handleFortnite}
+            >
+              Optimize Fortnite
+            </button>
+          </div>
+        );
+      case 'Warzone':
+        return (
+          <div>
+            <p className="mb-2">Optimize system for Warzone.</p>
+            <button
+              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handleWarzone}
+            >
+              Optimize Warzone
+            </button>
+          </div>
+        );
+      case 'Valorant':
+        return (
+          <div>
+            <p className="mb-2">Optimize system for Valorant.</p>
+            <button
+              className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handleValorant}
+            >
+              Optimize Valorant
             </button>
           </div>
         );
