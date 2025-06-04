@@ -55,7 +55,7 @@ project-root/
 1. Instale o [Node.js](https://nodejs.org/) (v18 ou superior recomendado).
 2. Clone este repositório e acesse a pasta do projeto.
 3. Rode `npm install` para baixar as dependências.
-4. Para desenvolvimento execute `npm run dev` e o aplicativo abrirá com recarregamento automático.
+4. Para desenvolvimento execute `npm run dev`, que inicia o Vite e o Electron simultaneamente com recarregamento automático.
 
 ## 📦 Builds e Distribuição
 
