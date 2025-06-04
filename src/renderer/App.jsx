@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './i18n';
-import { FaBroom } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -126,7 +125,6 @@ export default function App() {
           diskPercent,
           network
         });
-        setError(null);
       } catch (err) {
         console.error(err);
         toast.error(t('messages.fetch_failed'));
