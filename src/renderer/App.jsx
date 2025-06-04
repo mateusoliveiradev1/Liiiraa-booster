@@ -68,7 +68,9 @@ export default function App() {
     const stored = localStorage.getItem("theme");
     const isDark = stored
       ? stored === "dark"
-      : document.documentElement.classList.contains("dark");
+      : window.matchMedia
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : false;
     document.documentElement.classList.toggle("dark", isDark);
     setDark(isDark);
   }, []);
