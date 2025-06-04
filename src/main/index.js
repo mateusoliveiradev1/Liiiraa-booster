@@ -34,6 +34,41 @@ app.on('window-all-closed', () => {
 // Basic secure IPC example
 ipcMain.handle('run-script', async (_event, command) => {
   // whitelist allowed commands for security
+
+  const scriptsDir = path.resolve(__dirname, '../../scripts');
+  const allowed = {
+    hello: {
+      file: 'cmd',
+      args: ['/c', 'echo', 'Hello', 'World']
+    },
+    optimize: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'optimize.ps1')
+      ]
+    },
+    clean: {
+      file: 'cmd',
+      args: ['/c', path.join(scriptsDir, 'clean.bat')]
+    },
+    restore: {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'optimize.ps1'),
+        '-Restore'
+      ]
+    },
+    metrics: {
+      file: 'python',
+      args: [path.join(scriptsDir, 'metrics.py')]
+    }
+
   const optimizeScript = path.join(__dirname, '..', '..', 'scripts', 'optimize.ps1');
   const cleanScript = path.join(__dirname, '..', '..', 'scripts', 'clean.bat');
   const metricsScript = path.join(__dirname, '..', '..', 'scripts', 'metrics.py');
@@ -44,18 +79,36 @@ ipcMain.handle('run-script', async (_event, command) => {
     'clean': `cmd /c "${cleanScript}"`,
     'restore': `powershell -ExecutionPolicy Bypass -File "${optimizeScript}" -Restore`,
     'metrics': `python "${metricsScript}"`
+
   };
   if (!allowed[command]) {
     throw new Error('Command not allowed');
   }
-  const exec = require('child_process').exec;
+  const { execFile } = require('child_process');
   return new Promise((resolve, reject) => {
-    exec(allowed[command], (error, stdout, stderr) => {
-      if (error) {
-        reject(stderr || error.message);
+    const { file, args } = allowed[command];
+    const child = execFile(file, args, { windowsHide: true });
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout.on('data', (data) => {
+      stdout += data;
+    });
+
+    child.stderr.on('data', (data) => {
+      stderr += data;
+    });
+
+    child.on('close', (code) => {
+      if (code !== 0) {
+        reject(stderr || `Process exited with code ${code}`);
       } else {
         resolve(stdout);
       }
+    });
+
+    child.on('error', (error) => {
+      reject(error.message);
     });
   });
 });
