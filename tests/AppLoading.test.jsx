@@ -20,6 +20,8 @@ test('shows spinner during command execution', async () => {
 
   fireEvent.click(screen.getByRole('button', { name: /sidebar.system/ }));
   fireEvent.click(screen.getByRole('button', { name: /sidebar.optimize/ }));
+
+  await screen.findByText('buttons.run_optimize');
   fireEvent.click(screen.getByText('buttons.run_optimize'));
 
   // Spinner should be visible while promise is pending
