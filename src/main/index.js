@@ -85,17 +85,20 @@ ipcMain.handle('run-script', async (_event, command) => {
     },
 
     advanced: {
-
-    'cpu-amd': {
-
       file: 'powershell',
       args: [
         '-ExecutionPolicy',
         'Bypass',
         '-File',
-
         path.join(scriptsDir, 'advanced.ps1')
-
+      ]
+    },
+    'cpu-amd': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
         path.join(scriptsDir, 'cpu-amd.ps1')
       ]
     },
