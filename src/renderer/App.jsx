@@ -11,7 +11,12 @@ const mockMetrics = {
 
 export default function App() {
   const [dark, setDark] = useState(false);
-  const [metrics, setMetrics] = useState({ cpu: mockMetrics.cpu, ram: mockMetrics.ram });
+  const [metrics, setMetrics] = useState({
+    cpu: mockMetrics.cpu,
+    ram: mockMetrics.ram,
+    disk: mockMetrics.disk,
+    network: mockMetrics.network
+  });
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -19,9 +24,13 @@ export default function App() {
       try {
         const output = await window.api.runScript('metrics');
         const data = JSON.parse(output);
+
         const cpu = `${data.cpu_percent}%`;
-        const ramGb = (data.memory_used / (1024 ** 3)).toFixed(1);
-        setMetrics({ cpu, ram: `${ramGb} GB` });
+        const ram = `${(data.memory_used / (1024 ** 3)).toFixed(1)} GB / ${(data.memory_total / (1024 ** 3)).toFixed(1)} GB`;
+        const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
+        const network = `${(((data.net_up + data.net_down) * 8) / (1024 ** 2)).toFixed(1)} Mbps`;
+
+        setMetrics({ cpu, ram, disk, network });
         setError(null);
       } catch (err) {
         console.error(err);
@@ -54,8 +63,8 @@ export default function App() {
         <MetricsCard label="CPU" value={metrics.cpu} />
         <MetricsCard label="GPU" value={mockMetrics.gpu} />
         <MetricsCard label="RAM" value={metrics.ram} />
-        <MetricsCard label="Disk" value={mockMetrics.disk} />
-        <MetricsCard label="Network" value={mockMetrics.network} />
+        <MetricsCard label="Disk" value={metrics.disk} />
+        <MetricsCard label="Network" value={metrics.network} />
       </div>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
