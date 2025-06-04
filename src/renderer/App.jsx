@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './i18n';
-import { FaBroom } from 'react-icons/fa';
+import {
+  FaBroom,
+  FaMicrochip,
+  FaMemory,
+  FaHdd,
+  FaNetworkWired
+} from 'react-icons/fa';
+import { BsGpuCard } from 'react-icons/bs';
 import MetricsCard from './components/MetricsCard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Logs from './components/Logs.jsx';
 
 const mockMetrics = {
   cpu: '35%',
+  cpuPercent: 35,
   gpu: '45%',
+  gpuPercent: 45,
   ram: '8 GB / 16 GB',
+  ramPercent: 50,
   disk: '120 GB / 512 GB',
+  diskPercent: 23,
   network: '200 Mbps'
 };
 
@@ -20,9 +31,13 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('Dashboard');
   const [metrics, setMetrics] = useState({
     cpu: mockMetrics.cpu,
+    cpuPercent: mockMetrics.cpuPercent,
     gpu: 'N/A',
+    gpuPercent: null,
     ram: mockMetrics.ram,
+    ramPercent: mockMetrics.ramPercent,
     disk: mockMetrics.disk,
+    diskPercent: mockMetrics.diskPercent,
     network: mockMetrics.network
   });
   const [error, setError] = useState(null);
@@ -71,8 +86,11 @@ export default function App() {
         const output = await window.api.runScript('metrics');
         const data = JSON.parse(output);
 
-        const cpu = `${data.cpu_percent}%`;
+        const cpuPercent = data.cpu_percent;
+        const cpu = `${cpuPercent}%`;
+        const ramPercent = (data.memory_used / data.memory_total) * 100;
         const ram = `${(data.memory_used / (1024 ** 3)).toFixed(1)} GB / ${(data.memory_total / (1024 ** 3)).toFixed(1)} GB`;
+        const diskPercent = (data.disk_used / data.disk_total) * 100;
         const disk = `${(data.disk_used / (1024 ** 3)).toFixed(1)} GB / ${(data.disk_total / (1024 ** 3)).toFixed(1)} GB`;
         const bytesPerSec =
           data.network_bytes_per_sec !== undefined
@@ -81,6 +99,7 @@ export default function App() {
         const network = `${((bytesPerSec * 8) / 1_000_000).toFixed(1)} Mbps`;
 
         let gpu = 'N/A';
+        let gpuPercent = null;
         if (
           data.gpu_util !== undefined &&
           data.gpu_mem_used !== undefined &&
@@ -89,9 +108,20 @@ export default function App() {
           const util = `${data.gpu_util}%`;
           const mem = `${(data.gpu_mem_used / (1024 ** 3)).toFixed(1)} GB / ${(data.gpu_mem_total / (1024 ** 3)).toFixed(1)} GB`;
           gpu = `${util} - ${mem}`;
+          gpuPercent = data.gpu_util;
         }
 
-        setMetrics({ cpu, gpu, ram, disk, network });
+        setMetrics({
+          cpu,
+          cpuPercent,
+          gpu,
+          gpuPercent,
+          ram,
+          ramPercent,
+          disk,
+          diskPercent,
+          network
+        });
         setError(null);
       } catch (err) {
         console.error(err);
@@ -179,11 +209,35 @@ export default function App() {
             </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-              <MetricsCard label="CPU" value={metrics.cpu} />
-              <MetricsCard label="GPU" value={metrics.gpu} />
-              <MetricsCard label="RAM" value={metrics.ram} />
-              <MetricsCard label="Disk" value={metrics.disk} />
-              <MetricsCard label="Network" value={metrics.network} />
+              <MetricsCard
+                label="CPU"
+                value={metrics.cpu}
+                icon={<FaMicrochip />}
+                percentage={metrics.cpuPercent}
+              />
+              <MetricsCard
+                label="GPU"
+                value={metrics.gpu}
+                icon={<BsGpuCard />}
+                percentage={metrics.gpuPercent}
+              />
+              <MetricsCard
+                label="RAM"
+                value={metrics.ram}
+                icon={<FaMemory />}
+                percentage={metrics.ramPercent}
+              />
+              <MetricsCard
+                label="Disk"
+                value={metrics.disk}
+                icon={<FaHdd />}
+                percentage={metrics.diskPercent}
+              />
+              <MetricsCard
+                label="Network"
+                value={metrics.network}
+                icon={<FaNetworkWired />}
+              />
             </div>
 
 
