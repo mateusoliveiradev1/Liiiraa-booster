@@ -18,6 +18,7 @@ test('getLogs calls ipcRenderer.invoke', async () => {
   ipcRenderer.invoke.mockClear();
   await api.getLogs();
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-logs');
+});
 
 test('runScript supports debloat command', async () => {
   await api.runScript('debloat');
@@ -27,5 +28,19 @@ test('runScript supports debloat command', async () => {
 test('runScript supports gamebooster command', async () => {
   await api.runScript('gamebooster');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gamebooster');
+});
 
+test('runScript supports optimize command', async () => {
+  await api.runScript('optimize');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'optimize');
+});
+
+test('runScript supports clean command', async () => {
+  await api.runScript('clean');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'clean');
+});
+
+test('runScript supports restore command', async () => {
+  await api.runScript('restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
 });
