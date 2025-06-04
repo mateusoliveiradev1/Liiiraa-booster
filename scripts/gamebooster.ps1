@@ -3,6 +3,7 @@
 
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 
 Write-Warning 'Applying temporary tweaks for gaming session.'
@@ -30,6 +31,7 @@ try {
     Write-Output 'Game Booster ready.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog

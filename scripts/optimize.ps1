@@ -8,6 +8,7 @@ param(
 $backupPath = Join-Path $PSScriptRoot 'registry-backup.reg'
 
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 
 if ($Restore) {
@@ -171,6 +172,7 @@ try {
     Write-Output "Optimization complete"
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog

@@ -8,6 +8,7 @@ param(
 
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 Start-LiiiraaLog 'fortnite.log'
 
@@ -23,8 +24,9 @@ if ($Restore) {
         Write-Output 'Restore complete.'
     } catch {
         Write-Error $_
+    exit 1
     }
-    Stop-Transcript | Out-Null
+    Stop-LiiiraaLog
     exit
 }
 
@@ -42,6 +44,7 @@ try {
     Write-Output 'Game optimization complete.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog

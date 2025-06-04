@@ -16,6 +16,7 @@ param(
 $backupPath = Join-Path $PSScriptRoot 'advanced-backup.reg'
 
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 Start-LiiiraaLog 'advanced.log'
 
@@ -30,6 +31,11 @@ $flagList = @(
     $DisableTelemetry,
     $DisableSmartScreen
 )
+if ($Restore -and ($flagList -contains $true)) {
+    Write-Error 'Cannot combine -Restore with other tweak flags.'
+    Stop-LiiiraaLog
+    exit 1
+}
 if (-not ($flagList -contains $true)) {
     $DisableDefender = $true
     $DisableUpdate = $true
@@ -100,7 +106,7 @@ if ($Restore) {
     }
 
     Write-Output 'Advanced tweaks restored.'
-    Stop-Transcript | Out-Null
+    Stop-LiiiraaLog
     exit
 }
 
@@ -160,6 +166,7 @@ try {
     Write-Output 'Advanced tweaks applied.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog

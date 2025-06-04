@@ -1,34 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const { ALLOWED_COMMAND_NAMES } = require('./allowedCommands');
 
-const ALLOWED_COMMANDS = new Set([
-  'hello',
-  'optimize',
-  'auto-optimize',
-  'auto-optimize-restore',
-  'clean',
-  'debloat-full',
-  'debloat-lite',
-  'debloat-restore',
-  'restore',
-  'restore-point',
-  'gamebooster',
-  'gamebooster-restore',
-  'advanced',
-  'cpu-amd',
-  'cpu-amd-restore',
-  'cpu-intel',
-  'cpu-intel-restore',
-  'gpu-nvidia',
-  'gpu-intel',
-  'gpu-amd',
-  'pubg',
-  'cs2',
-  'fortnite',
-  'warzone',
-  'valorant',
-  'energy-plan',
-  'peripheral-energy'
-]);
+const ALLOWED_COMMANDS = new Set(ALLOWED_COMMAND_NAMES);
 
 const api = {
   runScript: (cmd) => {

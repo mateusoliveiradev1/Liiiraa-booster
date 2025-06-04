@@ -10,6 +10,7 @@ param(
 )
 
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
+Set-StrictMode -Version Latest
 Require-Admin
 
 Write-Warning 'This script removes built-in Windows apps. Use at your own risk.'
@@ -89,6 +90,7 @@ try {
     Write-Output 'Debloat complete.'
 } catch {
     Write-Error $_
+    exit 1
 }
 
-Stop-Transcript | Out-Null
+Stop-LiiiraaLog
