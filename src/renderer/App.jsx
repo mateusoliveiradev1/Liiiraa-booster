@@ -186,6 +186,7 @@ export default function App() {
   const handleCpuAmd = () => runCommand('cpu-amd');
   const handleCpuIntel = () => runCommand('cpu-intel');
   const handleGpuNvidia = () => runCommand('gpu-nvidia');
+  const handleGpuIntel = () => runCommand('gpu-intel');
   const handleGpuAmd = () => runCommand('gpu-amd');
   const handlePubg = () => runCommand('pubg');
   const handleCs2 = () => runCommand('cs2');
@@ -359,6 +360,9 @@ export default function App() {
           <div className="space-x-2">
             <button className="btn-success" onClick={handleGpuNvidia}>
               {t('buttons.optimize_nvidia_gpu')}
+            </button>
+            <button className="btn-success" onClick={handleGpuIntel}>
+              {t('buttons.optimize_intel_gpu')}
             </button>
             <button className="btn-success" onClick={handleGpuAmd}>
               {t('buttons.optimize_amd_gpu')}
