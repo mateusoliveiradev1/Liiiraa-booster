@@ -118,6 +118,7 @@ Electron via canal `run-script`:
 - **energy-plan.ps1** — aplica o plano de energia do Liiiraa Booster (botão *Apply Energy Plan* em **Energy**).
 - **peripheral-energy.ps1** — ajusta energia de periféricos USB (botão *Peripheral Power Tweak* em **Energy**).
 - **gamebooster.ps1** — tweaks temporários para jogos (botão *Start Game Booster* na aba **Game Booster**).
+- **gamebooster-restore.ps1** — restaura serviços e o Game Bar após usar o Game Booster.
 - **restore-point.ps1** — cria um ponto de restauração do sistema (botão *Create Restore Point* no **Dashboard**).
 
 > ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de

@@ -136,6 +136,15 @@ const ALLOWED_COMMANDS = {
         path.join(scriptsDir, 'gamebooster.ps1')
       ]
     },
+    'gamebooster-restore': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'gamebooster-restore.ps1')
+      ]
+    },
 
     advanced: {
       file: 'powershell',
