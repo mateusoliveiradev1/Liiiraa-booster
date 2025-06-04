@@ -1,10 +1,29 @@
 # Fortnite optimization script
 # Invoked via `window.api.runScript('fortnite')` in Electron
 
+param(
+    [switch]$Restore
+)
+
 # Ensure script is running as Administrator
 Import-Module (Join-Path $PSScriptRoot 'common.psm1')
 Require-Admin
 Start-LiiiraaLog 'fortnite.log'
+
+if ($Restore) {
+    try {
+        Write-Output 'Restoring Fortnite settings...'
+        $config = Join-Path $env:LOCALAPPDATA 'FortniteGame\Saved\Config\WindowsClient\GameUserSettings.ini'
+        if (Test-Path $config) {
+            (Get-Content $config) -replace '^bUseVSync=.*', 'bUseVSync=True' | Set-Content $config
+        }
+        Write-Output 'Restore complete.'
+    } catch {
+        Write-Error $_
+    }
+    Stop-Transcript | Out-Null
+    exit
+}
 
 try {
     Write-Output 'Applying Fortnite optimizations...'
