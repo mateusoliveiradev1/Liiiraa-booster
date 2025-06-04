@@ -37,3 +37,28 @@ Ideal para gamers, streamers, técnicos e entusiastas que desejam total controle
 
 ## 📁 Estrutura do Projeto
 
+```text
+project-root/
+├── frontend/           # interface feita com Vite e Tailwind
+│   ├── index.html
+│   └── src/
+├── backend/            # processos principais do Electron
+│   └── main.js
+└── scripts/            # scripts de otimização
+    ├── cleanup.ps1
+    ├── debloat.bat
+    └── utils.py
+```
+
+## 🚀 Como Começar
+
+1. Instale o [Node.js](https://nodejs.org/) (v18 ou superior recomendado).
+2. Clone este repositório e acesse a pasta do projeto.
+3. Rode `npm install` para baixar as dependências.
+4. Para desenvolvimento execute `npm run dev` e o aplicativo abrirá com recarregamento automático.
+
+## 📦 Builds e Distribuição
+
+1. Gere os arquivos otimizados com `npm run build`.
+2. Crie instaladores multiplataforma usando **electron-builder** com `npm run dist`.
+
