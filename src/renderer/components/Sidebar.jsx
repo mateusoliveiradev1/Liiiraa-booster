@@ -74,6 +74,7 @@ function Sidebar({ activeSection, onSelect }) {
         alt="Liiiraa Booster logo"
         className="h-24 w-24 mx-auto animate-bounce hover:animate-spin transition-transform"
       />
+      <img src={logo} alt="Liiiraa Booster logo" className="h-12 w-12 mx-auto" />
       {sectionGroups.map(({ title, items }, idx) => (
         <React.Fragment key={title}>
           {!collapsed && (
