@@ -24,6 +24,7 @@ test('renders freed space after clean command', async () => {
   };
 
   render(<App />);
+  fireEvent.click(screen.getByText('sidebar.system'));
   fireEvent.click(screen.getByText('sidebar.clean'));
   fireEvent.click(screen.getByText('buttons.run_clean'));
   expect(await screen.findByText('messages.clean_result')).toBeInTheDocument();

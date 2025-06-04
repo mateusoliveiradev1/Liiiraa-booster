@@ -23,35 +23,35 @@ test('renders group headings', () => {
 test('calls onSelect when a section is clicked', () => {
   const onSelect = jest.fn();
   render(<Sidebar activeSection="Dashboard" onSelect={onSelect} />);
-  fireEvent.click(screen.getByRole('button', { name: /sidebar.clean/ }));
-  expect(onSelect).toHaveBeenCalledWith('Clean');
+  fireEvent.click(screen.getByRole('button', { name: /sidebar.system/ }));
+  expect(onSelect).toHaveBeenCalledWith('System');
 });
 
-test('clicks on Debloat tab', () => {
+test('clicks on System tab', () => {
   const onSelect = jest.fn();
-  render(<Sidebar activeSection="Debloat" onSelect={onSelect} />);
-  const debloat = screen.getByRole('button', { name: /sidebar.debloat/ });
-  expect(debloat).toHaveClass('bg-primary');
-  fireEvent.click(debloat);
-  expect(onSelect).toHaveBeenCalledWith('Debloat');
+  render(<Sidebar activeSection="System" onSelect={onSelect} />);
+  const system = screen.getByRole('button', { name: /sidebar.system/ });
+  expect(system).toHaveClass('bg-primary');
+  fireEvent.click(system);
+  expect(onSelect).toHaveBeenCalledWith('System');
 });
 
-test('clicks on Game Booster tab', () => {
+test('clicks on Games tab', () => {
   const onSelect = jest.fn();
-  render(<Sidebar activeSection="Game Booster" onSelect={onSelect} />);
-  const booster = screen.getByRole('button', { name: /sidebar.game_booster/ });
-  expect(booster).toHaveClass('bg-primary');
-  fireEvent.click(booster);
-  expect(onSelect).toHaveBeenCalledWith('Game Booster');
+  render(<Sidebar activeSection="Games" onSelect={onSelect} />);
+  const games = screen.getByRole('button', { name: /sidebar.games/ });
+  expect(games).toHaveClass('bg-primary');
+  fireEvent.click(games);
+  expect(onSelect).toHaveBeenCalledWith('Games');
 });
 
-test('clicks on Optimize tab', () => {
+test('clicks on Dashboard tab', () => {
   const onSelect = jest.fn();
-  render(<Sidebar activeSection="Optimize" onSelect={onSelect} />);
-  const optimize = screen.getByRole('button', { name: /sidebar.optimize/ });
-  expect(optimize).toHaveClass('bg-primary');
-  fireEvent.click(optimize);
-  expect(onSelect).toHaveBeenCalledWith('Optimize');
+  render(<Sidebar activeSection="Dashboard" onSelect={onSelect} />);
+  const dash = screen.getByRole('button', { name: /sidebar.dashboard/ });
+  expect(dash).toHaveClass('bg-primary');
+  fireEvent.click(dash);
+  expect(onSelect).toHaveBeenCalledWith('Dashboard');
 });
 
 test('clicks on Advanced Tweaks tab', () => {

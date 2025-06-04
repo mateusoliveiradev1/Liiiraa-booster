@@ -18,6 +18,7 @@ test('shows spinner during command execution', async () => {
   render(<App />);
   await screen.findByText('labels.user: alice');
 
+  fireEvent.click(screen.getByRole('button', { name: /sidebar.system/ }));
   fireEvent.click(screen.getByRole('button', { name: /sidebar.optimize/ }));
   fireEvent.click(screen.getByText('buttons.run_optimize'));
 
