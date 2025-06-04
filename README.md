@@ -45,9 +45,9 @@ project-root/
 ├── backend/            # processos principais do Electron
 │   └── main.js
 └── scripts/            # scripts de otimização
-    ├── cleanup.ps1
-    ├── debloat.bat
-    └── utils.py
+    ├── optimize.ps1
+    ├── clean.bat
+    └── metrics.py
 ```
 
 ## 🚀 Como Começar
@@ -61,4 +61,20 @@ project-root/
 
 1. Gere os arquivos otimizados com `npm run build`.
 2. Crie instaladores multiplataforma usando **electron-builder** com `npm run dist`.
+
+## 📝 Scripts e IPC
+
+Esta pasta contém três scripts principais que podem ser executados a partir do
+Electron via canal `run-script`:
+
+- **optimize.ps1** — otimizações de performance no Windows usando PowerShell.
+- **clean.bat** — limpeza rápida de arquivos temporários por meio de um script
+  batch.
+- **metrics.py** — coleta de métricas básicas do sistema com Python e
+  [psutil](https://pypi.org/project/psutil/).
+
+No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
+lista de comandos permitidos. Basta enviar o nome do script pela camada de
+renderer (via `window.api.runScript('optimize')`, por exemplo) para que o
+Electron execute o comando correspondente em segurança.
 

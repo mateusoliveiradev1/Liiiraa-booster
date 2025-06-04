@@ -31,7 +31,10 @@ app.on('window-all-closed', () => {
 ipcMain.handle('run-script', async (_event, command) => {
   // whitelist allowed commands for security
   const allowed = {
-    'hello': 'echo Hello World'
+    'hello': 'echo Hello World',
+    'optimize': 'powershell -ExecutionPolicy Bypass -File scripts/optimize.ps1',
+    'clean': 'cmd /c scripts/clean.bat',
+    'metrics': 'python scripts/metrics.py'
   };
   if (!allowed[command]) {
     throw new Error('Command not allowed');
