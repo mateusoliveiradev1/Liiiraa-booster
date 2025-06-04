@@ -16,7 +16,8 @@
     "valorant": "Valorant",
     "advanced": "Advanced Tweaks",
     "history": "History",
-    "settings": "Settings"
+    "settings": "Settings",
+    "energy": "Energy"
   },
   "buttons": {
     "run_optimize": "Run Auto Optimize",
@@ -39,7 +40,9 @@
     "restore_tweaks": "Restore Tweaks",
     "light_mode": "Light Mode",
     "dark_mode": "Dark Mode",
-    "create_restore_point": "Create Restore Point"
+    "create_restore_point": "Create Restore Point",
+    "apply_energy_plan": "Apply Energy Plan",
+    "tweak_peripheral_power": "Peripheral Power Tweak"
   },
   "messages": {
     "optimize_desc": "Automatically detect CPU/GPU vendor and run the matching optimizations.",
@@ -62,14 +65,12 @@
     "load_logs_failed": "Failed to load logs",
     "no_logs": "No logs found.",
     "command_success": "{{cmd}} completed successfully",
-    "command_failed": "{{cmd}} failed"
-
-    ,"clean_result": "Freed {{space}} of disk space."
-
+    "command_failed": "{{cmd}} failed",
+    "clean_result": "Freed {{space}} of disk space.",
+    "energy_desc": "Configure Windows power settings for maximum performance."
   },
   "labels": {
     "user": "User",
     "time": "Time"
-
   }
 }

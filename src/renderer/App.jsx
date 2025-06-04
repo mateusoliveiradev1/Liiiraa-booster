@@ -104,7 +104,6 @@ export default function App() {
   };
 
 
-  const handleOptimize = () => runCommand('optimize');
   const handleClean = async () => {
     try {
       const output = await window.api.runScript('clean');
@@ -118,9 +117,7 @@ export default function App() {
       setFreedSpace('');
     }
   };
-
   const handleOptimize = () => runCommand('auto-optimize');
-  const handleClean = () => runCommand('clean')
 
   const handleDebloatFull = () => runCommand('debloat-full');
   const handleDebloatLite = () => runCommand('debloat-lite');
@@ -142,6 +139,8 @@ export default function App() {
   const handleFortnite = () => runCommand('fortnite');
   const handleWarzone = () => runCommand('warzone');
   const handleValorant = () => runCommand('valorant');
+  const handleEnergyPlan = () => runCommand('energy-plan');
+  const handlePeripheralEnergy = () => runCommand('peripheral-energy');
 
 
   const renderPlaceholder = (text) => (
@@ -360,6 +359,26 @@ export default function App() {
             >
               {t('buttons.optimize_valorant')}
             </button>
+          </div>
+        );
+      case 'Energy':
+        return (
+          <div>
+            <p className="mb-2">{t('messages.energy_desc')}</p>
+            <div className="space-x-2">
+              <button
+                className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+                onClick={handleEnergyPlan}
+              >
+                {t('buttons.apply_energy_plan')}
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark"
+                onClick={handlePeripheralEnergy}
+              >
+                {t('buttons.tweak_peripheral_power')}
+              </button>
+            </div>
           </div>
         );
       case 'Advanced Tweaks':

@@ -13,7 +13,6 @@ test('runScript calls ipcRenderer.invoke', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'hello');
 });
 
-
 test('getLogs calls ipcRenderer.invoke', async () => {
   ipcRenderer.invoke.mockClear();
   await api.getLogs();
@@ -60,14 +59,23 @@ test('runScript supports restore command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
 });
 
+test('runScript supports restore-point command', async () => {
+  await api.runScript('restore-point');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');
+});
+
+test('runScript supports energy-plan command', async () => {
+  await api.runScript('energy-plan');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'energy-plan');
+});
+
+test('runScript supports peripheral-energy command', async () => {
+  await api.runScript('peripheral-energy');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'peripheral-energy');
+});
 
 test('getUser calls ipcRenderer.invoke', async () => {
   ipcRenderer.invoke.mockClear();
   await api.getUser();
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('get-user');
-
-test('runScript supports restore-point command', async () => {
-  await api.runScript('restore-point');
-  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore-point');
-
 });

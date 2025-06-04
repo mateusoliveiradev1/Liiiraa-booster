@@ -214,6 +214,24 @@ ipcMain.handle('run-script', async (_event, command) => {
 
       ]
     },
+    'energy-plan': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'energy-plan.ps1')
+      ]
+    },
+    'peripheral-energy': {
+      file: 'powershell',
+      args: [
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        path.join(scriptsDir, 'peripheral-energy.ps1')
+      ]
+    },
     metrics: {
       file: 'python',
       args: [path.join(scriptsDir, 'metrics.py')]

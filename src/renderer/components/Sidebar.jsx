@@ -19,6 +19,7 @@ export default function Sidebar({ activeSection, onSelect }) {
     { key: 'Fortnite', icon: '🛡️', tKey: 'sidebar.fortnite' },
     { key: 'Warzone', icon: '💣', tKey: 'sidebar.warzone' },
     { key: 'Valorant', icon: '🎯', tKey: 'sidebar.valorant' },
+    { key: 'Energy', icon: '🔌', tKey: 'sidebar.energy' },
     { key: 'Advanced Tweaks', icon: '⚙️', tKey: 'sidebar.advanced' },
     { key: 'History', icon: '📜', tKey: 'sidebar.history' },
     { key: 'Settings', icon: '🔧', tKey: 'sidebar.settings' }
