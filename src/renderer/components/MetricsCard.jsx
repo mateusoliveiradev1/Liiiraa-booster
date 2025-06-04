@@ -11,7 +11,7 @@ function MetricsCard({ label, value, icon, percentage }) {
       {percentage !== undefined && percentage !== null && (
         <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded">
           <div
-            className="bg-gradient-to-r from-primary to-secondary h-full rounded"
+            className="bg-gradient-to-r from-primary to-secondary h-full rounded transition-all duration-500"
             style={{ width: `${percentage}%` }}
             role="progressbar"
             aria-valuenow={percentage}
