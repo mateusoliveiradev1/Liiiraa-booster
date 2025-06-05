@@ -1,1 +1,0 @@
-import{u as n,j as s,g as i}from"./index-gURdOHuy.js";function o({onRun:e}){const{t}=n();return s.jsxs("div",{children:[s.jsx("p",{className:"mb-2",children:t("messages.fortnite_desc")}),s.jsxs("button",{className:"btn-accent",onClick:e,children:[s.jsx(i,{className:"inline mr-1"}),t("buttons.optimize_fortnite")]})]})}export{o as default};
