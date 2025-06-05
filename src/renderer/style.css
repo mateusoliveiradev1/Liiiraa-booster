@@ -37,44 +37,48 @@
 @tailwind base;
 @tailwind components;
 @layer components {
+  .btn-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+
   .btn-primary {
-    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-primary text-white hover:bg-primary-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-success {
-    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply inline-flex items-center px-4 py-2 rounded bg-success text-white hover:bg-success-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-warning {
-    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-warning text-white hover:bg-warning-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-accent {
-    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-accent text-white hover:bg-accent-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-danger {
-    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-danger text-white hover:bg-danger-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-neutral {
-    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-border text-white hover:bg-border-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-premium {
-    @apply px-4 py-2 rounded bg-premium text-white hover:bg-premium-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-premium text-white hover:bg-premium-dark shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-amd {
-    @apply px-4 py-2 rounded bg-amd text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-amd text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-intel {
-    @apply px-4 py-2 rounded bg-intel text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-intel text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .btn-nvidia {
-    @apply px-4 py-2 rounded bg-nvidia text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200;
+    @apply px-4 py-2 rounded bg-nvidia text-white hover:opacity-90 shadow transition transform transition-transform hover:scale-105 active:scale-95 duration-200 btn-ring;
   }
 
   .card {

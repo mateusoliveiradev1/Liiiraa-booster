@@ -487,7 +487,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar activeSection={activeSection} onSelect={setActiveSection} />
+      <Sidebar activeSection={activeSection} onSelect={setActiveSection} loading={loading} />
       <div className="flex-1 p-4 overflow-auto">
         <div
           className={`sticky top-0 z-10 p-4 mb-4 bg-gradient-to-r backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg flex justify-between items-center text-white ${

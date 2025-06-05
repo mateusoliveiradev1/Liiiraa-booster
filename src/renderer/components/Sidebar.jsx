@@ -13,7 +13,7 @@ import {
 import { SiAmd, SiNvidia } from "react-icons/si";
 import logo from "../assets/logo.png";
 
-function Sidebar({ activeSection, onSelect }) {
+function Sidebar({ activeSection, onSelect, loading = false }) {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => setCollapsed((c) => !c);
@@ -51,7 +51,7 @@ function Sidebar({ activeSection, onSelect }) {
       data-testid="sidebar"
       className={`${
         collapsed ? "w-12" : "w-48"
-      } md:w-48 border-r border-border dark:border-border-dark bg-gradient-to-b from-surface to-muted dark:from-surface-dark dark:to-muted-dark p-4 space-y-2 transition-all duration-300 overflow-hidden`}
+      } md:w-48 border-r border-border dark:border-border-dark bg-gradient-to-b from-surface to-muted dark:from-surface-dark dark:to-muted-dark p-4 space-y-2 transition-all duration-300 overflow-hidden ${loading ? "opacity-50 pointer-events-none" : ""}`}
     >
       <button
         onClick={toggleCollapsed}
@@ -76,7 +76,9 @@ function Sidebar({ activeSection, onSelect }) {
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className={`flex items-center w-full text-left px-3 py-2 rounded transition ${
+              aria-label={t(tKey)}
+              aria-disabled={loading}
+              className={`flex items-center w-full text-left px-3 py-2 rounded transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                 activeSection === key
                   ? "bg-primary text-white"
                   : "hover:bg-muted dark:hover:bg-muted-dark"
