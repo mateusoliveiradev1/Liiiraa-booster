@@ -18,6 +18,11 @@ This file contains the English instructions for setting up, building and testing
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
+When packaging the application, `electron-builder` automatically extracts the
+`scripts/` folder using the `asarUnpack` option set in `package.json`. The
+resulting files are placed under `resources/app.asar.unpacked/scripts` and
+must be referenced from this location by the packaged app.
+
 > The installer will display the terms defined in `installer-license.txt`.
 
 ## 🧪 Tests
