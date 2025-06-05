@@ -75,6 +75,21 @@ test('runScript supports cpu-intel-restore command', async () => {
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'cpu-intel-restore');
 });
 
+test('runScript supports gpu-nvidia-restore command', async () => {
+  await api.runScript('gpu-nvidia-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gpu-nvidia-restore');
+});
+
+test('runScript supports gpu-intel-restore command', async () => {
+  await api.runScript('gpu-intel-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gpu-intel-restore');
+});
+
+test('runScript supports gpu-amd-restore command', async () => {
+  await api.runScript('gpu-amd-restore');
+  expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'gpu-amd-restore');
+});
+
 test('runScript supports restore command', async () => {
   await api.runScript('restore');
   expect(ipcRenderer.invoke).toHaveBeenCalledWith('run-script', 'restore');
