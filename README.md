@@ -82,6 +82,11 @@ project-root/
 Certifique-se de que a pasta `build/` contenha os arquivos `icon.ico`, `icon.icns` e `icon.png`.
 Esses ícones serão utilizados nos instaladores para cada plataforma.
 
+Para que os scripts de otimização funcionem na versão distribuída, o
+`electron-builder` descompacta a pasta `scripts/` usando a opção
+`asarUnpack` definida em `package.json`. Mantenha todos os scripts
+dentro desse diretório para que possam ser executados.
+
 > O instalador exibirá um diálogo com os termos definidos em `installer-license.txt`.
 
 ## 🧪 Testes
