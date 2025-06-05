@@ -1,0 +1,1 @@
+import{u as a,j as s,e as t}from"./index-RLcNN1za.js";function o({onRun:n}){const{t:e}=a();return s.jsxs("div",{children:[s.jsx("p",{className:"mb-2",children:e("messages.warzone_desc")}),s.jsxs("button",{className:"btn-accent",onClick:n,children:[s.jsx(t,{className:"inline mr-1"}),e("buttons.optimize_warzone")]})]})}export{o as default};
