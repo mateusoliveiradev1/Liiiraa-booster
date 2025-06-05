@@ -18,7 +18,7 @@ This file contains the English instructions for setting up, building and testing
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
-> During installation, NSIS displays the license terms from `installer-license.txt`.
+> The installer will display the terms defined in `installer-license.txt`.
 
 ## 🧪 Tests
 
