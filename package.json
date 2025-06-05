@@ -61,8 +61,6 @@
     },
     "nsis": {
       "license": "installer-license.txt"
-      "target": "AppImage",
-      "icon": "build/icon.png"
     }
   }
 }
