@@ -46,6 +46,7 @@
       "dist/**/*",
       "src/main/**/*",
       "scripts/**/*",
+      "build/**/*",
       "package.json"
     ],
     "mac": {
@@ -57,7 +58,8 @@
       "icon": "build/icon.ico"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "icon": "build/icon.png"
     },
     "nsis": {
       "license": "installer-license.txt"

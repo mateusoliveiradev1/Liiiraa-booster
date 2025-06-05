@@ -1,4 +1,5 @@
 # 🚀 Liiiraa Booster
+
 [English](README.en.md) | [Português](README.md)
 
 **Liiiraa Booster** é um aplicativo de otimização total para Windows, construído com **Electron + Vite** para entregar performance nativa, visual moderno e automações profundas no sistema operacional.
@@ -70,7 +71,6 @@ project-root/
 3. Rode `npm install` para baixar as dependências.
 4. Para desenvolvimento execute `npm run dev`, que usa **concurrently** e **cross-env** para rodar `vite` e `electron .` com `NODE_ENV=development` e recarregamento automático.
 
-
 ## 📦 Builds e Distribuição
 
 1. Gere os arquivos otimizados do renderer com `npm run build`.
@@ -78,6 +78,9 @@ project-root/
    - Windows: `.exe`
    - macOS: `.dmg`
    - Linux: `.AppImage`
+
+Certifique-se de que a pasta `build/` contenha os arquivos `icon.ico`, `icon.icns` e `icon.png`.
+Esses ícones serão utilizados nos instaladores para cada plataforma.
 
 > O instalador exibirá um diálogo com os termos definidos em `installer-license.txt`.
 
@@ -94,7 +97,6 @@ Antes de rodar a suíte de testes é **obrigatório** instalar todas as dependê
 > execução de testes.
 
 ## 🐍 Requisitos de Python
-
 
 Para executar o script `metrics.py` você precisa ter **Python 3** instalado. Em seguida, instale as dependências de métricas com:
 
@@ -122,7 +124,7 @@ Electron via canal `run-script`:
 - **advanced.ps1** — desativa UAC, Defender, Windows Update, Memory Compression, políticas de mitigação, Core Isolation, Telemetry e SmartScreen. Agora aceita `-DisableUAC`, `-DisableDefender`, `-DisableUpdate`, `-DisableMemoryCompression`, `-DisableMitigations`, `-DisableHVCI`, `-DisableTelemetry` e `-DisableSmartScreen` (use `-Restore` com os mesmos parâmetros para reverter).
 - **hardware-optimize.ps1** — detecta CPU/GPU e chama os scripts adequados.
   - **cpu-amd.ps1** / **cpu-intel.ps1** — otimizações específicas para cada fabricante, incluindo a desativação do Power Throttling (use `-Restore` para desfazer).
-  - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão *Optimize Nvidia GPU* em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho; `-Restore` reverte.
+  - **gpu-nvidia.ps1** — otimizações para placas NVIDIA (botão _Optimize Nvidia GPU_ em **GPU**). Use `-MaxPower` e `-LockMaxClock` para máximo desempenho; `-Restore` reverte.
   - **gpu-amd.ps1** — otimizações para placas AMD (use `-Restore` para desfazer).
   - **gpu-intel.ps1** — otimizações para GPUs Intel.
 - **clean.bat** — limpeza rápida de arquivos temporários e caches do sistema, registrando o espaço liberado. O cálculo agora usa PowerShell para funcionar em qualquer idioma do Windows.
@@ -132,7 +134,6 @@ Electron via canal `run-script`:
 - **gamebooster.ps1** — tweaks temporários para jogos.
 - **gamebooster-restore.ps1** — restaura serviços e o Game Bar após usar o Game Booster.
 - **restore-point.ps1** — cria um ponto de restauração do sistema.
-
 
 > ⚠️ **Atenção**: estes scripts precisam ser executados com privilégios de
 > **Administrador**. Eles modificam configurações do Windows e podem afetar a
@@ -147,12 +148,10 @@ Electron via canal `run-script`:
 > os aplicativos removidos. Remover apps essenciais pode causar problemas, tenha
 > sempre um ponto de restauração ou backup antes de prosseguir.
 
-
 No `src/main/index.js` existe um `ipcMain.handle('run-script')` que possui uma
 lista de comandos permitidos. Basta enviar o nome do script pela camada de
 renderer (via `window.api.runScript('auto-optimize')`, por exemplo) para que o
 Electron execute o comando correspondente em segurança.
-
 
 ---
 
