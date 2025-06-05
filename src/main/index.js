@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const { execFile } = require("child_process");
+const { ALLOWED_COMMANDS } = require("./allowedCommands");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -43,7 +44,6 @@ app.on("window-all-closed", () => {
 });
 
 let metricsProcess = null;
-const { ALLOWED_COMMANDS } = require("./allowedCommands");
 
 ipcMain.handle("start-metrics", async (event) => {
   if (metricsProcess) return;
