@@ -76,6 +76,7 @@
     "command_failed": "{{cmd}} failed",
     "command_failed_detail": "{{cmd}} failed: {{error}}",
     "run_as_admin": "Run the app as Administrator",
+    "desktop_only": "This feature requires the desktop app",
     "clean_result": "Freed {{space}} of disk space.",
     "energy_desc": "Configure Windows power settings for maximum performance.",
     "dashboard_desc": "View your current system metrics.",

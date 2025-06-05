@@ -169,6 +169,9 @@ export default function App() {
     const name = cmd.charAt(0).toUpperCase() + cmd.slice(1);
     setLoading(true);
     try {
+      if (!window.api?.runScript) {
+        throw new Error('Desktop API unavailable');
+      }
       await window.api.runScript(cmd);
       toast.success(t("messages.command_success", { cmd: name }));
     } catch (err) {
@@ -179,6 +182,8 @@ export default function App() {
       );
       if (/Administrator/i.test(message)) {
         toast.info(t("messages.run_as_admin"));
+      } else if (/Desktop API unavailable/i.test(message)) {
+        toast.info(t("messages.desktop_only"));
       }
     } finally {
       setLoading(false);
@@ -189,6 +194,9 @@ export default function App() {
   const handleClean = async () => {
     setLoading(true);
     try {
+      if (!window.api?.runScript) {
+        throw new Error('Desktop API unavailable');
+      }
       const output = await window.api.runScript("clean");
       setFreedSpace(output.trim());
       toast.success(t("messages.command_success", { cmd: "Clean" }));
@@ -200,6 +208,8 @@ export default function App() {
       );
       if (/Administrator/i.test(message)) {
         toast.info(t("messages.run_as_admin"));
+      } else if (/Desktop API unavailable/i.test(message)) {
+        toast.info(t("messages.desktop_only"));
       }
       setFreedSpace("");
     } finally {
