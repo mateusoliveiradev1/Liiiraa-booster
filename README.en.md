@@ -54,10 +54,7 @@ The `scripts/` folder contains several automation files. They must be run with *
 
  - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab). Use `-MaxPower` to apply the maximum power limit and `-LockMaxClock` to hold peak clocks for higher performance; `-Restore` reverts.
  - **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab, use `-Restore` to revert).
-
- - **gpu-nvidia.ps1** — tweaks for NVIDIA cards (via *Optimize Nvidia GPU* in the **GPU** tab). Use `-MaxPower` and `-LockMaxClock` for extra performance and `-Restore` to undo.
-- **gpu-amd.ps1** — tweaks for AMD GPUs (via *Optimize AMD GPU* in the **GPU** tab).
-- **gpu-intel.ps1** — tweaks for Intel GPUs (via *Optimize Intel GPU* in the **GPU** tab).
+ - **gpu-intel.ps1** — tweaks for Intel GPUs (via *Optimize Intel GPU* in the **GPU** tab).
 
 - **energy-plan.ps1** — applies the custom power plan (via *Apply Energy Plan* in **Energy**).
 - **peripheral-energy.ps1** — disables USB selective suspend (via *Peripheral Power Tweak* in **Energy** or **System**).
