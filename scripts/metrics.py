@@ -151,7 +151,7 @@ def main() -> None:
 
     interval = float(os.environ.get("METRICS_INTERVAL", "5"))
 
-     try:
+    try:
         while True:
             metrics = _collect(drive)
             logger.info("Metrics collected: %s", metrics)
