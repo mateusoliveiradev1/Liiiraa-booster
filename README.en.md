@@ -18,6 +18,8 @@ This file contains the English instructions for setting up, building and testing
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
+> The installer will display the terms defined in `installer-license.txt`.
+
 ## 🧪 Tests
 
 Before running the test suite you **must** install all dependencies:

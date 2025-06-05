@@ -79,6 +79,8 @@ project-root/
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
+> O instalador exibirá um diálogo com os termos definidos em `installer-license.txt`.
+
 ## 🧪 Testes
 
 Antes de rodar a suíte de testes é **obrigatório** instalar todas as dependências:

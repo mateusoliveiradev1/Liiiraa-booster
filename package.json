@@ -57,6 +57,10 @@
       "icon": "build/icon.ico"
     },
     "linux": {
+      "target": "AppImage"
+    },
+    "nsis": {
+      "license": "installer-license.txt"
       "target": "AppImage",
       "icon": "build/icon.png"
     }
