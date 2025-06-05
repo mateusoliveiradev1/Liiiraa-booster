@@ -74,6 +74,8 @@
     "no_logs": "Nenhum log encontrado.",
     "command_success": "{{cmd}} concluído com sucesso",
     "command_failed": "{{cmd}} falhou",
+    "command_failed_detail": "{{cmd}} falhou: {{error}}",
+    "run_as_admin": "Execute o aplicativo como Administrador",
     "clean_result": "Liberado {{space}} de espaço em disco.",
     "energy_desc": "Configurar as opções de energia para máximo desempenho.",
     "dashboard_desc": "Visualize as métricas atuais do sistema.",

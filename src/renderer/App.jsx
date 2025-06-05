@@ -173,7 +173,13 @@ export default function App() {
       toast.success(t("messages.command_success", { cmd: name }));
     } catch (err) {
       console.error(err);
-      toast.error(t("messages.command_failed", { cmd: name }));
+      const message = err?.message || String(err);
+      toast.error(
+        t("messages.command_failed_detail", { cmd: name, error: message })
+      );
+      if (/Administrator/i.test(message)) {
+        toast.info(t("messages.run_as_admin"));
+      }
     } finally {
       setLoading(false);
     }
@@ -188,7 +194,13 @@ export default function App() {
       toast.success(t("messages.command_success", { cmd: "Clean" }));
     } catch (err) {
       console.error(err);
-      toast.error(t("messages.command_failed", { cmd: "Clean" }));
+      const message = err?.message || String(err);
+      toast.error(
+        t("messages.command_failed_detail", { cmd: "Clean", error: message })
+      );
+      if (/Administrator/i.test(message)) {
+        toast.info(t("messages.run_as_admin"));
+      }
       setFreedSpace("");
     } finally {
       setLoading(false);
