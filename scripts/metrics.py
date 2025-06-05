@@ -151,11 +151,14 @@ def main() -> None:
 
     interval = float(os.environ.get("METRICS_INTERVAL", "5"))
 
-    while True:
-        metrics = _collect(drive)
-        logger.info("Metrics collected: %s", metrics)
-        print(json.dumps(metrics), flush=True)
-        time.sleep(interval)
+     try:
+        while True:
+            metrics = _collect(drive)
+            logger.info("Metrics collected: %s", metrics)
+            print(json.dumps(metrics), flush=True)
+            time.sleep(interval)
+    except KeyboardInterrupt:
+        logger.info("Metrics collection interrupted")
 
 
 if __name__ == "__main__":
