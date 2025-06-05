@@ -84,8 +84,10 @@ Esses ícones serão utilizados nos instaladores para cada plataforma.
 
 Para que os scripts de otimização funcionem na versão distribuída, o
 `electron-builder` descompacta a pasta `scripts/` usando a opção
-`asarUnpack` definida em `package.json`. Mantenha todos os scripts
-dentro desse diretório para que possam ser executados.
+`asarUnpack` definida em `package.json`. Os arquivos resultantes ficam
+em `resources/app.asar.unpacked/scripts` e é desse caminho que o
+aplicativo executa cada script. Mantenha todos os scripts dentro desse
+diretório para que possam ser executados.
 
 > O instalador exibirá um diálogo com os termos definidos em `installer-license.txt`.
 

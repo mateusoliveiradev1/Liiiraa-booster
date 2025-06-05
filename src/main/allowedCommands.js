@@ -3,7 +3,7 @@ const electron = require("electron");
 
 const isPackaged = Boolean(electron.app && electron.app.isPackaged);
 const scriptsDir = isPackaged
-  ? path.join(process.resourcesPath, "scripts")
+  ? path.join(process.resourcesPath, "app.asar.unpacked", "scripts")
   : path.resolve(__dirname, "../../scripts");
 
 const ALLOWED_COMMANDS = {
