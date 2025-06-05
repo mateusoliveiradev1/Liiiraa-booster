@@ -79,7 +79,7 @@ project-root/
    - macOS: `.dmg`
    - Linux: `.AppImage`
 
-> Durante a instalação, o NSIS exibirá os termos presentes em `installer-license.txt`.
+> O instalador exibirá um diálogo com os termos definidos em `installer-license.txt`.
 
 ## 🧪 Testes
 
