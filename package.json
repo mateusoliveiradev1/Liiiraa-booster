@@ -56,6 +56,9 @@
     },
     "linux": {
       "target": "AppImage"
+    },
+    "nsis": {
+      "license": "installer-license.txt"
     }
   }
 }

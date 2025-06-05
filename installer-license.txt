@@ -1,0 +1,9 @@
+END USER LICENSE AGREEMENT (EULA)
+
+By installing and using Liiiraa Booster, you agree to the following terms:
+
+1. This software is provided "as is" without warranty of any kind.
+2. You may use the application for personal or commercial purposes.
+3. Redistribution of modified versions is prohibited without permission.
+
+For more details see the LICENSE file included with this project.
