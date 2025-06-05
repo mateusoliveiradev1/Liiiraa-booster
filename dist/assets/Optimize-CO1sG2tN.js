@@ -1,0 +1,1 @@
+import{u as i,j as s}from"./index-gURdOHuy.js";function r({onRun:e}){const{t}=i();return s.jsxs("div",{children:[s.jsx("p",{className:"mb-2",children:t("messages.optimize_desc")}),s.jsx("button",{className:"btn-primary",onClick:e,children:t("buttons.run_optimize")})]})}export{r as default};

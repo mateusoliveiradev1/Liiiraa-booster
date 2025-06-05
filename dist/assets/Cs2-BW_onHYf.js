@@ -1,1 +1,0 @@
-import{u as n,j as s,d as a}from"./index-B9QDEe8_.js";function c({onRun:t}){const{t:e}=n();return s.jsxs("div",{children:[s.jsx("p",{className:"mb-2",children:e("messages.cs2_desc")}),s.jsxs("button",{className:"btn-accent",onClick:t,children:[s.jsx(a,{className:"inline mr-1"}),e("buttons.optimize_cs2")]})]})}export{c as default};

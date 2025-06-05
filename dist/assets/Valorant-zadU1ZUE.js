@@ -1,0 +1,1 @@
+import{u as t,j as s,f as e}from"./index-gURdOHuy.js";function r({onRun:n}){const{t:a}=t();return s.jsxs("div",{children:[s.jsx("p",{className:"mb-2",children:a("messages.valorant_desc")}),s.jsxs("button",{className:"btn-accent",onClick:n,children:[s.jsx(e,{className:"inline mr-1"}),a("buttons.optimize_valorant")]})]})}export{r as default};
