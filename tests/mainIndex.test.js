@@ -2,6 +2,9 @@
 
 const handlers = {};
 
+// Define a dummy resources path so path.join works when isPackaged is true
+process.resourcesPath = '/resources';
+
 jest.mock('child_process', () => {
   const execFile = jest.fn(() => ({
     stdout: { on: jest.fn() },
@@ -27,7 +30,11 @@ jest.mock('electron', () => {
     __removeMenu: removeMenu,
     __browserWindowOptions: () => lastOptions,
     __handlers: handlers,
-    app: { whenReady: jest.fn(() => Promise.resolve()), on: jest.fn() },
+    app: {
+      whenReady: jest.fn(() => Promise.resolve()),
+      on: jest.fn(),
+      isPackaged: true
+    },
     BrowserWindow,
     ipcMain: { handle: jest.fn((channel, fn) => { handlers[channel] = fn; }) },
     Menu: { setApplicationMenu: jest.fn() }
@@ -64,6 +71,21 @@ test('run-script passes -NoProfile in args', async () => {
   await handler({}, 'optimize');
   const args = execFile.mock.calls[0][1];
   expect(args).toContain('-NoProfile');
+});
+
+test('execFile uses unpacked scripts path when packaged', async () => {
+  const handler = handlers['run-script'];
+  await handler({}, 'optimize');
+  const args = execFile.mock.calls[0][1];
+  const idx = args.indexOf('-File');
+  const scriptPath = args[idx + 1];
+  const expected = require('path').join(
+    process.resourcesPath,
+    'app.asar.unpacked',
+    'scripts',
+    'optimize.ps1'
+  );
+  expect(scriptPath).toBe(expected);
 });
 
 test('BrowserWindow called with sandbox true', async () => {
