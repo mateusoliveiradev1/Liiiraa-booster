@@ -178,6 +178,17 @@ const ALLOWED_COMMANDS = {
       path.join(scriptsDir, 'gpu-nvidia.ps1')
     ]
   },
+  'gpu-nvidia-restore': {
+    file: 'powershell',
+    args: [
+      '-ExecutionPolicy',
+      'Bypass',
+      '-NoProfile',
+      '-File',
+      path.join(scriptsDir, 'gpu-nvidia.ps1'),
+      '-Restore'
+    ]
+  },
   'gpu-intel': {
     file: 'powershell',
     args: [
@@ -188,6 +199,17 @@ const ALLOWED_COMMANDS = {
       path.join(scriptsDir, 'gpu-intel.ps1')
     ]
   },
+  'gpu-intel-restore': {
+    file: 'powershell',
+    args: [
+      '-ExecutionPolicy',
+      'Bypass',
+      '-NoProfile',
+      '-File',
+      path.join(scriptsDir, 'gpu-intel.ps1'),
+      '-Restore'
+    ]
+  },
   'gpu-amd': {
     file: 'powershell',
     args: [
@@ -196,6 +218,17 @@ const ALLOWED_COMMANDS = {
       '-NoProfile',
       '-File',
       path.join(scriptsDir, 'gpu-amd.ps1')
+    ]
+  },
+  'gpu-amd-restore': {
+    file: 'powershell',
+    args: [
+      '-ExecutionPolicy',
+      'Bypass',
+      '-NoProfile',
+      '-File',
+      path.join(scriptsDir, 'gpu-amd.ps1'),
+      '-Restore'
     ]
   },
   pubg: {
