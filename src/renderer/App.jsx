@@ -101,7 +101,7 @@ export default function App() {
 
   useEffect(() => {
     if (activeSection !== "Dashboard") {
-      window.api.stopMetrics?.();
+      window.api?.stopMetrics?.();
       return;
     }
 
@@ -149,11 +149,11 @@ export default function App() {
       });
     };
 
-    window.api.startMetrics?.();
-    const unsubscribe = window.api.onMetrics(handleData);
+    window.api?.startMetrics?.();
+    const unsubscribe = window.api?.onMetrics?.(handleData);
     return () => {
       unsubscribe?.();
-      window.api.stopMetrics?.();
+      window.api?.stopMetrics?.();
     };
   }, [activeSection, t]);
 
